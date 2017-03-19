@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.akristic.www.tkrally.Statistics">
+
+    <LinearLayout
+        android:id="@+id/layout_statistic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="vertical"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/textview_player1_winners"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="Winners" />
+
+        <TextView
+            android:id="@+id/textview_player1_aces"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="Aces" />
+
+        <TextView
+            android:id="@+id/textview_player1_faults"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="Faults" />
+
+        <TextView
+            android:id="@+id/textview_player1_double_faults"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="Double Faults" />
+
+        <TextView
+            android:id="@+id/textview_player1_forced_errors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="Forced Errors" />
+
+        <TextView
+            android:id="@+id/textview_player1_unforced_errors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="Unforced Errors" />
+
+
+    </LinearLayout>
+
+</ScrollView>

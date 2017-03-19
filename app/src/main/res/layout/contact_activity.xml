@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.akristic.www.tkrally.ContactActivity">
+
+    <LinearLayout
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#FFFFFF"
+            android:scaleType="fitCenter"
+            android:src="@drawable/main_logo_slogan"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/slika_pocetna"
+            tools:ignore="ContentDescription"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/teniski_klub_rally"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/teniski_klub_rally"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/web_adresa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/teniski_klub_rally"
+                android:drawableLeft="@drawable/ic_home_black_24dp"
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_home_black_24dp"
+                android:gravity="center_vertical"
+                android:onClick="webAddressClicked"
+                android:padding="4dp"
+                android:paddingTop="8dp"
+                android:text="@string/web_adresa_www_kvalitetnaskolatenisa_com"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/broj_telefona"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/web_adresa"
+                android:drawableLeft="@drawable/ic_phone_black_24dp"
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_phone_black_24dp"
+                android:gravity="center_vertical"
+                android:onClick="callPhoneNumber"
+                android:padding="4dp"
+                android:text="@string/broj_telefona_385_95_903_44_21"
+                android:textSize="12sp" />
+
+
+            <TextView
+                android:id="@+id/email_adresa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/broj_telefona"
+                android:layout_gravity="center_vertical"
+                android:drawableLeft="@drawable/ic_mail_black_24dp"
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_mail_black_24dp"
+                android:gravity="center_vertical"
+                android:onClick="sendEmail"
+                android:padding="4dp"
+                android:text="@string/email_info_revoloop_hr"
+                android:textSize="12sp" />
+
+
+            <TextView
+                android:id="@+id/adresa_sjediste"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/email_adresa"
+                android:layout_gravity="center_vertical"
+                android:drawableLeft="@drawable/ic_place_black_24dp"
+                android:drawableStart="@drawable/ic_place_black_24dp"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:onClick="openGoogleMaps"
+                android:padding="4dp"
+                android:text="@string/rebro_46_10_360_sesvete"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/radno_vrijeme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/adresa_sjediste"
+                android:paddingTop="8dp"
+                android:text="@string/radno_vrijeme"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/radno_vrijeme"
+                android:layout_toEndOf="@id/radno_vrijeme"
+                android:layout_toRightOf="@id/radno_vrijeme"
+                android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingStart="16dp"
+                android:text="@string/od_8_do_22_sati"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/cime_se_bavimo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/radno_vrijeme"
+                android:paddingTop="8dp"
+                android:text="@string/ime_se_bavimo"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/misija"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cime_se_bavimo"
+                android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingStart="16dp"
+                android:text="@string/na_a_misija_je_pru_iti_kvalitetnu_tenisku_poduku_to_ve_em_broju_ljudi_misija_tim_i_vodstvo_ine_osnovu_na_eg_kluba"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

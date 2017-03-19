@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+android:title="@string/settings_title">
+
+<ListPreference
+    android:defaultValue="@string/settings_tiebreak_default"
+    android:entries="@array/settings_tiebreak_labels"
+    android:entryValues="@array/settings_tiebreak_values"
+    android:key="@string/settings_tiebreak_key"
+    android:title="@string/settings_tiebreak_label" />
+
+
+<ListPreference
+    android:defaultValue="@string/settings_number_of_sets_default"
+    android:entries="@array/settings_sets_labels"
+    android:entryValues="@array/settings_sets_values"
+    android:key="@string/settings_number_of_sets_key"
+    android:title="@string/settings_number_of_sets_label" />
+
+
+</PreferenceScreen>

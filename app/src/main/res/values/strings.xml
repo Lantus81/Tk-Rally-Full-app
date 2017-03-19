@@ -1,0 +1,113 @@
+<resources>
+    <string name="app_name">TkRally</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="dialog_select_prompt">Choose a picture</string>
+    <string name="dialog_select_camera">Camera</string>
+    <string name="dialog_select_gallery">Gallery</string>
+    <string name="image_picker_error">Something is wrong with that image. Pick a different one please.</string>
+
+    <string name="_0"></string>
+    <string name="deuce">Deuce</string>
+    <string name="points_40">40</string>
+    <string name="advance">AD</string>
+    <string name="break_point_player1">Break Point Player 1</string>
+    <string name="break_point_player2">Break Point Player 2</string>
+    <string name="game_for_player1">Game for Player 1</string>
+    <string name="tiebreak">Tiebreak</string>
+    <string name="game_for_player2">Game for Player 2</string>
+    <string name="set_for_player1">Set for Player 1</string>
+    <string name="game_set_match_player1">Game, Set, Match Player 1</string>
+    <string name="set_for_player2">Set for Player 2</string>
+    <string name="game_set_match_player2">Game, Set, Match Player 2</string>
+    <string name="fault">Fault</string>
+    <string name="double_fault">D.Fault</string>
+    <string name="check_for_5_set_match">Check for 3 set match</string>
+    <string name="winners">" :Winners: "</string>
+    <string name="aces">" :Aces: "</string>
+    <string name="faults">" :Faults: "</string>
+    <string name="double_faults">" :Double Fault: "</string>
+    <string name="forced_errors">" :Forced Errors: "</string>
+    <string name="unforced_errors">" :Unforced Errors: "</string>
+    <string name="toast_message">Can\'t change rules in the middle of match.\n\nPress RESET and than change rules</string>
+    <string name="toast_message_serve">Can\'t change serve in the middle of match</string>
+    <string name="players">Players</string>
+    <string name="player_1">Enter player 1 name</string>
+    <string name="player_2">Enter player 2 name</string>
+    <string name="previous_sets">PREVIOUS SETS</string>
+    <string name="reset">reset</string>
+    <string name="statistic">Statistics</string>
+
+    <!-- Unforced error button [CHAR LIMIT=7] -->
+    <string name="unf_error_button">U.Error</string>
+    <!-- Forced error button [CHAR LIMIT=7] -->
+    <string name="forced_error_button">F.Error</string>
+
+
+    <string name="sets">SETS</string>
+    <string name="games">GAMES</string>
+    <string name="points">POINTS</string>
+    <string name="ace">Ace</string>
+    <string name="winner">Winner</string>
+    <string name="winner_player">WINNER</string>
+    <string name="serve">Serve</string>
+    <!-- Settings Menu Main Item [CHAR LIMIT=NONE] -->
+    <string name="settings_menu_main_item">Main</string>
+
+    <!-- Settings Menu Item [CHAR LIMIT=NONE] -->
+    <string name="settings_menu_item">Settings</string>
+    <!-- Settings Activity Title [CHAR LIMIT=NONE] -->
+    <string name="settings_title">Match Settings</string>
+    <string name="statistics_title">Match Statistics</string>
+
+    <!-- Strings For Minimum Number Of Sets Preference [CHAR LIMIT=30] -->
+    <string name="settings_number_of_sets_label">Number of Sets for win</string>
+    <string name="settings_number_of_sets_key" translatable="false">number_of_sets</string>
+    <string name="settings_number_of_sets_default" translatable="false">2</string>
+
+    <!-- Strings For Tiebreak Preference [CHAR LIMIT=30] -->
+    <string name="settings_tiebreak_label">Tiebreak</string>
+    <string name="settings_tiebreak_key" translatable="false">tiebreak_value</string>
+    <string name="settings_tiebreak_default" translatable="false">@string/settings_tiebreak_true_value</string>
+
+    <!-- Label for Tiebreak true option [CHAR LIMIT=20] -->
+    <string name="settings_tiebreak_true_label">Play Tiebreak</string>
+    <string name="settings_tiebreak_true_value" translatable="false">Yes</string>
+
+    <!-- Label for Tiebreak false option [CHAR LIMIT=20] -->
+    <string name="settings_tiebreak_false_label">No Tiebreak</string>
+    <string name="settings_tiebreak_false_value" translatable="false">No</string>
+
+    <!-- Label for Sets option [CHAR LIMIT=20] -->
+    <string name="settings_sets_1_label">Play 1 set for win</string>
+    <string name="settings_sets_1_value" translatable="false">1</string>
+
+    <!-- Label for Sets option [CHAR LIMIT=20] -->
+    <string name="settings_sets_2_label">Play 2 set for win</string>
+    <string name="settings_sets_2_value" translatable="false">2</string>
+    <!-- Label for Sets option [CHAR LIMIT=20] -->
+    <string name="settings_sets_3_label">Play 3 set for win</string>
+    <string name="settings_sets_3_value" translatable="false">3</string>
+
+
+    <!-- Label for Contact activity -->
+    <string name="teniski_klub_rally">Teniski klub Rally</string>
+    <string name="web_adresa_www_kvalitetnaskolatenisa_com">Web adresa: www.kvalitetnaskolatenisa.com</string>
+    <string name="email_info_revoloop_hr">Email: info@revoloop.hr</string>
+    <string name="radno_vrijeme">Radno vrijeme:</string>
+    <string name="od_8_do_22_sati">Od 8 do 22 sati</string>
+    <string name="ime_se_bavimo">Čime se bavimo:</string>
+    <string name="na_a_misija_je_pru_iti_kvalitetnu_tenisku_poduku_to_ve_em_broju_ljudi_misija_tim_i_vodstvo_ine_osnovu_na_eg_kluba">Naša misija je pružiti kvalitetnu tenisku poduku što većem broju ljudi. Misija, tim i vodstvo čine osnovu našeg kluba.</string>
+    <string name="sjedi_te">Sjedište:</string>
+    <string name="rebro_46_10_360_sesvete">Sjedište: Rebro 46, 10 360 Sesvete</string>
+    <string name="broj_telefona_385_95_903_44_21">Broj telefona: +385 95 903 44 21</string>
+
+
+    <string name="title_activity_quiz">QuizActivity</string>
+    <string name="title_players_names">Player Names</string>
+
+</resources>
