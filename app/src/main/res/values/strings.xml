@@ -109,5 +109,6 @@
 
     <string name="title_activity_quiz">QuizActivity</string>
     <string name="title_players_names">Player Names</string>
+    <string name="vs">VS</string>
 
 </resources>

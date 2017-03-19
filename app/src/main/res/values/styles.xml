@@ -44,5 +44,27 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowNoDisplay">true</item>
     </style>
+    <!-- Player Images ScooreKeeper -->
+    <style name="PlayerImage" parent="AppTheme">
+        <item name="android:layout_width">90dp</item>
+        <item name="android:layout_height">90dp</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:src">@drawable/player_silhouette</item>
+    </style>
+    <!-- Text ScooreKeeper-->
+    <style name="TextForSets" parent="AppTheme">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/medium_horizontal_margin</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+    <style name="TextForSetsBlack" parent="AppTheme">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
 
 </resources>
