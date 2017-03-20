@@ -5,10 +5,10 @@
     android:id="@+id/content_navigation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="60dp"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
-    android:paddingTop="8dp"
+    android:paddingBottom="@dimen/score_keeper_bottom"
+    android:paddingLeft="@dimen/medium_horizontal_margin"
+    android:paddingRight="@dimen/medium_horizontal_margin"
+    android:paddingTop="@dimen/medium_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.akristic.www.tkrally.NavigationScoreKeeperActivity"
     tools:showIn="@layout/app_bar_navigation">
@@ -50,6 +50,7 @@
 
             <TextView
                 style="@style/TextForSets"
+                android:layout_marginLeft="@dimen/medium_horizontal_margin"
                 android:text="@string/previous_sets" />
 
             <TextView
@@ -63,7 +64,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorButton"
+            android:background="@color/grayLightButtons"
             android:orientation="horizontal">
 
             <TextView
@@ -116,7 +117,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:background="@color/colorBackgroundLight"
+            android:paddingLeft="@dimen/small_horizontal_margin"
+            android:background="@color/grayLight"
             android:orientation="horizontal">
 
             <TextView
@@ -151,141 +153,86 @@
 
             <TextView
                 android:id="@+id/player1_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="3"
-                android:maxLength="16"
-                android:maxLines="2"
+                style="@style/playersNames"
                 android:onClick="changePlayersNames"
-                android:text="@string/player_1"
-                android:textAlignment="center"
-                android:textSize="14sp" />
+                android:text="@string/player_1" />
 
             <TextView
                 android:id="@+id/player_1_sets"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                style="@style/setsGamesPointsBig"
                 android:layout_weight="2"
-                android:text="0"
-                android:textAlignment="center"
-                android:textSize="36sp" />
+
+                />
 
             <TextView
                 android:id="@+id/player_1_games"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="0"
-                android:textAlignment="center"
-                android:textSize="36sp" />
+                style="@style/setsGamesPointsBig"
+                android:layout_weight="2" />
 
             <TextView
                 android:id="@+id/player_1_points"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="0"
-                android:textAlignment="center"
-                android:textSize="36sp" />
+                style="@style/setsGamesPointsBig"
+                android:layout_weight="3" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:background="@color/colorBackgroundLight"
+            android:paddingLeft="@dimen/small_horizontal_margin"
+            android:background="@color/grayLight"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/save_sets_player2_set_1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
+                style="@style/TextForSets"
                 android:text="@string/_0"
-                android:textAlignment="center"
                 android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/save_sets_player2_set_2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
+                style="@style/TextForSets"
                 android:text="@string/_0"
-                android:textAlignment="center"
                 android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/save_sets_player2_set_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
+                style="@style/TextForSets"
                 android:text="@string/_0"
-                android:textAlignment="center"
                 android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/save_sets_player2_set_4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
+                style="@style/TextForSets"
                 android:text="@string/_0"
-                android:textAlignment="center"
                 android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/save_sets_player2_set_5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
+                style="@style/TextForSets"
                 android:text="@string/_0"
-                android:textAlignment="center"
                 android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/player2_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="3"
-                android:maxLength="16"
-                android:maxLines="2"
+                style="@style/playersNames"
                 android:onClick="changePlayersNames"
-                android:text="@string/player_2"
-                android:textAlignment="center"
-                android:textSize="14sp" />
+                android:text="@string/player_2" />
 
             <TextView
                 android:id="@+id/player_2_sets"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="0"
-                android:textAlignment="center"
-                android:textSize="36sp" />
+                style="@style/setsGamesPointsBig"
+                android:layout_weight="2" />
 
             <TextView
                 android:id="@+id/player_2_games"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="0"
-                android:textAlignment="center"
-                android:textSize="36sp" />
+                style="@style/setsGamesPointsBig"
+                android:layout_weight="2" />
 
             <TextView
                 android:id="@+id/player_2_points"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="0"
-                android:textAlignment="center"
-                android:textSize="36sp" />
+                style="@style/setsGamesPointsBig"
+                android:layout_weight="3" />
         </LinearLayout>
 
         <LinearLayout
@@ -298,9 +245,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:onClick="changeServeFirstPlayer"
                 android:text="@string/player_1"
-                android:textAlignment="center"
                 android:textSize="12sp" />
 
             <TextView
@@ -308,9 +255,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:onClick="changeServeFirstPlayer"
                 android:text="@string/player_2"
-                android:textAlignment="center"
                 android:textSize="12sp" />
 
         </LinearLayout>
@@ -322,27 +269,17 @@
 
             <TextView
                 android:id="@+id/serve_color_Player1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="3dp"
-                android:layout_weight="1"
-                android:background="@color/colorAccent"
+                style="@style/serveStyleLabel"
                 android:onClick="changeServeFirstPlayer"
                 android:text="@string/serve"
-                android:textAlignment="center"
-                android:textSize="12sp" />
+                 />
 
             <TextView
                 android:id="@+id/serve_color_Player2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_weight="1"
-                android:background="@color/colorAccent"
+                style="@style/serveStyleLabel"
                 android:onClick="changeServeFirstPlayer"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                tools:text="Serve" />
+                android:background="@color/grayDark"
+                />
 
         </LinearLayout>
 
@@ -357,7 +294,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorBlack"
+                android:background="@color/black"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -367,19 +304,19 @@
 
                     <Button
                         android:id="@+id/button_player1_ace"
-                        style="@style/ButtonStyleForScooreKepeer"
+                        style="@style/ButtonStyleForScoreKeeper"
                         android:onClick="addPointForPlayer1Ace"
                         android:text="@string/ace" />
 
                     <Button
                         android:id="@+id/button_player1_fault"
-                        style="@style/ButtonStyleForScooreKepeer"
+                        style="@style/ButtonStyleForScoreKeeper"
                         android:onClick="addPointForPlayer1Fault"
                         android:text="@string/fault" />
                 </LinearLayout>
 
                 <Button
-                    style="@style/ButtonStyleForScooreKepeer"
+                    style="@style/ButtonStyleForScoreKeeper"
                     android:layout_width="match_parent"
                     android:onClick="addPointForPlayer1"
                     android:text="@string/winner" />
@@ -390,12 +327,12 @@
                     android:orientation="horizontal">
 
                     <Button
-                        style="@style/ButtonStyleForScooreKepeer"
+                        style="@style/ButtonStyleForScoreKeeper"
                         android:onClick="addPointForPlayer1ForError"
                         android:text="@string/forced_error_button" />
 
                     <Button
-                        style="@style/ButtonStyleForScooreKepeer"
+                        style="@style/ButtonStyleForScoreKeeper"
                         android:onClick="addPointForPlayer1UnfError"
                         android:text="@string/unf_error_button" />
                 </LinearLayout>
@@ -414,7 +351,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorBlack"
+                android:background="@color/black"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -424,19 +361,19 @@
 
                     <Button
                         android:id="@+id/button_player2_ace"
-                        style="@style/ButtonStyleForScooreKepeer"
+                        style="@style/ButtonStyleForScoreKeeper"
                         android:onClick="addPointForPlayer2Ace"
                         android:text="@string/ace" />
 
                     <Button
                         android:id="@+id/button_player2_fault"
-                        style="@style/ButtonStyleForScooreKepeer"
+                        style="@style/ButtonStyleForScoreKeeper"
                         android:onClick="addPointForPlayer2Fault"
                         android:text="@string/fault" />
                 </LinearLayout>
 
                 <Button
-                    style="@style/ButtonStyleForScooreKepeer"
+                    style="@style/ButtonStyleForScoreKeeper"
                     android:layout_width="match_parent"
                     android:onClick="addPointForPlayer2"
                     android:text="@string/winner"
@@ -448,27 +385,16 @@
                     android:orientation="horizontal">
 
                     <Button
-                        style="@style/ButtonStyleForScooreKepeer"
+                        style="@style/ButtonStyleForScoreKeeper"
                         android:onClick="addPointForPlayer2ForError"
                         android:text="@string/forced_error_button" />
 
                     <Button
-                        style="@style/ButtonStyleForScooreKepeer"
+                        style="@style/ButtonStyleForScoreKeeper"
                         android:onClick="addPointForPlayer2UnfError"
                         android:text="@string/unf_error_button" />
                 </LinearLayout>
-
-
             </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="4dp">
-
-        </LinearLayout>
-
     </LinearLayout>
 </ScrollView>

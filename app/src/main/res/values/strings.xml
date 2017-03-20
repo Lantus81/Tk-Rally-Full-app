@@ -12,6 +12,7 @@
     <string name="image_picker_error">Something is wrong with that image. Pick a different one please.</string>
 
     <string name="_0"></string>
+    <string name="show_0">0</string>
     <string name="deuce">Deuce</string>
     <string name="points_40">40</string>
     <string name="advance">AD</string>
