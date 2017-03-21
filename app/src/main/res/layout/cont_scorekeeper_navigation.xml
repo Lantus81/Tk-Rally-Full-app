@@ -51,6 +51,7 @@
             <TextView
                 style="@style/TextForSets"
                 android:layout_marginLeft="@dimen/medium_horizontal_margin"
+                android:layout_marginStart="@dimen/medium_horizontal_margin"
                 android:text="@string/previous_sets" />
 
             <TextView
@@ -118,6 +119,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:paddingLeft="@dimen/small_horizontal_margin"
+            android:paddingRight="@dimen/small_horizontal_margin"
+            android:paddingStart="@dimen/small_horizontal_margin"
+            android:paddingEnd="@dimen/small_horizontal_margin"
             android:background="@color/grayLight"
             android:orientation="horizontal">
 
@@ -180,6 +184,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:paddingLeft="@dimen/small_horizontal_margin"
+            android:paddingRight="@dimen/small_horizontal_margin"
+            android:paddingStart="@dimen/small_horizontal_margin"
+            android:paddingEnd="@dimen/small_horizontal_margin"
             android:background="@color/grayLight"
             android:orientation="horizontal">
 

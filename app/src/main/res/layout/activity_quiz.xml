@@ -9,7 +9,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:orientation="vertical">
 
 
@@ -19,8 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:padding="2dp"
-
-            android:text="Question number: 1" />
+            android:text="@string/quiz_number_counter" />
 
         <TextView
             android:id="@+id/question_text"
@@ -28,7 +26,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:padding="4dp"
-            android:text="This is question text"
+            android:text="@string/quiz_text_question"
             android:textSize="16sp" />
 
         <RadioGroup
@@ -47,7 +45,7 @@
             android:id="@+id/question_answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Your answer here" />
+            android:hint="@string/quiz_answer_hint" />
 
 
         <RatingBar
@@ -65,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:onClick="tryAgain"
-            android:text="Try Again"
+            android:text="@string/quiz_try_again_button"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -75,7 +73,7 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:onClick="nextQuestion"
-            android:text="Next"
+            android:text="@string/quiz_next_button"
             android:visibility="gone" />
 
         <Button
@@ -84,14 +82,14 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:onClick="submitQuestion"
-            android:text="Submit" />
+            android:text="@string/quiz_submit_button" />
 
         <TextView
             android:id="@+id/current_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Your score: 0/10" />
+            android:text="@string/quiz_current_score" />
 
     </LinearLayout>
 

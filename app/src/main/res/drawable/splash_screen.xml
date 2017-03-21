@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@color/grayLight"/>
+
     <item>
-        <color android:color="@android:color/white"/>
-    </item>
-    <item>
-        <bitmap
+        <animation-list
+            android:gravity="center"
             android:src="@drawable/logo_move"
-            android:tileMode="disabled"
-            android:gravity="center"/>
+            />
     </item>
+
 </layer-list>

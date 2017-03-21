@@ -111,5 +111,14 @@
     <string name="title_activity_quiz">QuizActivity</string>
     <string name="title_players_names">Player Names</string>
     <string name="vs">VS</string>
+    <string name="quiz_number_counter">Question number: 1</string>
+    <string name="quiz_text_question">This is question text</string>
+    <string name="quiz_answer_hint">Your answer here</string>
+    <string name="quiz_try_again_button">Try Again</string>
+    <string name="quiz_next_button">Next</string>
+    <string name="quiz_submit_button">Submit</string>
+    <string name="quiz_current_score">Your score: 0/10</string>
+    <string name="scorekeeper_reset_match">Reset Match</string>
+    <string name="scorekeeper_reset_question">Do you really want to reset?</string>
 
 </resources>

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,14 +21,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Locale;
+
+import static com.akristic.www.tkrally.R.string.tiebreak;
 
 public class NavigationScoreKeeperActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -66,6 +65,9 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
 
     static String namePlayer1 = "Player 1";
     static String namePlayer2 = "Player 2";
+    /**
+     * views
+     */
     private TextView namePlayer1TextView;
     private TextView namePlayer2TextView;
     private TextView namePlayer1TextViewServe;
@@ -86,7 +88,6 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     private LinearLayout buttonsLayout;
     private ImageView mImagePlayer1;
     private ImageView mImagePlayer2;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,10 +123,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        /**
-         * hide buttons and statistic at onCreate
-         */
+        //* hide buttons at onCreate
         buttonsLayout = (LinearLayout) findViewById(R.id.buttons_layout_holder);
         buttonAcePlayer1 = (Button) findViewById(R.id.button_player1_ace);
         buttonAcePlayer2 = (Button) findViewById(R.id.button_player2_ace);
@@ -149,6 +147,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         mImagePlayer1 = (ImageView) findViewById(R.id.score_image_player1);
         mImagePlayer2 = (ImageView) findViewById(R.id.score_image_player2);
 
+
         if (savedInstanceState != null) {
             pointsPlayer1 = savedInstanceState.getInt("pointsPlayer1");
             pointsPlayer2 = savedInstanceState.getInt("pointsPlayer2");
@@ -163,6 +162,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             tieBreak = savedInstanceState.getBoolean("tieBreak");
             firstFault = savedInstanceState.getBoolean("firstFault");
             matchWon = savedInstanceState.getBoolean("matchWon");
+            checkIfPlayerHasWinMatch();
             tiebreakFinal = savedInstanceState.getBoolean("tiebreakFinal");
             scoreViewPlayer1.setText(String.valueOf(pointsPlayer1));
             scoreViewPlayer2.setText(String.valueOf(pointsPlayer2));
@@ -178,9 +178,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     }
 
     private void setPreferences() {
-        /**
-         * manage preferences of app. Tiebreak and number of sets for win
-         */
+         //* manage preferences of app. Tiebreak and number of sets for win
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String setsNumber = sharedPrefs.getString(
                 getString(R.string.settings_number_of_sets_key),
@@ -333,19 +331,13 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             if (pointsPlayer1 == 40 && pointsPlayer2 == 40 && !tieBreak) {
                 textViewDeuce.setText(getString(R.string.deuce));
             }
-            /**
-             * manage tiebreak service
-             */
+            //* manage tiebreak service
             manageTiebreakService();
-            /**
-             * set text if it is a break point
-             */
+            //* set text if it is a break point
             if (!serveOfPlayer && pointsPlayer1 == 40 && !tieBreak && pointsPlayer2 < 40) {
                 textViewDeuce.setText(getString(R.string.break_point_player1));
             }
-            /**
-             * check if player has Win the tiebreak
-             */
+            //* check if player has Win the tiebreak
             if (pointsPlayer1 >= 6 && pointsPlayer1 > pointsPlayer2 + 1 && tieBreak) {
                 gamesPlayer1++;
                 displayGamesForPlayer1(gamesPlayer1);
@@ -385,19 +377,13 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             if (pointsPlayer1 == 40 && pointsPlayer2 == 40 && !tieBreak) {
                 textViewDeuce.setText(getString(R.string.deuce));
             }
-            /**
-             * manage tiebreak service
-             */
+            //* manage tiebreak service
             manageTiebreakService();
-            /**
-             * set text if it is a break point
-             */
+            //* set text if it is a break point
             if (serveOfPlayer && pointsPlayer2 == 40 && !tieBreak && pointsPlayer1 < 40) {
                 textViewDeuce.setText(getString(R.string.break_point_player2));
             }
-            /**
-             * check if player has Win the tiebreak
-             */
+            //* check if player has Win the tiebreak
             if (pointsPlayer2 >= 6 && pointsPlayer2 > pointsPlayer1 + 1 && tieBreak) {
                 gamesPlayer2++;
                 displayGamesForPlayer2(gamesPlayer2);
@@ -436,14 +422,10 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         scoreViewPlayer1.setText("0");
         scoreViewPlayer2.setText("0");
         textViewDeuce.setText(getString(R.string.game_for_player1));
-        /**
-         * change serve only if not playing tiebreak
-         */
+        //* change serve only if not playing tiebreak
         serveOfPlayer = !serveOfPlayer;
         serveChange(serveOfPlayer);
-        /**
-         * check if player has win the set
-         */
+        //* check if player has win the set
         if (gamesPlayer1 >= 6 && gamesPlayer1 > gamesPlayer2 + 1 || gamesPlayer1 == 7) {
             setsPlayer1++;
             displaySetsForPlayer1(setsPlayer1);
@@ -462,14 +444,10 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         scoreViewPlayer1.setText("0");
         scoreViewPlayer2.setText("0");
         textViewDeuce.setText(getString(R.string.game_for_player2));
-        /**
-         * change serve only if not playing tiebreak
-         */
+        //* change serve only if not playing tiebreak
         serveOfPlayer = !serveOfPlayer;
         serveChange(serveOfPlayer);
-        /**
-         * check if player has win the set
-         */
+        //* check if player has win the set
         if (gamesPlayer2 >= 6 && gamesPlayer2 > gamesPlayer1 + 1 || gamesPlayer2 == 7) {
             setsPlayer2++;
             displaySetsForPlayer2(setsPlayer2);
@@ -483,14 +461,11 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
      */
     private void checkForTiebreak() {
 
-        if (gamesPlayer1 == 6 && gamesPlayer2 == 6 && tiebreakFinal) {
+        if (gamesPlayer1 == 6 && gamesPlayer2 == 6 && tiebreakFinal) { //* tiebreakFinal is set in preferences settings
             tieBreak = true;
-            textViewDeuce.setText(getString(R.string.tiebreak));
-            /**
-             * in tiebreak first serve has player who is next on serve in order and tiebreak is like one game,
-             * so they change serve in tiebreak but continue with normal serving after.
-             *
-             */
+            textViewDeuce.setText(getString(tiebreak));
+            //* in tiebreak first serve has player who is next on serve in order and tiebreak is like one game,
+            //* so they change serve in tiebreak but continue with normal serving after.
             serveOfPlayerInTieBreak = serveOfPlayer;
             serveChange(serveOfPlayerInTieBreak);
         }
@@ -500,9 +475,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
      * Displays the score of SETS for Player 1. and reset points for games
      */
     public void displaySetsForPlayer1(int points) {
-        /**
-         * Save GAMES before resetting to 0
-         */
+        //* Save GAMES before resetting to 0
         if (setsPlayer1 + setsPlayer2 == 1) {
             TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
             TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
@@ -533,9 +506,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
             saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
         }
-        /**
-         * set Games and POINTS to 0 and manage text
-         */
+        // * set Games and POINTS to 0 and manage text
         gamesPlayer1 = 0;
         gamesPlayer2 = 0;
         gamesViewPlayer1.setText("0");
@@ -544,16 +515,12 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         scoreViewPlayer2.setText("0");
         setsViewPlayer1.setText(String.valueOf(points));
         textViewDeuce.setText(getString(R.string.set_for_player1));
-        /**
-         * check if player has WIN the match
-         * hide buttons
-         */
-        if (numberOfSetsForWin == setsPlayer1) {
+        //* check if player has WIN the match
+        //* hide buttons
+        checkIfPlayerHasWinMatch();
+        if (matchWon) {
             textViewDeuce.setText(getString(R.string.game_set_match_player1));
-            matchWon = true;
-            TextView textViewWinner = (TextView) findViewById(R.id.serve_color_Player1);
-            textViewWinner.setText(getString(R.string.winner_player));
-            buttonsLayout.setVisibility(View.GONE);
+            textViewServePlayer1.setText(getString(R.string.winner_player));
         }
     }
 
@@ -561,10 +528,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
      * Displays the score of SETS for Player 2. and reset points for games
      */
     public void displaySetsForPlayer2(int points) {
-
-        /**
-         * Save GAMES before resetting to 0
-         */
+        //* Save GAMES before resetting to 0
         if (setsPlayer1 + setsPlayer2 == 1) {
             TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
             TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
@@ -595,9 +559,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
             saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
         }
-        /**
-         * set Games and POINTS to 0 and manage text
-         */
+        //* set Games and POINTS to 0 and manage text
         gamesPlayer1 = 0;
         gamesPlayer2 = 0;
         gamesViewPlayer1.setText("0");
@@ -606,15 +568,18 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         scoreViewPlayer2.setText("0");
         setsViewPlayer2.setText(String.valueOf(points));
         textViewDeuce.setText(getString(R.string.set_for_player2));
-        /**
-         * Check if player has WIN the match
-         * hides buttons
-         */
-        if (numberOfSetsForWin == setsPlayer2) {
+        //* Check if player has WIN the match
+        //* hides buttons
+        checkIfPlayerHasWinMatch();
+        if (matchWon) {
             textViewDeuce.setText(getString(R.string.game_set_match_player2));
+            textViewServePlayer2.setText(getString(R.string.winner_player));
+
+        }
+    }
+    private void checkIfPlayerHasWinMatch(){
+        if (numberOfSetsForWin == setsPlayer2 || numberOfSetsForWin==setsPlayer1) {
             matchWon = true;
-            TextView textViewWinner = (TextView) findViewById(R.id.serve_color_Player2);
-            textViewWinner.setText(getString(R.string.winner_player));
             buttonsLayout.setVisibility(View.GONE);
         }
     }
@@ -664,9 +629,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     public void addPointForPlayer1(View v) {
         winnerPlayer1++;
         managePointsPlayer1();
-        /**
-         * set first fault to 0
-         */
+        //* set first fault to 0
         if (!firstFault) {
             firstFault = true;
             Button buttonFaultPlayer1 = (Button) findViewById(R.id.button_player1_fault);
@@ -680,9 +643,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     public void addPointForPlayer1Ace(View v) {
         acePlayer1++;
         managePointsPlayer1();
-        /**
-         * set first fault to 0
-         */
+        //* set first fault to 0
         if (!firstFault) {
             firstFault = true;
             buttonFaultPlayer1.setText(getString(R.string.fault));
@@ -695,9 +656,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     public void addPointForPlayer1ForError(View v) {
         forcedErrorPlayer1++;
         managePointsPlayer2();
-        /**
-         * set first fault to 0
-         */
+        //* set first fault to 0
         if (!firstFault) {
             firstFault = true;
             Button buttonFaultPlayer1 = (Button) findViewById(R.id.button_player1_fault);
@@ -711,9 +670,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     public void addPointForPlayer1UnfError(View v) {
         unforcedErrorPlayer1++;
         managePointsPlayer2();
-        /**
-         * set first fault to 0
-         */
+        //* set first fault to 0
         if (!firstFault) {
             firstFault = true;
             Button buttonFaultPlayer1 = (Button) findViewById(R.id.button_player1_fault);
@@ -782,11 +739,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     public void addPointForPlayer2(View v) {
         winnerPlayer2++;
         managePointsPlayer2();
-        if (!firstFault) {
-            firstFault = true;
-            Button buttonFaultPlayer1 = (Button) findViewById(R.id.button_player1_fault);
-            buttonFaultPlayer1.setText(getString(R.string.fault));
-        }
+        resetFaultButton();
     }
 
     /**
@@ -795,14 +748,8 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     public void addPointForPlayer2Ace(View v) {
         acePlayer1++;
         managePointsPlayer2();
-        /**
-         * set first fault to 0
-         */
-        if (!firstFault) {
-            firstFault = true;
-            Button buttonFaultPlayer2 = (Button) findViewById(R.id.button_player2_fault);
-            buttonFaultPlayer2.setText(getString(R.string.fault));
-        }
+        //** set first fault to 0
+        resetFaultButton();
     }
 
     /**
@@ -811,27 +758,15 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     public void addPointForPlayer2ForError(View v) {
         forcedErrorPlayer2++;
         managePointsPlayer1();
-        /**
-         * set first fault to 0
-         */
-        if (!firstFault) {
-            firstFault = true;
-            Button buttonFaultPlayer2 = (Button) findViewById(R.id.button_player2_fault);
-            buttonFaultPlayer2.setText(getString(R.string.fault));
-        }
+        // * set first fault to 0
+        resetFaultButton();
     }
 
     public void addPointForPlayer2UnfError(View v) {
         unforcedErrorPlayer2++;
         managePointsPlayer1();
-        /**
-         * set first fault to 0
-         */
-        if (!firstFault) {
-            firstFault = true;
-            Button buttonFaultPlayer2 = (Button) findViewById(R.id.button_player2_fault);
-            buttonFaultPlayer2.setText(getString(R.string.fault));
-        }
+        //* set first fault to 0
+        resetFaultButton();
     }
 
     /**
@@ -840,15 +775,20 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     public void addPointForPlayer2Fault(View v) {
         if (firstFault) {
             faultPlayer2++;
-            Button buttonFaultPlayer2 = (Button) findViewById(R.id.button_player2_fault);
             buttonFaultPlayer2.setText(getString(R.string.double_fault));
             firstFault = false;
         } else {
             doubleFaultPlayer2++;
-            Button buttonFaultPlayer2 = (Button) findViewById(R.id.button_player2_fault);
             buttonFaultPlayer2.setText(getString(R.string.fault));
             firstFault = true;
             managePointsPlayer1();
+        }
+    }
+
+    private void resetFaultButton() {
+        if (!firstFault) {
+            firstFault = true;
+            buttonFaultPlayer2.setText(getString(R.string.fault));
         }
     }
 
@@ -906,16 +846,14 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     public void resetAll() {
 
         new AlertDialog.Builder(this)
-                .setTitle("Reset Match")
-                .setMessage("Do you really want to reset?")
+                .setTitle(R.string.scorekeeper_reset_match)
+                .setMessage(R.string.scorekeeper_reset_question)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        Toast.makeText(NavigationScoreKeeperActivity.this, "Match reset", Toast.LENGTH_SHORT).show();
-                        /**
-                         * set all variables to default state
-                         */
+                        Toast.makeText(NavigationScoreKeeperActivity.this, R.string.scorekeeper_reset_match, Toast.LENGTH_SHORT).show();
+                         //* set all variables to default state
                         pointsPlayer1 = 0;
                         pointsPlayer2 = 0;
                         gamesPlayer1 = 0;
@@ -942,63 +880,38 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                         doubleFaultPlayer2 = 0;
                         forcedErrorPlayer2 = 0;
                         unforcedErrorPlayer2 = 0;
-                        /**
-                         * reset POINTS
-                         */
-
-
+                         //* reset POINTS
                         scoreViewPlayer1.setText("0");
                         scoreViewPlayer2.setText("0");
                         textViewDeuce.setText("");
-
-                        /**
-                         * reset GAMES
-                         */
-
+                         //* reset GAMES
                         gamesViewPlayer1.setText("0");
                         gamesViewPlayer2.setText("0");
-
-                        /**
-                         * reset SETS
-                         */
-
+                         //* reset SETS
                         setsViewPlayer1.setText("0");
                         setsViewPlayer2.setText("0");
-
-
-                        /**
-                         * reset saved SETS
-                         */
+                         //* reset saved SETS
                         TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
                         TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
                         saveSetViewPlayer1.setText("");
                         saveSetViewPlayer2.setText("");
-
                         TextView saveSet2ViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_2);
                         TextView saveSet2ViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_2);
                         saveSet2ViewPlayer1.setText("");
                         saveSet2ViewPlayer2.setText("");
-
                         TextView saveSet3ViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_3);
                         TextView saveSet3ViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_3);
                         saveSet3ViewPlayer1.setText("");
                         saveSet3ViewPlayer2.setText("");
-
                         TextView saveSet4ViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_4);
                         TextView saveSet4ViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_4);
                         saveSet4ViewPlayer1.setText("");
                         saveSet4ViewPlayer2.setText("");
-
                         TextView saveSet5ViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_5);
                         TextView saveSet5ViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_5);
                         saveSet5ViewPlayer1.setText("");
                         saveSet5ViewPlayer2.setText("");
-
-
-                        /**
-                         * return serve to player 1 first and remove winner text
-                         */
-
+                        // * return serve to player 1 first and remove winner text
                         TextView textViewWinner1 = (TextView) findViewById(R.id.serve_color_Player1);
                         textViewWinner1.setText("");
                         TextView textViewWinner2 = (TextView) findViewById(R.id.serve_color_Player2);
@@ -1011,15 +924,11 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                     }
                 })
                 .setNegativeButton(android.R.string.no, null).show();
-
-
     }
-
-
-    /**
+   /**
      * changing players names
      *
-     * @param v
+     * @param v imageView silhouette
      */
     public void changePlayersNames(View v) {
         Intent playersIntent = new Intent(getApplicationContext(), PlayersNamesActivity.class);
