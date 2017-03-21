@@ -47,6 +47,8 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     private boolean firstFault = true;
     private boolean matchWon = false;
     private boolean tiebreakFinal = true;
+    private boolean playAdvantageFinal = true;
+    private int NUMBER_OF_GAMES_FOR_WIN = 6;
     /**
      * statistic variables
      */
@@ -178,19 +180,31 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     }
 
     private void setPreferences() {
-         //* manage preferences of app. Tiebreak and number of sets for win
+        //* manage preferences of app. Tiebreak and number of sets for win
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String setsNumber = sharedPrefs.getString(
                 getString(R.string.settings_number_of_sets_key),
                 getString(R.string.settings_number_of_sets_default));
+        numberOfSetsForWin = Integer.parseInt(setsNumber);
         String tiebreakFinalString = sharedPrefs.getString(
                 getString(R.string.settings_tiebreak_key),
                 getString(R.string.settings_tiebreak_default));
-        numberOfSetsForWin = Integer.parseInt(setsNumber);
         if (tiebreakFinalString.equals("No")) {
             tiebreakFinal = false;
         } else {
             tiebreakFinal = true;
+        }
+        String gamesNumber = sharedPrefs.getString(
+                getString(R.string.settings_number_of_games_key),
+                getString(R.string.settings_number_of_games_default));
+        NUMBER_OF_GAMES_FOR_WIN = Integer.parseInt(gamesNumber);
+        String advantageFinalString = sharedPrefs.getString(
+                getString(R.string.settings_advantage_key),
+                getString(R.string.settings_advantage_default));
+        if (advantageFinalString.equals("No")) {
+            playAdvantageFinal = false;
+        } else {
+            playAdvantageFinal = true;
         }
     }
 
@@ -345,6 +359,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             }
             return;
         }
+
         if (points == pointsPlayer2) {
             scoreViewPlayer1.setText(getString(R.string.points_40));
             scoreViewPlayer2.setText(getString(R.string.points_40));
@@ -426,7 +441,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         serveOfPlayer = !serveOfPlayer;
         serveChange(serveOfPlayer);
         //* check if player has win the set
-        if (gamesPlayer1 >= 6 && gamesPlayer1 > gamesPlayer2 + 1 || gamesPlayer1 == 7) {
+        if (gamesPlayer1 >= NUMBER_OF_GAMES_FOR_WIN && gamesPlayer1 > gamesPlayer2 + 1 || gamesPlayer1 == NUMBER_OF_GAMES_FOR_WIN + 1) {
             setsPlayer1++;
             displaySetsForPlayer1(setsPlayer1);
             return;
@@ -448,7 +463,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         serveOfPlayer = !serveOfPlayer;
         serveChange(serveOfPlayer);
         //* check if player has win the set
-        if (gamesPlayer2 >= 6 && gamesPlayer2 > gamesPlayer1 + 1 || gamesPlayer2 == 7) {
+        if (gamesPlayer2 >= NUMBER_OF_GAMES_FOR_WIN && gamesPlayer2 > gamesPlayer1 + 1 || gamesPlayer2 == NUMBER_OF_GAMES_FOR_WIN + 1) {
             setsPlayer2++;
             displaySetsForPlayer2(setsPlayer2);
             return;
@@ -461,7 +476,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
      */
     private void checkForTiebreak() {
 
-        if (gamesPlayer1 == 6 && gamesPlayer2 == 6 && tiebreakFinal) { //* tiebreakFinal is set in preferences settings
+        if (gamesPlayer1 == NUMBER_OF_GAMES_FOR_WIN && gamesPlayer2 == NUMBER_OF_GAMES_FOR_WIN && tiebreakFinal) { //* tiebreakFinal is set in preferences settings
             tieBreak = true;
             textViewDeuce.setText(getString(tiebreak));
             //* in tiebreak first serve has player who is next on serve in order and tiebreak is like one game,
@@ -577,8 +592,9 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
 
         }
     }
-    private void checkIfPlayerHasWinMatch(){
-        if (numberOfSetsForWin == setsPlayer2 || numberOfSetsForWin==setsPlayer1) {
+
+    private void checkIfPlayerHasWinMatch() {
+        if (numberOfSetsForWin == setsPlayer2 || numberOfSetsForWin == setsPlayer1) {
             matchWon = true;
             buttonsLayout.setVisibility(View.GONE);
         }
@@ -600,27 +616,32 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                 return;
             }
             if (pointsPlayer1 >= 40) {
-                pointsPlayer1++;
-                if (pointsPlayer2 < 40) {
+                if (playAdvantageFinal) {
+                    pointsPlayer1++;
+                    if (pointsPlayer2 < 40) {
+                        gamesPlayer1++;
+                        displayGamesForPlayer1(gamesPlayer1);
+                        return;
+                    }
+                    if (pointsPlayer1 >= pointsPlayer2) {
+                        displayPointsForPlayer1(pointsPlayer1);
+                        return;
+                    }
+                    if (pointsPlayer1 == pointsPlayer2 + 2) {
+                        gamesPlayer1++;
+                        displayGamesForPlayer1(gamesPlayer1);
+                        return;
+                    }
+                } else {
                     gamesPlayer1++;
                     displayGamesForPlayer1(gamesPlayer1);
                     return;
-                }
-                if (pointsPlayer1 >= pointsPlayer2) {
-                    displayPointsForPlayer1(pointsPlayer1);
-                    return;
-                }
-                if (pointsPlayer1 == pointsPlayer2 + 2) {
-                    gamesPlayer1++;
-                    displayGamesForPlayer1(gamesPlayer1);
                 }
             }
         } else {
             pointsPlayer1++;
             displayPointsForPlayer1(pointsPlayer1);
         }
-
-
     }
 
     /**
@@ -712,19 +733,26 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                 return;
             }
             if (pointsPlayer2 >= 40) {
-                pointsPlayer2++;
-                if (pointsPlayer1 < 40) {
+                if (playAdvantageFinal) {
+                    pointsPlayer2++;
+                    if (pointsPlayer1 < 40) {
+                        gamesPlayer2++;
+                        displayGamesForPlayer2(gamesPlayer2);
+                        return;
+                    }
+                    if (pointsPlayer2 >= pointsPlayer1) {
+                        displayPointsForPlayer2(pointsPlayer2);
+                        return;
+                    }
+                    if (pointsPlayer2 == pointsPlayer1 + 2) {
+                        gamesPlayer2++;
+                        displayGamesForPlayer2(gamesPlayer2);
+                        return;
+                    }
+                } else {
                     gamesPlayer2++;
                     displayGamesForPlayer2(gamesPlayer2);
                     return;
-                }
-                if (pointsPlayer2 >= pointsPlayer1) {
-                    displayPointsForPlayer2(pointsPlayer2);
-                    return;
-                }
-                if (pointsPlayer2 == pointsPlayer1 + 2) {
-                    gamesPlayer2++;
-                    displayGamesForPlayer2(gamesPlayer2);
                 }
             }
         } else {
@@ -853,7 +881,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         Toast.makeText(NavigationScoreKeeperActivity.this, R.string.scorekeeper_reset_match, Toast.LENGTH_SHORT).show();
-                         //* set all variables to default state
+                        //* set all variables to default state
                         pointsPlayer1 = 0;
                         pointsPlayer2 = 0;
                         gamesPlayer1 = 0;
@@ -880,17 +908,17 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                         doubleFaultPlayer2 = 0;
                         forcedErrorPlayer2 = 0;
                         unforcedErrorPlayer2 = 0;
-                         //* reset POINTS
+                        //* reset POINTS
                         scoreViewPlayer1.setText("0");
                         scoreViewPlayer2.setText("0");
                         textViewDeuce.setText("");
-                         //* reset GAMES
+                        //* reset GAMES
                         gamesViewPlayer1.setText("0");
                         gamesViewPlayer2.setText("0");
-                         //* reset SETS
+                        //* reset SETS
                         setsViewPlayer1.setText("0");
                         setsViewPlayer2.setText("0");
-                         //* reset saved SETS
+                        //* reset saved SETS
                         TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
                         TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
                         saveSetViewPlayer1.setText("");
@@ -925,7 +953,8 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                 })
                 .setNegativeButton(android.R.string.no, null).show();
     }
-   /**
+
+    /**
      * changing players names
      *
      * @param v imageView silhouette

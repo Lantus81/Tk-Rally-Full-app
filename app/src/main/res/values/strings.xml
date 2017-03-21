@@ -66,9 +66,14 @@
     <string name="statistics_title">Match Statistics</string>
 
     <!-- Strings For Minimum Number Of Sets Preference [CHAR LIMIT=30] -->
-    <string name="settings_number_of_sets_label">Number of Sets for win</string>
+    <string name="settings_number_of_sets_label">Number of Sets in Match</string>
     <string name="settings_number_of_sets_key" translatable="false">number_of_sets</string>
     <string name="settings_number_of_sets_default" translatable="false">2</string>
+
+    <!-- Strings For Minimum Number Of Games Preference [CHAR LIMIT=30] -->
+    <string name="settings_number_of_games_label">Number of Games in Set</string>
+    <string name="settings_number_of_games_key" translatable="false">number_of_games</string>
+    <string name="settings_number_of_games_default" translatable="false">6</string>
 
     <!-- Strings For Tiebreak Preference [CHAR LIMIT=30] -->
     <string name="settings_tiebreak_label">Tiebreak</string>
@@ -83,16 +88,53 @@
     <string name="settings_tiebreak_false_label">No Tiebreak</string>
     <string name="settings_tiebreak_false_value" translatable="false">No</string>
 
+    <!-- Strings For Advantage Preference [CHAR LIMIT=30] -->
+    <string name="settings_advantage_label">Advantage</string>
+    <string name="settings_advantage_key" translatable="false">advantage_value</string>
+    <string name="settings_advantage_default" translatable="false">@string/settings_advantage_true_value</string>
+    <!-- Label for Advantage true option [CHAR LIMIT=20] -->
+    <string name="settings_advantage_true_label">Play Advantage</string>
+    <string name="settings_advantage_true_value" translatable="false">Yes</string>
+    <!-- Label for Advantage false option [CHAR LIMIT=20] -->
+    <string name="settings_advantage_false_label">No Advantage</string>
+    <string name="settings_advantage_false_value" translatable="false">No</string>
+
+
     <!-- Label for Sets option [CHAR LIMIT=20] -->
-    <string name="settings_sets_1_label">Play 1 set for win</string>
+    <string name="settings_sets_1_label">Play 1 set Match</string>
     <string name="settings_sets_1_value" translatable="false">1</string>
 
     <!-- Label for Sets option [CHAR LIMIT=20] -->
-    <string name="settings_sets_2_label">Play 2 set for win</string>
+    <string name="settings_sets_2_label">Play 2 set Match</string>
     <string name="settings_sets_2_value" translatable="false">2</string>
     <!-- Label for Sets option [CHAR LIMIT=20] -->
-    <string name="settings_sets_3_label">Play 3 set for win</string>
+    <string name="settings_sets_3_label">Play 3 set Match</string>
     <string name="settings_sets_3_value" translatable="false">3</string>
+
+    <!-- Label for Games option [CHAR LIMIT=20] -->
+    <string name="settings_games_02_label">Play 2 Games Set</string>
+    <string name="settings_games_03_label">Play 3 Games Set</string>
+    <string name="settings_games_04_label">Play 4 Games Set</string>
+    <string name="settings_games_05_label">Play 5 Games Set</string>
+    <string name="settings_games_06_label">Play 6 Games Set</string>
+    <string name="settings_games_07_label">Play 7 Games Set</string>
+    <string name="settings_games_08_label">Play 8 Games Set</string>
+    <string name="settings_games_09_label">Play 9 Games Set</string>
+    <string name="settings_games_10_label">Play 10 Games Set</string>
+    <string name="settings_games_11_label">Play 11 Games Set</string>
+    <string name="settings_games_12_label">Play 12 Games Set</string>
+    <string name="settings_games_02_value" translatable="false">2</string>
+    <string name="settings_games_03_value" translatable="false">3</string>
+    <string name="settings_games_04_value" translatable="false">4</string>
+    <string name="settings_games_05_value" translatable="false">5</string>
+    <string name="settings_games_06_value" translatable="false">6</string>
+    <string name="settings_games_07_value" translatable="false">7</string>
+    <string name="settings_games_08_value" translatable="false">8</string>
+    <string name="settings_games_09_value" translatable="false">9</string>
+    <string name="settings_games_10_value" translatable="false">10</string>
+    <string name="settings_games_11_value" translatable="false">11</string>
+    <string name="settings_games_12_value" translatable="false">12</string>
+
 
 
     <!-- Label for Contact activity -->

@@ -7,6 +7,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -24,8 +25,14 @@ public class SettingsActivity extends AppCompatActivity {
             Preference numberOfSets = findPreference(getString(R.string.settings_number_of_sets_key));
             bindPreferenceSummaryToValue(numberOfSets);
 
+            Preference numberOfGames = findPreference(getString(R.string.settings_number_of_games_key));
+            bindPreferenceSummaryToValue(numberOfGames);
+
             Preference tiebreakValue = findPreference(getString(R.string.settings_tiebreak_key));
             bindPreferenceSummaryToValue(tiebreakValue);
+
+            Preference advantageValue = findPreference(getString(R.string.settings_advantage_key));
+            bindPreferenceSummaryToValue(advantageValue);
         }
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {

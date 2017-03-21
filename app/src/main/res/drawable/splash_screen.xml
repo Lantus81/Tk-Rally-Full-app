@@ -5,9 +5,9 @@
         android:drawable="@color/grayLight"/>
 
     <item>
-        <animation-list
+        <bitmap
             android:gravity="center"
-            android:src="@drawable/logo_move"
+            android:src="@drawable/main_logo_slogan"
             />
     </item>
 

@@ -4,11 +4,20 @@
         <item>@string/settings_tiebreak_true_label</item>
         <item>@string/settings_tiebreak_false_label</item>
     </string-array>
-
     <string-array name="settings_tiebreak_values">
         <item>@string/settings_tiebreak_true_value</item>
         <item>@string/settings_tiebreak_false_value</item>
     </string-array>
+
+    <string-array name="settings_advantage_labels">
+        <item>@string/settings_advantage_true_label</item>
+        <item>@string/settings_advantage_false_label</item>
+    </string-array>
+    <string-array name="settings_advantage_values">
+        <item>@string/settings_advantage_true_value</item>
+        <item>@string/settings_advantage_false_value</item>
+    </string-array>
+
     <string-array name="settings_sets_labels">
         <item>@string/settings_sets_1_label</item>
         <item>@string/settings_sets_2_label</item>
@@ -18,6 +27,33 @@
         <item>@string/settings_sets_1_value</item>
         <item>@string/settings_sets_2_value</item>
         <item>@string/settings_sets_3_value</item>
+    </string-array>
+
+    <string-array name="settings_games_labels">
+        <item>@string/settings_games_02_label</item>
+        <item>@string/settings_games_03_label</item>
+        <item>@string/settings_games_04_label</item>
+        <item>@string/settings_games_05_label</item>
+        <item>@string/settings_games_06_label</item>
+        <item>@string/settings_games_07_label</item>
+        <item>@string/settings_games_08_label</item>
+        <item>@string/settings_games_09_label</item>
+        <item>@string/settings_games_10_label</item>
+        <item>@string/settings_games_11_label</item>
+        <item>@string/settings_games_12_label</item>
+    </string-array>
+    <string-array name="settings_games_values">
+        <item>@string/settings_games_02_value</item>
+        <item>@string/settings_games_03_value</item>
+        <item>@string/settings_games_04_value</item>
+        <item>@string/settings_games_05_value</item>
+        <item>@string/settings_games_06_value</item>
+        <item>@string/settings_games_07_value</item>
+        <item>@string/settings_games_08_value</item>
+        <item>@string/settings_games_09_value</item>
+        <item>@string/settings_games_10_value</item>
+        <item>@string/settings_games_11_value</item>
+        <item>@string/settings_games_12_value</item>
     </string-array>
 
 
