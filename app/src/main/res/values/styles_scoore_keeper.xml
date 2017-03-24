@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <style name="score_btn_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textColorPrimaryDisableOnly">@color/grayDark</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:background">@drawable/score_btn_shape</item>
+
+    </style>
+ <style name="sets_style">
+    <item name="android:layout_width">0dp</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginLeft">2dp</item>
+    <item name="android:background">@drawable/score_display</item>
+    <item name="android:gravity">center</item>
+    <item name="android:textColor">@color/grayLight</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:text">0</item>
+
+</style>
+    <style name="score_display_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_marginLeft">@dimen/small_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/small_horizontal_margin</item>
+        <item name="android:layout_marginTop">@dimen/small_vertical_margin</item>
+        <item name="android:layout_marginBottom">@dimen/small_vertical_margin</item>
+        <item name="android:background">@drawable/score_display</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/grayLight</item>
+        <item name="android:text">0</item>
+        <item name="android:textSize">24sp</item>
+    </style>
     <!-- Player Images-->
     <style name="PlayerImage">
         <item name="android:layout_width">90dp</item>

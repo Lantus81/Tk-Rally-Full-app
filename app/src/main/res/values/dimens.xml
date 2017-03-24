@@ -9,6 +9,7 @@
     <dimen name="medium_vertical_margin">8dp</dimen>
     <dimen name="small_horizontal_margin">4dp</dimen>
     <dimen name="small_vertical_margin">4dp</dimen>
+    <dimen name="minimum_margin">0dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="score_keeper_bottom">60dp</dimen>
+    <dimen name="score_keeper_bottom">55dp</dimen>
 </resources>

@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="81dp">
+
+    <!-- HORIZONTAL GUIDELINE -->
+    <android.support.constraint.Guideline
+        android:id="@+id/guide_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <!-- VERTICAL GUIDELINE AT 5% -->
+    <android.support.constraint.Guideline
+        android:id="@+id/guide_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_court"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/small_horizontal_margin"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="@dimen/small_horizontal_margin"
+        android:background="#55000000"
+        app:layout_constraintBottom_toTopOf="@id/guide_horizontal"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@id/guide_vertical"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <!-- VERTICAL GUIDELINE AT 50% -->
+        <android.support.constraint.Guideline
+            android:id="@+id/guide_vertical_player_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <!-- HORIZONTAL GUIDELINE AT 30% -->
+        <android.support.constraint.Guideline
+            android:id="@+id/guide_horizontal_player_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
+        <!-- HORIZONTAL GUIDELINE AT 30% -->
+        <android.support.constraint.Guideline
+            android:id="@+id/guide_horizontal2_player_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.6" />
+
+        <ImageView
+            android:id="@+id/top_avatar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/medium_horizontal_margin"
+            android:padding="@dimen/medium_horizontal_margin"
+            android:src="@drawable/player_black"
+            app:layout_constraintBottom_toTopOf="@id/guide_horizontal2_player_1"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/guide_vertical_player_1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/score_name_player_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/medium_horizontal_margin"
+            android:layout_marginRight="@dimen/medium_horizontal_margin"
+            android:layout_marginTop="@dimen/medium_horizontal_margin"
+            android:layout_marginBottom="@dimen/medium_horizontal_margin"
+            android:maxLength="35"
+            android:text="Goran Ivanišević"
+            android:textColor="@color/grayLight"
+            android:textSize="12sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+        <ImageView
+            android:id="@+id/score_ball_serve"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/medium_horizontal_margin"
+            android:src="@drawable/tennis_ball"
+            android:onClick="changeServeFirstPlayer"
+            app:layout_constraintBottom_toTopOf="@id/guide_horizontal_player_1"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toLeftOf="@id/guide_vertical_player_1"
+            app:layout_constraintTop_toBottomOf="@id/score_name_player_1" />
+
+        <TextView
+            android:id="@+id/serve_color_Player1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/medium_horizontal_margin"
+            android:layout_marginLeft="@dimen/medium_horizontal_margin"
+            android:onClick="changeServeFirstPlayer"
+            android:text="@string/serve"
+            android:textColor="@color/grayLight"
+            android:textSize="12sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@id/guide_horizontal_player_1"
+            app:layout_constraintLeft_toRightOf="@id/score_ball_serve"
+            app:layout_constraintTop_toBottomOf="@id/score_name_player_1" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/small_horizontal_margin"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="@dimen/small_horizontal_margin"
+            android:background="#55000000"
+            android:padding="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toRightOf="@id/guide_vertical_player_1"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guide_horizontal_player_1"
+            app:layout_constraintVertical_bias="0.0">
+            <!-- VERTICAL GUIDELINE AT 50% -->
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guide_vertical_buttons_player_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guide_horizontal_buttons_player_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.3" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guide_horizontal2_buttons_player_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.7" />
+
+            <Button
+                android:id="@+id/button_player1_ace"
+                style="@style/score_btn_style"
+                android:onClick="addPointForPlayer1Ace"
+                android:text="@string/ace"
+                app:layout_constraintBottom_toTopOf="@id/guide_horizontal_buttons_player_1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/guide_vertical_buttons_player_1"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </Button>
+
+            <Button
+                android:id="@+id/button_player1_fault"
+                style="@style/score_btn_style"
+                android:onClick="addPointForPlayer1Fault"
+                android:text="@string/fault"
+                app:layout_constraintBottom_toTopOf="@id/guide_horizontal_buttons_player_1"
+                app:layout_constraintLeft_toRightOf="@id/guide_vertical_buttons_player_1"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button_player1_winner"
+                style="@style/score_btn_style"
+                android:onClick="addPointForPlayer1"
+                android:text="@string/winner"
+                app:layout_constraintBottom_toTopOf="@id/guide_horizontal2_buttons_player_1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guide_horizontal_buttons_player_1" />
+
+            <Button
+                android:id="@+id/button_player1_f_error"
+                style="@style/score_btn_style"
+                android:onClick="addPointForPlayer1ForError"
+                android:text="@string/forced_error_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/guide_vertical_buttons_player_1"
+                app:layout_constraintTop_toBottomOf="@id/guide_horizontal2_buttons_player_1" />
+
+            <Button
+                android:id="@+id/button_player1_unf_error"
+                style="@style/score_btn_style"
+                android:onClick="addPointForPlayer1UnfError"
+                android:text="@string/unf_error_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/guide_vertical_buttons_player_1"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guide_horizontal2_buttons_player_1" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/small_horizontal_margin"
+            android:layout_marginEnd="@dimen/minimum_margin"
+            android:layout_marginLeft="@dimen/small_horizontal_margin"
+            android:layout_marginRight="@dimen/minimum_margin"
+            android:layout_marginStart="@dimen/small_horizontal_margin"
+            android:layout_marginTop="@dimen/small_horizontal_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/guide_vertical_player_1"
+            app:layout_constraintTop_toBottomOf="@id/guide_horizontal2_player_1">
+
+            <TextView
+                android:id="@+id/save_sets_player1_set_1"
+                style="@style/sets_style"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <TextView
+                android:id="@+id/save_sets_player1_set_2"
+                style="@style/sets_style"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toRightOf="@+id/save_sets_player1_set_1" />
+
+            <TextView
+                android:id="@+id/save_sets_player1_set_3"
+                style="@style/sets_style"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toRightOf="@id/save_sets_player1_set_2" />
+
+            <TextView
+                android:id="@+id/save_sets_player1_set_4"
+                style="@style/sets_style"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toRightOf="@id/save_sets_player1_set_3" />
+
+            <TextView
+                android:id="@+id/save_sets_player1_set_5"
+                style="@style/sets_style"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toRightOf="@id/save_sets_player1_set_4" />
+            <!--SCORE-->
+            <TextView
+                android:id="@+id/player_1_points"
+                style="@style/score_display_style"
+                app:layout_constraintBottom_toTopOf="@id/save_sets_player1_set_1"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/player_1_games"
+                style="@style/score_display_style"
+                app:layout_constraintBottom_toTopOf="@id/save_sets_player1_set_1"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintRight_toLeftOf="@+id/player_1_points"
+                app:layout_constraintTop_toBottomOf="@+id/text_points_player_1" />
+
+            <TextView
+                android:id="@+id/player_1_sets"
+                style="@style/score_display_style"
+                app:layout_constraintBottom_toTopOf="@id/save_sets_player1_set_1"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/player_1_games"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/games"
+                android:textColor="@color/grayLight"
+                app:layout_constraintLeft_toLeftOf="@id/player_1_games"
+                app:layout_constraintRight_toRightOf="@id/player_1_games"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_points_player_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sets"
+                android:textColor="@color/grayLight"
+                app:layout_constraintLeft_toLeftOf="@id/player_1_sets"
+                app:layout_constraintRight_toRightOf="@id/player_1_sets"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/small_horizontal_margin"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="@dimen/small_horizontal_margin"
+        android:background="#55000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/guide_vertical"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guide_horizontal">
+
+        <!-- VERTICAL GUIDELINE AT 50% -->
+        <android.support.constraint.Guideline
+            android:id="@+id/guide_vertical_player_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <!-- HORIZONTAL GUIDELINE AT 30% -->
+        <android.support.constraint.Guideline
+            android:id="@+id/guide_horizontal_player_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.4" />
+        <!-- HORIZONTAL GUIDELINE AT 30% -->
+        <android.support.constraint.Guideline
+            android:id="@+id/guide_horizontal2_player_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.7" />
+
+        <ImageView
+            android:id="@+id/score_image_player2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/medium_horizontal_margin"
+            android:padding="@dimen/medium_horizontal_margin"
+            android:src="@drawable/player_black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/guide_vertical_player_2"
+            app:layout_constraintTop_toTopOf="@id/guide_horizontal_player_2" />
+
+        <TextView
+            android:id="@+id/score_name_player_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/medium_horizontal_margin"
+            android:layout_marginRight="@dimen/medium_horizontal_margin"
+            android:layout_marginTop="@dimen/medium_horizontal_margin"
+            android:layout_marginBottom="@dimen/medium_horizontal_margin"
+            android:maxLength="35"
+            android:text="Goran Ivanišević"
+            android:textColor="@color/grayLight"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+
+
+        <ImageView
+            android:id="@+id/score_ball_serve_player_2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/medium_horizontal_margin"
+            android:src="@drawable/tennis_ball"
+            android:onClick="changeServeFirstPlayer"
+            app:layout_constraintBottom_toTopOf="@id/score_name_player_2"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toLeftOf="@id/guide_vertical_player_2"
+            app:layout_constraintTop_toBottomOf="@id/guide_horizontal2_player_2" />
+        <TextView
+            android:id="@+id/serve_color_Player2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/medium_horizontal_margin"
+            android:layout_marginLeft="@dimen/medium_horizontal_margin"
+            android:text="@string/serve"
+            android:onClick="changeServeFirstPlayer"
+            android:textColor="@color/grayLight"
+            android:textSize="12sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@id/score_name_player_2"
+            app:layout_constraintLeft_toRightOf="@id/score_ball_serve_player_2"
+            app:layout_constraintTop_toBottomOf="@id/guide_horizontal2_player_2" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/small_horizontal_margin"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="@dimen/small_horizontal_margin"
+            android:background="#55000000"
+            android:padding="1dp"
+            app:layout_constraintBottom_toBottomOf="@id/guide_horizontal2_player_2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toRightOf="@id/guide_vertical_player_2"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+            <!-- VERTICAL GUIDELINE AT 50% -->
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guide_vertical_buttons_player_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guide_horizontal_buttons_player_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.3" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guide_horizontal2_buttons_player_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.7" />
+
+            <Button
+                android:id="@+id/button_player2_ace"
+                style="@style/score_btn_style"
+                android:onClick="onAddPointClick"
+                android:text="@string/ace"
+                app:layout_constraintBottom_toTopOf="@id/guide_horizontal_buttons_player_2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/guide_vertical_buttons_player_2"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </Button>
+
+            <Button
+                android:id="@+id/button_player2_fault"
+                style="@style/score_btn_style"
+                android:onClick="onAddPointClick"
+                android:text="@string/fault"
+                app:layout_constraintBottom_toTopOf="@id/guide_horizontal_buttons_player_2"
+                app:layout_constraintLeft_toRightOf="@id/guide_vertical_buttons_player_2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button_player2_winner"
+                style="@style/score_btn_style"
+                android:onClick="onAddPointClick"
+                android:text="@string/winner"
+                app:layout_constraintBottom_toTopOf="@id/guide_horizontal2_buttons_player_2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guide_horizontal_buttons_player_2" />
+
+            <Button
+                android:id="@+id/button_player2_f_error"
+                style="@style/score_btn_style"
+                android:onClick="onAddPointClick"
+                android:text="@string/forced_error_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/guide_vertical_buttons_player_2"
+                app:layout_constraintTop_toBottomOf="@id/guide_horizontal2_buttons_player_2" />
+
+            <Button
+                android:id="@+id/button_player2_u_error"
+                style="@style/score_btn_style"
+                android:onClick="onAddPointClick"
+                android:text="@string/unf_error_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/guide_vertical_buttons_player_2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guide_horizontal2_buttons_player_2" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/small_horizontal_margin"
+            android:layout_marginEnd="@dimen/minimum_margin"
+            android:layout_marginLeft="@dimen/small_horizontal_margin"
+            android:layout_marginRight="@dimen/minimum_margin"
+            android:layout_marginStart="@dimen/small_horizontal_margin"
+            android:layout_marginTop="@dimen/small_horizontal_margin"
+            app:layout_constraintBottom_toBottomOf="@id/guide_horizontal_player_2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/guide_vertical_player_2"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/save_sets_player2_set_1"
+                style="@style/sets_style"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/save_sets_player2_set_2"
+                style="@style/sets_style"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toRightOf="@+id/save_sets_player2_set_1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/save_sets_player2_set_3"
+                style="@style/sets_style"
+
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toRightOf="@id/save_sets_player2_set_2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/save_sets_player2_set_4"
+                style="@style/sets_style"
+
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toRightOf="@id/save_sets_player2_set_3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/save_sets_player2_set_5"
+                style="@style/sets_style"
+
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toRightOf="@id/save_sets_player2_set_4"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--SCORE-->
+            <TextView
+                android:id="@+id/player_2_points"
+                style="@style/score_display_style"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toRightOf="@id/player_2_games"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/save_sets_player2_set_1" />
+
+            <TextView
+                android:id="@+id/player_2_games"
+                style="@style/score_display_style"
+                app:layout_constraintBottom_toTopOf="@+id/text_points_player_2"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toRightOf="@id/player_2_sets"
+                app:layout_constraintRight_toLeftOf="@id/player_2_points"
+                app:layout_constraintTop_toBottomOf="@id/save_sets_player2_set_1" />
+
+            <TextView
+                android:id="@+id/player_2_sets"
+                style="@style/score_display_style"
+                app:layout_constraintTop_toBottomOf="@id/save_sets_player2_set_1"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/player_2_games"
+                 />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/games"
+                android:textColor="@color/grayLight"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/player_2_games"
+                app:layout_constraintRight_toRightOf="@id/player_2_games" />
+
+            <TextView
+                android:id="@+id/text_points_player_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sets"
+                android:textColor="@color/grayLight"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/player_2_sets"
+                app:layout_constraintRight_toRightOf="@id/player_2_sets" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

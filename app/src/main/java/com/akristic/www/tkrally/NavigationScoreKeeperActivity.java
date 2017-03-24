@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -72,8 +73,6 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
      */
     private TextView namePlayer1TextView;
     private TextView namePlayer2TextView;
-    private TextView namePlayer1TextViewServe;
-    private TextView namePlayer2TextViewServe;
     private TextView scoreViewPlayer1;
     private TextView scoreViewPlayer2;
     private TextView setsViewPlayer1;
@@ -87,7 +86,8 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     private Button buttonAcePlayer2;
     private Button buttonFaultPlayer1;
     private Button buttonFaultPlayer2;
-    private LinearLayout buttonsLayout;
+    private ConstraintLayout buttonsLayoutPlayer1;
+    private ConstraintLayout buttonsLayoutPlayer2;
     private ImageView mImagePlayer1;
     private ImageView mImagePlayer2;
 
@@ -126,7 +126,8 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //* hide buttons at onCreate
-        buttonsLayout = (LinearLayout) findViewById(R.id.buttons_layout_holder);
+        buttonsLayoutPlayer1 = (ConstraintLayout) findViewById(R.id.buttons_layout_holder_player_1);
+        buttonsLayoutPlayer2 = (ConstraintLayout) findViewById(R.id.buttons_layout_holder_player_2);
         buttonAcePlayer1 = (Button) findViewById(R.id.button_player1_ace);
         buttonAcePlayer2 = (Button) findViewById(R.id.button_player2_ace);
         buttonFaultPlayer2 = (Button) findViewById(R.id.button_player2_fault);
@@ -144,8 +145,6 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         setsViewPlayer2 = (TextView) findViewById(R.id.player_2_sets);
         namePlayer1TextView = (TextView) findViewById(R.id.player1_name);
         namePlayer2TextView = (TextView) findViewById(R.id.player2_name);
-        namePlayer1TextViewServe = (TextView) findViewById(R.id.player1_name_serve);
-        namePlayer2TextViewServe = (TextView) findViewById(R.id.player2_name_serve);
         mImagePlayer1 = (ImageView) findViewById(R.id.score_image_player1);
         mImagePlayer2 = (ImageView) findViewById(R.id.score_image_player2);
 
@@ -494,30 +493,40 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         if (setsPlayer1 + setsPlayer2 == 1) {
             TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
             TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
             saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
             saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
         }
         if (setsPlayer1 + setsPlayer2 == 2) {
             TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_2);
             TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_2);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
             saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
             saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
         }
         if (setsPlayer1 + setsPlayer2 == 3) {
             TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_3);
             TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_3);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
             saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
             saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
         }
         if (setsPlayer1 + setsPlayer2 == 4) {
             TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_4);
             TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_4);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
             saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
             saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
         }
         if (setsPlayer1 + setsPlayer2 == 5) {
             TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_5);
             TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_5);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
             saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
             saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
         }
@@ -537,6 +546,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             textViewDeuce.setText(getString(R.string.game_set_match_player1));
             textViewServePlayer1.setText(getString(R.string.winner_player));
         }
+
     }
 
     /**
@@ -547,30 +557,40 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         if (setsPlayer1 + setsPlayer2 == 1) {
             TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
             TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
             saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
             saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
         }
         if (setsPlayer1 + setsPlayer2 == 2) {
             TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_2);
             TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_2);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
             saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
             saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
         }
         if (setsPlayer1 + setsPlayer2 == 3) {
             TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_3);
             TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_3);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
             saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
             saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
         }
         if (setsPlayer1 + setsPlayer2 == 4) {
             TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_4);
             TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_4);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
             saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
             saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
         }
         if (setsPlayer1 + setsPlayer2 == 5) {
             TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_5);
             TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_5);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
             saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
             saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
         }
@@ -596,7 +616,8 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     private void checkIfPlayerHasWinMatch() {
         if (numberOfSetsForWin == setsPlayer2 || numberOfSetsForWin == setsPlayer1) {
             matchWon = true;
-            buttonsLayout.setVisibility(View.GONE);
+            buttonsLayoutPlayer1.setVisibility(View.GONE);
+            buttonsLayoutPlayer2.setVisibility(View.GONE);
         }
     }
 
@@ -651,11 +672,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         winnerPlayer1++;
         managePointsPlayer1();
         //* set first fault to 0
-        if (!firstFault) {
-            firstFault = true;
-            Button buttonFaultPlayer1 = (Button) findViewById(R.id.button_player1_fault);
-            buttonFaultPlayer1.setText(getString(R.string.fault));
-        }
+        resetFaultButton();
     }
 
     /**
@@ -665,10 +682,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         acePlayer1++;
         managePointsPlayer1();
         //* set first fault to 0
-        if (!firstFault) {
-            firstFault = true;
-            buttonFaultPlayer1.setText(getString(R.string.fault));
-        }
+        resetFaultButton();
     }
 
     /**
@@ -678,11 +692,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         forcedErrorPlayer1++;
         managePointsPlayer2();
         //* set first fault to 0
-        if (!firstFault) {
-            firstFault = true;
-            Button buttonFaultPlayer1 = (Button) findViewById(R.id.button_player1_fault);
-            buttonFaultPlayer1.setText(getString(R.string.fault));
-        }
+        resetFaultButton();
     }
 
     /**
@@ -692,11 +702,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         unforcedErrorPlayer1++;
         managePointsPlayer2();
         //* set first fault to 0
-        if (!firstFault) {
-            firstFault = true;
-            Button buttonFaultPlayer1 = (Button) findViewById(R.id.button_player1_fault);
-            buttonFaultPlayer1.setText(getString(R.string.fault));
-        }
+        resetFaultButton();
     }
 
     /**
@@ -919,24 +925,34 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                         setsViewPlayer1.setText("0");
                         setsViewPlayer2.setText("0");
                         //* reset saved SETS
-                        TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
-                        TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
-                        saveSetViewPlayer1.setText("");
-                        saveSetViewPlayer2.setText("");
+                        TextView saveSet1ViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
+                        TextView saveSet1ViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
+                        saveSet1ViewPlayer1.setVisibility(View.INVISIBLE);
+                        saveSet1ViewPlayer2.setVisibility(View.INVISIBLE);
+                        saveSet1ViewPlayer1.setText("");
+                        saveSet1ViewPlayer2.setText("");
                         TextView saveSet2ViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_2);
                         TextView saveSet2ViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_2);
+                        saveSet2ViewPlayer1.setVisibility(View.INVISIBLE);
+                        saveSet2ViewPlayer2.setVisibility(View.INVISIBLE);
                         saveSet2ViewPlayer1.setText("");
                         saveSet2ViewPlayer2.setText("");
                         TextView saveSet3ViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_3);
                         TextView saveSet3ViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_3);
+                        saveSet3ViewPlayer1.setVisibility(View.INVISIBLE);
+                        saveSet3ViewPlayer2.setVisibility(View.INVISIBLE);
                         saveSet3ViewPlayer1.setText("");
                         saveSet3ViewPlayer2.setText("");
                         TextView saveSet4ViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_4);
                         TextView saveSet4ViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_4);
+                        saveSet4ViewPlayer1.setVisibility(View.INVISIBLE);
+                        saveSet4ViewPlayer2.setVisibility(View.INVISIBLE);
                         saveSet4ViewPlayer1.setText("");
                         saveSet4ViewPlayer2.setText("");
                         TextView saveSet5ViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_5);
                         TextView saveSet5ViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_5);
+                        saveSet5ViewPlayer1.setVisibility(View.INVISIBLE);
+                        saveSet5ViewPlayer2.setVisibility(View.INVISIBLE);
                         saveSet5ViewPlayer1.setText("");
                         saveSet5ViewPlayer2.setText("");
                         // * return serve to player 1 first and remove winner text
@@ -946,7 +962,8 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                         textViewWinner2.setText("");
                         serveChange(serveOfPlayer);
                         //*show buttons
-                        buttonsLayout.setVisibility(View.VISIBLE);
+                        buttonsLayoutPlayer1.setVisibility(View.VISIBLE);
+                        buttonsLayoutPlayer2.setVisibility(View.VISIBLE);
                         setPreferences();
                         changePlayersNames();
                     }
@@ -967,8 +984,6 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     public void changePlayersNames() {
         namePlayer1TextView.setText(namePlayer1);
         namePlayer2TextView.setText(namePlayer2);
-        namePlayer1TextViewServe.setText(namePlayer1);
-        namePlayer2TextViewServe.setText(namePlayer2);
     }
 
     private void setPlayerPictures() {
