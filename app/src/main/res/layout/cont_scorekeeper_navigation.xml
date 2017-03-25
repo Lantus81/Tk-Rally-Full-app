@@ -5,7 +5,7 @@
     android:id="@+id/content_navigation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/score_keeper_bottom"
+    android:paddingBottom="@dimen/minimum_margin"
     android:paddingLeft="@dimen/minimum_margin"
     android:paddingRight="@dimen/minimum_margin"
     android:paddingTop="@dimen/minimum_margin"
@@ -26,7 +26,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
+            app:layout_constraintGuide_percent="0.46" />
+        <!-- HORIZONTAL GUIDELINE -->
+        <android.support.constraint.Guideline
+            android:id="@+id/guide_horizontal_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.92" />
 
         <!-- VERTICAL GUIDELINE AT 5% -->
         <android.support.constraint.Guideline
@@ -41,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/background_court"
+            android:src="@drawable/background_court2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -52,9 +59,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="@dimen/medium_vertical_margin"
-            android:layout_marginRight="0dp"
+            android:layout_marginRight="@dimen/minimum_margin"
             android:layout_marginTop="@dimen/small_horizontal_margin"
             android:background="#55000000"
+            android:paddingRight="@dimen/medium_horizontal_margin"
             app:layout_constraintBottom_toTopOf="@id/guide_horizontal"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toRightOf="@id/guide_vertical"
@@ -89,40 +97,42 @@
                 android:id="@+id/score_image_player1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_margin="32dp"
                 android:onClick="changePlayersNames"
                 android:scaleType="centerCrop"
-                android:layout_margin="@dimen/medium_horizontal_margin"
-                android:padding="@dimen/medium_horizontal_margin"
                 android:src="@drawable/player_black"
                 app:layout_constraintBottom_toTopOf="@id/guide_horizontal2_player_1"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/guide_vertical_player_1"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/mask"
                 app:layout_constraintBottom_toBottomOf="@id/guide_horizontal2_player_1"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="@id/guide_vertical_player_1"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/player1_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="changePlayersNames"
                 android:layout_marginBottom="@dimen/medium_horizontal_margin"
                 android:layout_marginEnd="@dimen/medium_horizontal_margin"
                 android:layout_marginRight="@dimen/medium_horizontal_margin"
                 android:layout_marginTop="@dimen/medium_horizontal_margin"
                 android:maxLength="35"
-                tools:text="Ime i Prezime"
+                android:onClick="changePlayersNames"
                 android:textColor="@color/grayLight"
                 android:textSize="12sp"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Ime i Prezime" />
 
 
             <ImageView
@@ -360,7 +370,8 @@
             android:layout_marginRight="0dp"
             android:layout_marginTop="@dimen/medium_vertical_margin"
             android:background="#55000000"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingRight="@dimen/medium_horizontal_margin"
+            app:layout_constraintBottom_toBottomOf="@id/guide_horizontal_bottom"
             app:layout_constraintLeft_toRightOf="@id/guide_vertical"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/guide_horizontal">
@@ -392,16 +403,16 @@
                 android:id="@+id/score_image_player2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:scaleType="centerCrop"
+                android:layout_margin="32dp"
                 android:onClick="changePlayersNames"
-                android:layout_margin="@dimen/medium_horizontal_margin"
-                android:padding="@dimen/medium_horizontal_margin"
+                android:scaleType="centerCrop"
                 android:src="@drawable/player_black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/guide_vertical_player_2"
                 app:layout_constraintTop_toTopOf="@id/guide_horizontal_player_2" />
+
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -411,21 +422,22 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="@id/guide_vertical_player_2"
                 app:layout_constraintTop_toTopOf="@id/guide_horizontal_player_2" />
+
             <TextView
                 android:id="@+id/player2_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="changePlayersNames"
                 android:layout_marginBottom="@dimen/medium_horizontal_margin"
                 android:layout_marginEnd="@dimen/medium_horizontal_margin"
                 android:layout_marginRight="@dimen/medium_horizontal_margin"
                 android:layout_marginTop="@dimen/medium_horizontal_margin"
                 android:maxLength="35"
-                tools:text="Ime i Prezime"
+                android:onClick="changePlayersNames"
                 android:textColor="@color/grayLight"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                app:layout_constraintRight_toRightOf="parent"
+                tools:text="Ime i Prezime" />
 
 
             <ImageView
@@ -461,8 +473,9 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginBottom="@dimen/small_horizontal_margin"
-                android:layout_marginRight="0dp"
+                android:layout_marginRight="@dimen/minimum_margin"
                 android:layout_marginTop="@dimen/medium_vertical_margin"
+
                 android:background="#55000000"
                 android:padding="1dp"
                 app:layout_constraintBottom_toBottomOf="@id/guide_horizontal2_player_2"
@@ -666,7 +679,55 @@
             app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.455" />
 
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#55000000"
+            android:paddingBottom="@dimen/small_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/small_vertical_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guide_horizontal_bottom">
+
+            <ImageView
+                android:id="@+id/button_statistics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="openStatistics"
+                android:src="@drawable/ic_poll_black_24dp"
+                android:tint="@color/grayLight"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_undo_black_24dp"
+                android:tint="@color/grayLight"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/button_statistics"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_redo_black_24dp"
+                android:tint="@color/grayLight"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/button_statistics"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
 </LinearLayout>

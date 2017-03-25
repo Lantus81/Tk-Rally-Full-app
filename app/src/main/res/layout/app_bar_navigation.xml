@@ -25,14 +25,4 @@
 
     <include layout="@layout/cont_scorekeeper_navigation" />
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_nav"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:itemBackground="?attr/colorPrimary"
-        app:itemIconTint="@android:color/white"
-        app:itemTextColor="@android:color/white"
-        app:menu="@menu/bottombar_menu"/>
-
 </android.support.design.widget.CoordinatorLayout>

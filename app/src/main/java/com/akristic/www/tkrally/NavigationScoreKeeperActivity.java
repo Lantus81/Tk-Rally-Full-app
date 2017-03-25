@@ -97,27 +97,6 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         setContentView(R.layout.activity_navigation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_nav);
-        bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.bottombaritem_undo:
-                                // TODO
-                                return false;
-                            case R.id.bottombaritem_statistics:
-                                Intent statisticsIntent = new Intent(getApplicationContext(), Statistics.class);
-                                startActivity(statisticsIntent);
-                                return false;
-
-                            case R.id.bottombaritem_redo:
-                                // TODO
-                                return false;
-                        }
-                        return false;
-                    }
-                });
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -177,7 +156,10 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         changePlayersNames();
         setPlayerPictures();
     }
-
+public void openStatistics(View v){
+    Intent statisticsIntent = new Intent(getApplicationContext(), Statistics.class);
+    startActivity(statisticsIntent);
+}
     private void setPreferences() {
         //* manage preferences of app. Tiebreak and number of sets for win
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
