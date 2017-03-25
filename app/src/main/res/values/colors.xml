@@ -9,4 +9,7 @@
     <color name="black">#000000</color>
     <color name="grayLightButtons">#F5F5F5</color>
     <color name="black_overlay">#BDBDBD</color>
+    <!-- Transparent colors -->
+    <color name="transparentWhite">#55FFFFFF</color>
+    <color name="transparentBlack">#55000000</color>
 </resources>
