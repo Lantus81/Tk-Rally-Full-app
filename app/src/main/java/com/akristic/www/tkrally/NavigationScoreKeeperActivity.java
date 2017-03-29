@@ -1195,11 +1195,11 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
 
         if (PlayersNamesActivity.bitmapPlayer1 != null) {
             mImagePlayer1.setImageBitmap(PlayersNamesActivity.bitmapPlayer1);
-            mImagePlayer1.setRotation(270);
+
         }
         if (PlayersNamesActivity.bitmapPlayer2 != null) {
             mImagePlayer2.setImageBitmap(PlayersNamesActivity.bitmapPlayer2);
-            mImagePlayer2.setRotation(270);
+
         }
     }
 }
