@@ -80,6 +80,7 @@
 
             <Button
                 android:id="@+id/button_try_again"
+                style="@style/score_btn_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -90,6 +91,7 @@
 
             <Button
                 android:id="@+id/button_next_question"
+                style="@style/score_btn_style"
                 android:layout_width="160dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
@@ -99,6 +101,7 @@
 
             <Button
                 android:id="@+id/button_submit_question"
+                style="@style/score_btn_style"
                 android:layout_width="160dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"

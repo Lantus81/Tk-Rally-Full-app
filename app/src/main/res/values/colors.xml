@@ -4,12 +4,12 @@
     <color name="colorPrimaryDark">#E65100</color>
     <color name="colorAccent">#689F38</color>
     <!-- Gray scale-->
-    <color name="grayDark">#eeeeee</color>
+    <color name="grayDark">#d8757575</color>
     <color name="grayLight">#ffffff</color>
     <color name="black">#000000</color>
-    <color name="grayLightButtons">#F5F5F5</color>
+    <color name="grayLightButtons">#000000</color>
     <color name="black_overlay">#BDBDBD</color>
     <!-- Transparent colors -->
-    <color name="transparentWhite">#55FFFFFF</color>
-    <color name="transparentBlack">#55000000</color>
+    <color name="transparentWhite">#ffffff</color>
+    <color name="transparentBlack">#ffffff</color>
 </resources>

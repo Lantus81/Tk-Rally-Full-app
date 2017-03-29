@@ -23,7 +23,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 import java.util.Locale;
+
 
 import static com.akristic.www.tkrally.R.string.tiebreak;
 
@@ -69,8 +72,8 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
      */
     private TextView namePlayer1TextView;
     private TextView namePlayer2TextView;
-    private TextView scoreViewPlayer1;
-    private TextView scoreViewPlayer2;
+    private TextView pointsViewPlayer1;
+    private TextView pointsViewPlayer2;
     private TextView setsViewPlayer1;
     private TextView setsViewPlayer2;
     private TextView textViewDeuce;
@@ -86,6 +89,9 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     private ConstraintLayout buttonsLayoutPlayer2;
     private ImageView mImagePlayer1;
     private ImageView mImagePlayer2;
+
+    private ArrayList<UndoRedo> savedState = new ArrayList<UndoRedo>();
+    private int currentUndoIndex = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,10 +113,8 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         buttonAcePlayer2 = (Button) findViewById(R.id.button_player2_ace);
         buttonFaultPlayer2 = (Button) findViewById(R.id.button_player2_fault);
         buttonFaultPlayer1 = (Button) findViewById(R.id.button_player1_fault);
-        buttonAcePlayer2.setEnabled(false);
-        buttonFaultPlayer2.setEnabled(false);
-        scoreViewPlayer1 = (TextView) findViewById(R.id.player_1_points);
-        scoreViewPlayer2 = (TextView) findViewById(R.id.player_2_points);
+        pointsViewPlayer1 = (TextView) findViewById(R.id.player_1_points);
+        pointsViewPlayer2 = (TextView) findViewById(R.id.player_2_points);
         textViewDeuce = (TextView) findViewById(R.id.deuce);
         textViewServePlayer1 = (TextView) findViewById(R.id.serve_color_Player1);
         textViewServePlayer2 = (TextView) findViewById(R.id.serve_color_Player2);
@@ -140,8 +144,8 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             matchWon = savedInstanceState.getBoolean("matchWon");
             checkIfPlayerHasWinMatch();
             tiebreakFinal = savedInstanceState.getBoolean("tiebreakFinal");
-            scoreViewPlayer1.setText(String.valueOf(pointsPlayer1));
-            scoreViewPlayer2.setText(String.valueOf(pointsPlayer2));
+            pointsViewPlayer1.setText(String.valueOf(pointsPlayer1));
+            pointsViewPlayer2.setText(String.valueOf(pointsPlayer2));
             gamesViewPlayer1.setText(String.valueOf(gamesPlayer1));
             gamesViewPlayer2.setText(String.valueOf(gamesPlayer2));
             setsViewPlayer1.setText(String.valueOf(setsPlayer1));
@@ -151,11 +155,19 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         setPreferences();
         changePlayersNames();
         setPlayerPictures();
+        if (!tieBreak) {
+            serveChange(serveOfPlayer);
+        } else {
+            serveChange(serveOfPlayerInTieBreak);
+        }
+        saveUndoState(); //* set zero index state for undo and redo ArrayList
     }
-public void openStatistics(View v){
-    Intent statisticsIntent = new Intent(getApplicationContext(), Statistics.class);
-    startActivity(statisticsIntent);
-}
+
+    public void openStatistics(View v) {
+        Intent statisticsIntent = new Intent(getApplicationContext(), Statistics.class);
+        startActivity(statisticsIntent);
+    }
+
     private void setPreferences() {
         //* manage preferences of app. Tiebreak and number of sets for win
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -318,7 +330,7 @@ public void openStatistics(View v){
     public void displayPointsForPlayer1(int points) {
         textViewDeuce.setText("");
         if (points <= 40 || tieBreak) {
-            scoreViewPlayer1.setText(String.valueOf(points));
+            pointsViewPlayer1.setText(String.valueOf(points));
             if (pointsPlayer1 == 40 && pointsPlayer2 == 40 && !tieBreak) {
                 textViewDeuce.setText(getString(R.string.deuce));
             }
@@ -338,14 +350,14 @@ public void openStatistics(View v){
         }
 
         if (points == pointsPlayer2) {
-            scoreViewPlayer1.setText(getString(R.string.points_40));
-            scoreViewPlayer2.setText(getString(R.string.points_40));
+            pointsViewPlayer1.setText(getString(R.string.points_40));
+            pointsViewPlayer2.setText(getString(R.string.points_40));
             textViewDeuce.setText(getString(R.string.deuce) + " (" + (pointsPlayer1 - 39) + ")");
             return;
         }
         if (points == pointsPlayer2 + 1) {
-            scoreViewPlayer1.setText(getString(R.string.advance));
-            scoreViewPlayer2.setText("");
+            pointsViewPlayer1.setText(getString(R.string.advance));
+            pointsViewPlayer2.setText("");
             if (!serveOfPlayer) {
                 textViewDeuce.setText(getString(R.string.break_point_player1));
             }
@@ -365,7 +377,7 @@ public void openStatistics(View v){
 
         textViewDeuce.setText("");
         if (points <= 40 || tieBreak) {
-            scoreViewPlayer2.setText(String.valueOf(points));
+            pointsViewPlayer2.setText(String.valueOf(points));
             if (pointsPlayer1 == 40 && pointsPlayer2 == 40 && !tieBreak) {
                 textViewDeuce.setText(getString(R.string.deuce));
             }
@@ -384,14 +396,14 @@ public void openStatistics(View v){
             return;
         }
         if (points == pointsPlayer1) {
-            scoreViewPlayer1.setText(getString(R.string.points_40));
-            scoreViewPlayer2.setText(getString(R.string.points_40));
+            pointsViewPlayer1.setText(getString(R.string.points_40));
+            pointsViewPlayer2.setText(getString(R.string.points_40));
             textViewDeuce.setText(getString(R.string.deuce) + " (" + (pointsPlayer1 - 39) + ")");
             return;
         }
         if (points == pointsPlayer1 + 1) {
-            scoreViewPlayer1.setText("");
-            scoreViewPlayer2.setText(getString(R.string.advance));
+            pointsViewPlayer1.setText("");
+            pointsViewPlayer2.setText(getString(R.string.advance));
             if (serveOfPlayer) {
                 textViewDeuce.setText(getString(R.string.break_point_player2));
             }
@@ -411,8 +423,8 @@ public void openStatistics(View v){
         gamesViewPlayer1.setText(String.valueOf(points));
         pointsPlayer1 = 0;
         pointsPlayer2 = 0;
-        scoreViewPlayer1.setText("0");
-        scoreViewPlayer2.setText("0");
+        pointsViewPlayer1.setText("0");
+        pointsViewPlayer2.setText("0");
         textViewDeuce.setText(getString(R.string.game_for_player1));
         //* change serve only if not playing tiebreak
         serveOfPlayer = !serveOfPlayer;
@@ -433,8 +445,8 @@ public void openStatistics(View v){
         gamesViewPlayer2.setText(String.valueOf(points));
         pointsPlayer1 = 0;
         pointsPlayer2 = 0;
-        scoreViewPlayer1.setText("0");
-        scoreViewPlayer2.setText("0");
+        pointsViewPlayer1.setText("0");
+        pointsViewPlayer2.setText("0");
         textViewDeuce.setText(getString(R.string.game_for_player2));
         //* change serve only if not playing tiebreak
         serveOfPlayer = !serveOfPlayer;
@@ -513,8 +525,8 @@ public void openStatistics(View v){
         gamesPlayer2 = 0;
         gamesViewPlayer1.setText("0");
         gamesViewPlayer2.setText("0");
-        scoreViewPlayer1.setText("0");
-        scoreViewPlayer2.setText("0");
+        pointsViewPlayer1.setText("0");
+        pointsViewPlayer2.setText("0");
         setsViewPlayer1.setText(String.valueOf(points));
         textViewDeuce.setText(getString(R.string.set_for_player1));
         //* check if player has WIN the match
@@ -523,6 +535,9 @@ public void openStatistics(View v){
         if (matchWon) {
             textViewDeuce.setText(getString(R.string.game_set_match_player1));
             textViewServePlayer1.setText(getString(R.string.winner_player));
+            textViewServePlayer1.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            textViewServePlayer2.setBackgroundColor(Color.TRANSPARENT);
+            textViewServePlayer2.setText("");
         }
 
     }
@@ -577,8 +592,8 @@ public void openStatistics(View v){
         gamesPlayer2 = 0;
         gamesViewPlayer1.setText("0");
         gamesViewPlayer2.setText("0");
-        scoreViewPlayer1.setText("0");
-        scoreViewPlayer2.setText("0");
+        pointsViewPlayer1.setText("0");
+        pointsViewPlayer2.setText("0");
         setsViewPlayer2.setText(String.valueOf(points));
         textViewDeuce.setText(getString(R.string.set_for_player2));
         //* Check if player has WIN the match
@@ -587,6 +602,9 @@ public void openStatistics(View v){
         if (matchWon) {
             textViewDeuce.setText(getString(R.string.game_set_match_player2));
             textViewServePlayer2.setText(getString(R.string.winner_player));
+            textViewServePlayer2.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            textViewServePlayer1.setBackgroundColor(Color.TRANSPARENT);
+            textViewServePlayer1.setText("");
 
         }
     }
@@ -644,6 +662,189 @@ public void openStatistics(View v){
     }
 
     /**
+     * Undo and redo methods
+     */
+
+    private void saveUndoState() {
+        String displayPointsPlayer1 = pointsViewPlayer1.getText().toString();
+        String displayGamesPlayer1 = gamesViewPlayer1.getText().toString();
+        String displaySetsPlayer1 = setsViewPlayer1.getText().toString();
+        String displayPointsPlayer2 = pointsViewPlayer2.getText().toString();
+        String displayGamesPlayer2 = gamesViewPlayer2.getText().toString();
+        String displaySetsPlayer2 = setsViewPlayer2.getText().toString();
+        String displayTextMessage = textViewDeuce.getText().toString();
+        currentUndoIndex++;
+        if (currentUndoIndex >= savedState.size()) {
+            savedState.add(new UndoRedo(pointsPlayer1,
+                    pointsPlayer2,
+                    gamesPlayer1,
+                    gamesPlayer2,
+                    setsPlayer1,
+                    setsPlayer2,
+                    numberOfSetsForWin,
+                    numberOfServeInTieBreak,
+                    serveOfPlayer,
+                    serveOfPlayerInTieBreak,
+                    tieBreak,
+                    firstFault,
+                    matchWon,
+                    tiebreakFinal,
+                    winnerPlayer1,
+                    acePlayer1,
+                    faultPlayer1,
+                    doubleFaultPlayer1,
+                    forcedErrorPlayer1,
+                    unforcedErrorPlayer1,
+                    winnerPlayer2,
+                    acePlayer2,
+                    faultPlayer2,
+                    doubleFaultPlayer2,
+                    forcedErrorPlayer2,
+                    unforcedErrorPlayer2,
+                    displayPointsPlayer1,
+                    displayGamesPlayer1,
+                    displaySetsPlayer1,
+                    displayPointsPlayer2,
+                    displayGamesPlayer2,
+                    displaySetsPlayer2,
+                    displayTextMessage));
+        } else {
+            savedState.set(currentUndoIndex, new UndoRedo(pointsPlayer1,
+                    pointsPlayer2,
+                    gamesPlayer1,
+                    gamesPlayer2,
+                    setsPlayer1,
+                    setsPlayer2,
+                    numberOfSetsForWin,
+                    numberOfServeInTieBreak,
+                    serveOfPlayer,
+                    serveOfPlayerInTieBreak,
+                    tieBreak,
+                    firstFault,
+                    matchWon,
+                    tiebreakFinal,
+                    winnerPlayer1,
+                    acePlayer1,
+                    faultPlayer1,
+                    doubleFaultPlayer1,
+                    forcedErrorPlayer1,
+                    unforcedErrorPlayer1,
+                    winnerPlayer2,
+                    acePlayer2,
+                    faultPlayer2,
+                    doubleFaultPlayer2,
+                    forcedErrorPlayer2,
+                    unforcedErrorPlayer2,
+                    displayPointsPlayer1,
+                    displayGamesPlayer1,
+                    displaySetsPlayer1,
+                    displayPointsPlayer2,
+                    displayGamesPlayer2,
+                    displaySetsPlayer2,
+                    displayTextMessage));
+        }
+        /**
+         * remove all data if after currentUndoIndex
+         */
+        for (int i = savedState.size() - 1; i > currentUndoIndex; i--) {
+            savedState.remove(i);
+        }
+
+
+    }
+
+    public void undo(View v) {
+
+        if (currentUndoIndex - 1 < savedState.size() && currentUndoIndex - 1 >= 0) {
+            currentUndoIndex--;
+            pointsPlayer1 = savedState.get(currentUndoIndex).getPointsPlayer1();
+            pointsPlayer2 = savedState.get(currentUndoIndex).getPointsPlayer2();
+            gamesPlayer1 = savedState.get(currentUndoIndex).getGamesPlayer1();
+            gamesPlayer2 = savedState.get(currentUndoIndex).getGamesPlayer2();
+            setsPlayer1 = savedState.get(currentUndoIndex).getSetsPlayer1();
+            setsPlayer2 = savedState.get(currentUndoIndex).getSetsPlayer2();
+            numberOfSetsForWin = savedState.get(currentUndoIndex).getNumberOfSetsForWin();
+            numberOfServeInTieBreak = savedState.get(currentUndoIndex).getNumberOfServeInTieBreak();
+            serveOfPlayer = savedState.get(currentUndoIndex).getServeOfPlayer();
+            serveOfPlayerInTieBreak = savedState.get(currentUndoIndex).getServeOfPlayerInTieBreak();
+            tieBreak = savedState.get(currentUndoIndex).getTieBreak();
+            firstFault = savedState.get(currentUndoIndex).getFirstFault();
+            matchWon = savedState.get(currentUndoIndex).getMatchWon();
+            tiebreakFinal = savedState.get(currentUndoIndex).getTiebreakFinal();
+            winnerPlayer1 = savedState.get(currentUndoIndex).getWinnerPlayer1();
+            acePlayer1 = savedState.get(currentUndoIndex).getAcePlayer1();
+            faultPlayer1 = savedState.get(currentUndoIndex).getFaultPlayer1();
+            doubleFaultPlayer1 = savedState.get(currentUndoIndex).getDoubleFaultPlayer1();
+            forcedErrorPlayer1 = savedState.get(currentUndoIndex).getForcedErrorPlayer1();
+            unforcedErrorPlayer1 = savedState.get(currentUndoIndex).getUnforcedErrorPlayer1();
+            winnerPlayer2 = savedState.get(currentUndoIndex).getWinnerPlayer2();
+            acePlayer2 = savedState.get(currentUndoIndex).getAcePlayer2();
+            faultPlayer2 = savedState.get(currentUndoIndex).getFaultPlayer2();
+            doubleFaultPlayer2 = savedState.get(currentUndoIndex).getDoubleFaultPlayer2();
+            forcedErrorPlayer2 = savedState.get(currentUndoIndex).getForcedErrorPlayer2();
+            unforcedErrorPlayer2 = savedState.get(currentUndoIndex).getUnforcedErrorPlayer2();
+            pointsViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplayPointsPlayer1());
+            gamesViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplayGamesPlayer1());
+            setsViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplaySetsPlayer1());
+            pointsViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplayPointsPlayer2());
+            gamesViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplayGamesPlayer2());
+            setsViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplaySetsPlayer2());
+            textViewDeuce.setText(savedState.get(currentUndoIndex).getDisplayTextMessage());
+            serveChange(serveOfPlayer);
+            displayRightFaultButtonText ();
+
+        } else {
+            Toast.makeText(this, "Can't undo", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void redo(View v) {
+
+        if (currentUndoIndex + 1 < savedState.size() && currentUndoIndex + 1 >= 0) {
+            currentUndoIndex++;
+            pointsPlayer1 = savedState.get(currentUndoIndex).getPointsPlayer1();
+            pointsPlayer2 = savedState.get(currentUndoIndex).getPointsPlayer2();
+            gamesPlayer1 = savedState.get(currentUndoIndex).getGamesPlayer1();
+            gamesPlayer2 = savedState.get(currentUndoIndex).getGamesPlayer2();
+            setsPlayer1 = savedState.get(currentUndoIndex).getSetsPlayer1();
+            setsPlayer2 = savedState.get(currentUndoIndex).getSetsPlayer2();
+            numberOfSetsForWin = savedState.get(currentUndoIndex).getNumberOfSetsForWin();
+            numberOfServeInTieBreak = savedState.get(currentUndoIndex).getNumberOfServeInTieBreak();
+            serveOfPlayer = savedState.get(currentUndoIndex).getServeOfPlayer();
+            serveOfPlayerInTieBreak = savedState.get(currentUndoIndex).getServeOfPlayerInTieBreak();
+            tieBreak = savedState.get(currentUndoIndex).getTieBreak();
+            firstFault = savedState.get(currentUndoIndex).getFirstFault();
+            matchWon = savedState.get(currentUndoIndex).getMatchWon();
+            tiebreakFinal = savedState.get(currentUndoIndex).getTiebreakFinal();
+            winnerPlayer1 = savedState.get(currentUndoIndex).getWinnerPlayer1();
+            acePlayer1 = savedState.get(currentUndoIndex).getAcePlayer1();
+            faultPlayer1 = savedState.get(currentUndoIndex).getFaultPlayer1();
+            doubleFaultPlayer1 = savedState.get(currentUndoIndex).getDoubleFaultPlayer1();
+            forcedErrorPlayer1 = savedState.get(currentUndoIndex).getForcedErrorPlayer1();
+            unforcedErrorPlayer1 = savedState.get(currentUndoIndex).getUnforcedErrorPlayer1();
+            winnerPlayer2 = savedState.get(currentUndoIndex).getWinnerPlayer2();
+            acePlayer2 = savedState.get(currentUndoIndex).getAcePlayer2();
+            faultPlayer2 = savedState.get(currentUndoIndex).getFaultPlayer2();
+            doubleFaultPlayer2 = savedState.get(currentUndoIndex).getDoubleFaultPlayer2();
+            forcedErrorPlayer2 = savedState.get(currentUndoIndex).getForcedErrorPlayer2();
+            unforcedErrorPlayer2 = savedState.get(currentUndoIndex).getUnforcedErrorPlayer2();
+            pointsViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplayPointsPlayer1());
+            gamesViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplayGamesPlayer1());
+            setsViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplaySetsPlayer1());
+            pointsViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplayPointsPlayer2());
+            gamesViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplayGamesPlayer2());
+            setsViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplaySetsPlayer2());
+            textViewDeuce.setText(savedState.get(currentUndoIndex).getDisplayTextMessage());
+            serveChange(serveOfPlayer);
+            displayRightFaultButtonText ();
+
+        } else {
+            Toast.makeText(this, "Can't redo", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
      * winner points for player 1
      */
     public void addPointForPlayer1(View v) {
@@ -651,6 +852,7 @@ public void openStatistics(View v){
         managePointsPlayer1();
         //* set first fault to 0
         resetFaultButton();
+        saveUndoState();
     }
 
     /**
@@ -661,6 +863,7 @@ public void openStatistics(View v){
         managePointsPlayer1();
         //* set first fault to 0
         resetFaultButton();
+        saveUndoState();
     }
 
     /**
@@ -671,6 +874,7 @@ public void openStatistics(View v){
         managePointsPlayer2();
         //* set first fault to 0
         resetFaultButton();
+        saveUndoState();
     }
 
     /**
@@ -681,6 +885,7 @@ public void openStatistics(View v){
         managePointsPlayer2();
         //* set first fault to 0
         resetFaultButton();
+        saveUndoState();
     }
 
     /**
@@ -689,16 +894,15 @@ public void openStatistics(View v){
     public void addPointForPlayer1Fault(View v) {
         if (firstFault) {
             faultPlayer1++;
-            Button buttonFaultPlayer1 = (Button) findViewById(R.id.button_player1_fault);
             buttonFaultPlayer1.setText(getString(R.string.double_fault));
             firstFault = false;
         } else {
             doubleFaultPlayer1++;
-            Button buttonFaultPlayer1 = (Button) findViewById(R.id.button_player1_fault);
             buttonFaultPlayer1.setText(getString(R.string.fault));
             firstFault = true;
             managePointsPlayer2();
         }
+        saveUndoState();
     }
 
     /**
@@ -752,6 +956,7 @@ public void openStatistics(View v){
         winnerPlayer2++;
         managePointsPlayer2();
         resetFaultButton();
+        saveUndoState();
     }
 
     /**
@@ -762,6 +967,7 @@ public void openStatistics(View v){
         managePointsPlayer2();
         //** set first fault to 0
         resetFaultButton();
+        saveUndoState();
     }
 
     /**
@@ -772,6 +978,7 @@ public void openStatistics(View v){
         managePointsPlayer1();
         // * set first fault to 0
         resetFaultButton();
+        saveUndoState();
     }
 
     public void addPointForPlayer2UnfError(View v) {
@@ -779,6 +986,7 @@ public void openStatistics(View v){
         managePointsPlayer1();
         //* set first fault to 0
         resetFaultButton();
+        saveUndoState();
     }
 
     /**
@@ -795,15 +1003,30 @@ public void openStatistics(View v){
             firstFault = true;
             managePointsPlayer1();
         }
+        saveUndoState();
     }
 
     private void resetFaultButton() {
         if (!firstFault) {
             firstFault = true;
+            buttonFaultPlayer1.setText(getString(R.string.fault));
             buttonFaultPlayer2.setText(getString(R.string.fault));
         }
     }
-
+    private void displayRightFaultButtonText (){
+        if (!firstFault && serveOfPlayer){
+            buttonFaultPlayer1.setText(getString(R.string.double_fault));
+        }
+        if (!firstFault && !serveOfPlayer){
+            buttonFaultPlayer2.setText(getString(R.string.double_fault));
+        }
+        if (firstFault && serveOfPlayer){
+            buttonFaultPlayer1.setText(getString(R.string.fault));
+        }
+        if (firstFault && !serveOfPlayer){
+            buttonFaultPlayer2.setText(getString(R.string.fault));
+        }
+    }
 
     /**
      * change who serve first
@@ -815,6 +1038,7 @@ public void openStatistics(View v){
                 forcedErrorPlayer1 == 0 && forcedErrorPlayer2 == 0 && unforcedErrorPlayer1 == 0 && unforcedErrorPlayer2 == 0) {
             serveOfPlayer = !serveOfPlayer;
             serveChange(serveOfPlayer);
+            saveUndoState();
         } else {
             Toast.makeText(this, getString(R.string.toast_message_serve), Toast.LENGTH_SHORT).show();
         }
@@ -866,6 +1090,9 @@ public void openStatistics(View v){
                     public void onClick(DialogInterface dialog, int whichButton) {
                         Toast.makeText(NavigationScoreKeeperActivity.this, R.string.scorekeeper_reset_match, Toast.LENGTH_SHORT).show();
                         //* set all variables to default state
+                        savedState.clear();
+                        currentUndoIndex = -1;
+                        saveUndoState();
                         pointsPlayer1 = 0;
                         pointsPlayer2 = 0;
                         gamesPlayer1 = 0;
@@ -893,8 +1120,8 @@ public void openStatistics(View v){
                         forcedErrorPlayer2 = 0;
                         unforcedErrorPlayer2 = 0;
                         //* reset POINTS
-                        scoreViewPlayer1.setText("0");
-                        scoreViewPlayer2.setText("0");
+                        pointsViewPlayer1.setText("0");
+                        pointsViewPlayer2.setText("0");
                         textViewDeuce.setText("");
                         //* reset GAMES
                         gamesViewPlayer1.setText("0");

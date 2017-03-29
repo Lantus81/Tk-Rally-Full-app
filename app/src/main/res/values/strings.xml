@@ -162,6 +162,6 @@
     <string name="quiz_current_score">Your score: 0/10</string>
     <string name="scorekeeper_reset_match">Reset Match</string>
     <string name="scorekeeper_reset_question">Do you really want to reset?</string>
-    <string name="scorekeeper_beauty_of_the_game">Discover beauty of the Game</string>
+    <string name="scorekeeper_beauty_of_the_game">Discover the Beauty of the Game</string>
 
 </resources>

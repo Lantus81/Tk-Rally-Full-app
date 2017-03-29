@@ -205,6 +205,7 @@ public class PlayersNamesActivity extends AppCompatActivity {
                 Bitmap bitmap = scaleBitmapDown(MediaStore.Images.Media.getBitmap(getContentResolver(), uri),
                         IMAGE_SIZE);
 
+
                 if (whatPlayer.equals("Player1")) {
                     mImagePlayer1.setImageBitmap(bitmap);
                     mImagePlayer1.setRotation(270);
