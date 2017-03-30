@@ -1,16 +1,34 @@
 package com.akristic.www.tkrally;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.acePlayer1;
+import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.acePlayer2;
+import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.doubleFaultPlayer1;
+import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.doubleFaultPlayer2;
+import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.faultPlayer1;
+import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.faultPlayer2;
+import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.forcedErrorPlayer1;
+import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.forcedErrorPlayer2;
+import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.unforcedErrorPlayer1;
+import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.unforcedErrorPlayer2;
+import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.winnerPlayer1;
+import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.winnerPlayer2;
+
 /**
  * Created by Toni on 7.3.2017..
  */
 
-public class UndoRedo {
+public class UndoRedo implements Parcelable {
     private int mPointsPlayer1 = 0;
     private int mPointsPlayer2 = 0;
     private int mGamesPlayer1 = 0;
     private int mGamesPlayer2 = 0;
     private int mSetsPlayer1 = 0;
     private int mSetsPlayer2 = 0;
+
+    private int mSetsScore []={0};
 
     private int mNumberOfSetsForWin = 2;
     private int mNumberOfServeInTieBreak = 0;
@@ -76,7 +94,8 @@ public class UndoRedo {
                     String displayPointsPlayer2,
                     String displayGamesPlayer2,
                     String displaySetsPlayer2,
-                    String displayTextMessage) {
+                    String displayTextMessage,
+                    int setsScore []) {
 
         mPointsPlayer1 = pointsPlayer1;
         mPointsPlayer2 = pointsPlayer2;
@@ -84,6 +103,8 @@ public class UndoRedo {
         mGamesPlayer2 = gamesPlayer2;
         mSetsPlayer1 = setsPlayer1;
         mSetsPlayer2 = setsPlayer2;
+
+        mSetsScore = setsScore;
 
         mNumberOfSetsForWin = numberOfSetsForWin;
         mNumberOfServeInTieBreak = numberOfServeInTieBreak;
@@ -111,15 +132,125 @@ public class UndoRedo {
         /**
          * text display
          */
-        mDisplayPointsPlayer1=displayPointsPlayer1;
-        mDisplayGamesPlayer1=displayGamesPlayer1;
-        mDisplaySetsPlayer1=displaySetsPlayer1;
-        mDisplayPointsPlayer2=displayPointsPlayer2;
-        mDisplayGamesPlayer2=displayGamesPlayer2;
-        mDisplaySetsPlayer2=displaySetsPlayer2;
-        mDisplayTextMessage=displayTextMessage;
+        mDisplayPointsPlayer1 = displayPointsPlayer1;
+        mDisplayGamesPlayer1 = displayGamesPlayer1;
+        mDisplaySetsPlayer1 = displaySetsPlayer1;
+        mDisplayPointsPlayer2 = displayPointsPlayer2;
+        mDisplayGamesPlayer2 = displayGamesPlayer2;
+        mDisplaySetsPlayer2 = displaySetsPlayer2;
+        mDisplayTextMessage = displayTextMessage;
     }
 
+    protected UndoRedo(Parcel in) {
+        mPointsPlayer1 = in.readInt();
+        mPointsPlayer2 = in.readInt();
+        mGamesPlayer1 = in.readInt();
+        mGamesPlayer2 = in.readInt();
+        mSetsPlayer1 = in.readInt();
+        mSetsPlayer2 = in.readInt();
+
+        mSetsScore = in.createIntArray();
+
+        mNumberOfSetsForWin = in.readInt();
+        mNumberOfServeInTieBreak = in.readInt();
+
+        mServeOfPlayer = in.readByte() != 0;
+        mServeOfPlayerInTieBreak = in.readByte() != 0;
+        mTieBreak = in.readByte() != 0;
+        mFirstFault = in.readByte() != 0;
+        mMatchWon = in.readByte() != 0;
+        mTiebreakFinal = in.readByte() != 0;
+        /**
+         * statistic variables
+         */
+        mWinnerPlayer1 = in.readInt();
+        mAcePlayer1 = in.readInt();
+        mFaultPlayer1 = in.readInt();
+        mDoubleFaultPlayer1 = in.readInt();
+        mForcedErrorPlayer1 = in.readInt();
+        mUnforcedErrorPlayer1 = in.readInt();
+        mWinnerPlayer2 = in.readInt();
+        mAcePlayer2 = in.readInt();
+        mFaultPlayer2 = in.readInt();
+        mDoubleFaultPlayer2 = in.readInt();
+        mForcedErrorPlayer2 = in.readInt();
+        mUnforcedErrorPlayer2 = in.readInt();
+        /**
+         * text display
+         */
+        mDisplayPointsPlayer1 = in.readString();
+        mDisplayGamesPlayer1 = in.readString();
+        mDisplaySetsPlayer1 = in.readString();
+        mDisplayPointsPlayer2 = in.readString();
+        mDisplayGamesPlayer2 = in.readString();
+        mDisplaySetsPlayer2 = in.readString();
+        mDisplayTextMessage = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+
+        dest.writeInt(mPointsPlayer1);
+        dest.writeInt(mPointsPlayer2);
+        dest.writeInt(mGamesPlayer1);
+        dest.writeInt(mGamesPlayer2);
+        dest.writeInt(mSetsPlayer1);
+        dest.writeInt(mSetsPlayer2);
+        dest.writeInt(mNumberOfSetsForWin);
+        dest.writeInt(mNumberOfServeInTieBreak);
+
+        dest.writeIntArray(mSetsScore);
+
+        dest.writeByte((byte) (mServeOfPlayer ? 1 : 0));
+        dest.writeByte((byte) (mServeOfPlayerInTieBreak ? 1 : 0));
+        dest.writeByte((byte) (mTieBreak ? 1 : 0));
+        dest.writeByte((byte) (mFirstFault ? 1 : 0));
+        dest.writeByte((byte) (mMatchWon ? 1 : 0));
+        dest.writeByte((byte) (mTiebreakFinal ? 1 : 0));
+
+
+        dest.writeInt(mWinnerPlayer1);
+        dest.writeInt(mAcePlayer1);
+        dest.writeInt(mFaultPlayer1);
+        dest.writeInt(mDoubleFaultPlayer1);
+        dest.writeInt(mForcedErrorPlayer1);
+        dest.writeInt(mUnforcedErrorPlayer1);
+        dest.writeInt(mWinnerPlayer2);
+        dest.writeInt(mAcePlayer2);
+        dest.writeInt(mFaultPlayer2);
+        dest.writeInt(mDoubleFaultPlayer2);
+        dest.writeInt(mForcedErrorPlayer2);
+        dest.writeInt(mUnforcedErrorPlayer2);
+        dest.writeString(mDisplayPointsPlayer1);
+        dest.writeString(mDisplayGamesPlayer1);
+        dest.writeString(mDisplaySetsPlayer1);
+        dest.writeString(mDisplayGamesPlayer2);
+        dest.writeString(mDisplaySetsPlayer2);
+        dest.writeString(mDisplayTextMessage);
+
+    }
+
+    @SuppressWarnings("unused")
+    public static final Creator<UndoRedo> CREATOR = new Creator<UndoRedo>() {
+        @Override
+        public UndoRedo createFromParcel(Parcel in) {
+            return new UndoRedo(in);
+        }
+
+        @Override
+        public UndoRedo[] newArray(int size) {
+            return new UndoRedo[size];
+        }
+    };
+    public int[] getSetsScore() {
+        return mSetsScore;
+    }
     public int getPointsPlayer1() {
         return mPointsPlayer1;
     }
@@ -223,25 +354,32 @@ public class UndoRedo {
     public int getUnforcedErrorPlayer2() {
         return mUnforcedErrorPlayer2;
     }
-    public String getDisplayPointsPlayer1(){
+
+    public String getDisplayPointsPlayer1() {
         return mDisplayPointsPlayer1;
     }
-    public String getDisplayPointsPlayer2(){
+
+    public String getDisplayPointsPlayer2() {
         return mDisplayPointsPlayer2;
     }
-    public String getDisplayGamesPlayer1(){
+
+    public String getDisplayGamesPlayer1() {
         return mDisplayGamesPlayer1;
     }
-    public String getDisplayGamesPlayer2(){
+
+    public String getDisplayGamesPlayer2() {
         return mDisplayGamesPlayer2;
     }
-    public String getDisplaySetsPlayer1(){
+
+    public String getDisplaySetsPlayer1() {
         return mDisplaySetsPlayer1;
     }
-    public String getDisplaySetsPlayer2(){
+
+    public String getDisplaySetsPlayer2() {
         return mDisplaySetsPlayer2;
     }
-    public String getDisplayTextMessage(){
+
+    public String getDisplayTextMessage() {
         return mDisplayTextMessage;
     }
 }

@@ -5,11 +5,11 @@
     <color name="colorAccent">#689F38</color>
     <!-- Gray scale-->
     <color name="grayDark">#d8757575</color>
-    <color name="grayLight">#ffffff</color>
+    <color name="grayLightWhite">#ffffff</color>
     <color name="black">#000000</color>
     <color name="grayLightButtons">#000000</color>
     <color name="black_overlay">#BDBDBD</color>
-    <!-- Transparent colors -->
-    <color name="transparentWhite">#ffffff</color>
-    <color name="transparentBlack">#ffffff</color>
+    <!-- Transparent colors-->
+    <color name="transparentBlack">#64000000</color>
+
 </resources>

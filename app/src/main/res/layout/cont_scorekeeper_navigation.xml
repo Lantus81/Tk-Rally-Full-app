@@ -14,7 +14,6 @@
     tools:showIn="@layout/app_bar_navigation">
 
 
-
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -51,47 +50,40 @@
             app:layout_constraintGuide_percent="0.00" />
 
 
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/background_court2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <android.support.constraint.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="#55000000"
+
             app:layout_constraintBottom_toTopOf="@id/guide_horizontal_top"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <TextView
                 android:id="@+id/deuce"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="140dp"
                 android:padding="@dimen/small_horizontal_margin"
                 android:text="@string/scorekeeper_beauty_of_the_game"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="14sp"
-                android:background="@color/grayLight"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </android.support.constraint.ConstraintLayout>
+
         <android.support.constraint.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="2dp"
+            android:layout_marginBottom="@dimen/x_small_margin"
+            android:layout_marginEnd="@dimen/minimum_margin"
             android:layout_marginRight="@dimen/minimum_margin"
-            android:background="@color/transparentBlack"
+            android:background="@color/grayLightWhite"
+            android:paddingEnd="@dimen/medium_horizontal_margin"
+            android:paddingLeft="@dimen/minimum_margin"
             android:paddingRight="@dimen/medium_horizontal_margin"
+            android:paddingStart="@dimen/minimum_margin"
             app:layout_constraintBottom_toTopOf="@id/guide_horizontal"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toRightOf="@id/guide_vertical"
@@ -120,13 +112,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.6" />
+                app:layout_constraintGuide_percent="0.55" />
 
             <ImageView
                 android:id="@+id/score_image_player1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_margin="@dimen/medium_horizontal_margin"
+                android:contentDescription="@string/score_open_players_information"
                 android:onClick="changePlayersNames"
                 android:scaleType="centerCrop"
                 android:src="@drawable/player_black"
@@ -139,10 +132,10 @@
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
                 android:src="@drawable/mask"
                 app:layout_constraintBottom_toBottomOf="@id/guide_horizontal2_player_1"
-
+                tools:ignore="contentDescription"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="@id/guide_vertical_player_1"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -160,6 +153,7 @@
                 android:id="@+id/score_ball_serve"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:contentDescription="@string/score_change_serve_image"
                 android:layout_margin="@dimen/minimum_margin"
                 android:onClick="changeServeFirstPlayer"
                 android:src="@drawable/tennis_ball"
@@ -173,12 +167,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/medium_horizontal_margin"
-                android:layout_marginLeft="@dimen/medium_horizontal_margin"
                 android:background="@color/colorAccent"
                 android:onClick="changeServeFirstPlayer"
                 android:padding="@dimen/small_horizontal_margin"
                 android:text="@string/serve"
-                android:textColor="@color/grayLight"
+                android:textColor="@color/grayLightWhite"
                 android:textSize="12sp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@id/guide_horizontal_player_1"
@@ -190,9 +183,9 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginBottom="@dimen/medium_horizontal_margin"
-                android:layout_marginRight="0dp"
+                android:layout_marginEnd="@dimen/minimum_margin"
+                android:layout_marginRight="@dimen/minimum_margin"
                 android:layout_marginTop="@dimen/small_horizontal_margin"
-                android:background="@color/transparentBlack"
                 android:padding="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -364,13 +357,12 @@
                     android:text="@string/points"
                     app:layout_constraintBottom_toBottomOf="@id/player1_horizontal_points_display"
                     app:layout_constraintLeft_toRightOf="@id/player1_vertical_points_display"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintRight_toRightOf="parent" />
 
                 <TextView
                     android:id="@+id/player_1_points"
                     style="@style/score_display_style"
-                    app:layout_constraintBottom_toBottomOf="@id/player1_horizontal_points_display"
+                    app:layout_constraintBottom_toTopOf="@id/player_1_points_text"
                     app:layout_constraintLeft_toRightOf="@id/player1_vertical_points_display"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -384,13 +376,12 @@
                     app:layout_constraintBottom_toTopOf="@id/player1_horizontal_points_display"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/player1_vertical_points_display_games"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintRight_toLeftOf="@id/player1_vertical_points_display_games" />
 
                 <TextView
                     android:id="@+id/player_1_sets"
                     style="@style/score_display_style"
-                    app:layout_constraintBottom_toTopOf="@id/player1_horizontal_points_display"
+                    app:layout_constraintBottom_toTopOf="@id/player_1_sets_text"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/player1_vertical_points_display_games"
@@ -403,14 +394,14 @@
                     app:layout_constraintBottom_toTopOf="@id/player1_horizontal_points_display"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintLeft_toLeftOf="@id/player1_vertical_points_display_games"
-                    app:layout_constraintRight_toRightOf="@id/player1_vertical_points_display"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintRight_toRightOf="@id/player1_vertical_points_display" />
 
                 <TextView
                     android:id="@+id/player_1_games"
                     style="@style/score_display_style"
                     android:layout_marginLeft="@dimen/small_horizontal_margin"
-                    app:layout_constraintBottom_toTopOf="@id/player1_horizontal_points_display"
+                    android:layout_marginStart="@dimen/small_horizontal_margin"
+                    app:layout_constraintBottom_toTopOf="@id/player_1_games_text"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintLeft_toLeftOf="@id/player1_vertical_points_display_games"
                     app:layout_constraintRight_toLeftOf="@id/player1_vertical_points_display"
@@ -425,10 +416,14 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="@dimen/minimum_margin"
-            android:layout_marginRight="0dp"
-            android:layout_marginTop="2dp"
-            android:background="@color/transparentBlack"
+            android:layout_marginEnd="@dimen/minimum_margin"
+            android:layout_marginRight="@dimen/minimum_margin"
+            android:layout_marginTop="@dimen/x_small_margin"
+            android:background="@color/grayLightWhite"
+            android:paddingEnd="@dimen/medium_horizontal_margin"
+            android:paddingLeft="@dimen/minimum_margin"
             android:paddingRight="@dimen/medium_horizontal_margin"
+            android:paddingStart="@dimen/minimum_margin"
             app:layout_constraintBottom_toBottomOf="@id/guide_horizontal_bottom"
             app:layout_constraintLeft_toRightOf="@id/guide_vertical"
             app:layout_constraintRight_toRightOf="parent"
@@ -448,7 +443,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.4" />
+                app:layout_constraintGuide_percent="0.45" />
             <!-- HORIZONTAL GUIDELINE AT 30% -->
             <android.support.constraint.Guideline
                 android:id="@+id/guide_horizontal2_player_2"
@@ -462,6 +457,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_margin="@dimen/medium_horizontal_margin"
+                android:contentDescription="@string/score_open_players_information"
                 android:onClick="changePlayersNames"
                 android:scaleType="centerCrop"
                 android:src="@drawable/player_silhouette"
@@ -474,12 +470,13 @@
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
                 android:src="@drawable/mask"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="@id/guide_vertical_player_2"
-                app:layout_constraintTop_toTopOf="@id/guide_horizontal_player_2" />
+                app:layout_constraintTop_toTopOf="@id/guide_horizontal_player_2"
+                tools:ignore="contentDescription" />
 
             <TextView
                 android:id="@+id/player2_name"
@@ -495,6 +492,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_margin="@dimen/minimum_margin"
+                android:contentDescription="@string/score_change_serve_image"
                 android:onClick="changeServeFirstPlayer"
                 android:src="@drawable/tennis_ball"
                 app:layout_constraintBottom_toTopOf="@id/player2_name"
@@ -507,10 +505,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/medium_horizontal_margin"
-                android:layout_marginLeft="@dimen/medium_horizontal_margin"
                 android:onClick="changeServeFirstPlayer"
                 android:padding="@dimen/small_horizontal_margin"
-                android:textColor="@color/grayLight"
+                android:textColor="@color/grayLightWhite"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@id/player2_name"
                 app:layout_constraintLeft_toRightOf="@id/score_ball_serve_player_2"
@@ -522,10 +519,10 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginBottom="@dimen/small_horizontal_margin"
+                android:layout_marginLeft="@dimen/minimum_margin"
                 android:layout_marginRight="@dimen/minimum_margin"
                 android:layout_marginTop="@dimen/medium_vertical_margin"
-                android:background="@color/transparentBlack"
-                android:padding="2dp"
+                android:padding="@dimen/x_small_margin"
                 app:layout_constraintBottom_toBottomOf="@id/guide_horizontal2_player_2"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toRightOf="@id/guide_vertical_player_2"
@@ -692,16 +689,14 @@
                     android:id="@+id/player_2_points_text"
                     style="@style/score_points_text"
                     android:text="@string/points"
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/player2_vertical_points_display"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/player2_horizontal_points_display" />
+                    app:layout_constraintRight_toRightOf="parent" />
 
                 <TextView
                     android:id="@+id/player_2_points"
                     style="@style/score_display_style"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/player_2_points_text"
                     app:layout_constraintLeft_toRightOf="@id/player2_vertical_points_display"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@id/player2_horizontal_points_display" />
@@ -710,16 +705,14 @@
                     android:id="@+id/player_2_sets_text"
                     style="@style/score_points_text"
                     android:text="@string/sets"
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/player2_vertical_points_display_games"
-                    app:layout_constraintTop_toTopOf="@id/player2_horizontal_points_display" />
+                    app:layout_constraintRight_toLeftOf="@id/player2_vertical_points_display_games" />
 
                 <TextView
                     android:id="@+id/player_2_sets"
                     style="@style/score_display_style"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/player_2_sets_text"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/player2_vertical_points_display_games"
@@ -727,19 +720,16 @@
 
                 <TextView
                     android:id="@+id/player_2_games_text"
-
                     style="@style/score_points_text"
                     android:text="@string/games"
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/player2_vertical_points_display_games"
-                    app:layout_constraintRight_toLeftOf="@id/player2_vertical_points_display"
-                    app:layout_constraintTop_toTopOf="@id/player2_horizontal_points_display" />
+                    app:layout_constraintRight_toLeftOf="@id/player2_vertical_points_display" />
 
                 <TextView
                     android:id="@+id/player_2_games"
                     style="@style/score_display_style"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/player_2_games_text"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintLeft_toRightOf="@id/player2_vertical_points_display_games"
                     app:layout_constraintRight_toLeftOf="@id/player2_vertical_points_display"
@@ -750,11 +740,9 @@
         </android.support.constraint.ConstraintLayout>
 
 
-
         <android.support.constraint.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="#55000000"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -766,9 +754,10 @@
                 android:id="@+id/button_statistics"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/score_open_statistics"
                 android:onClick="openStatistics"
                 android:src="@drawable/ic_poll_black_24dp"
-                android:tint="@color/grayLight"
+                android:tint="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -777,9 +766,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_undo_black_24dp"
-                android:tint="@color/grayLight"
+                android:contentDescription="@string/score_undo_point"
                 android:onClick="undo"
+                android:src="@drawable/ic_undo_black_24dp"
+                android:tint="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/button_statistics"
@@ -788,9 +778,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_redo_black_24dp"
-                android:tint="@color/grayLight"
+                android:contentDescription="@string/score_redo_point"
                 android:onClick="redo"
+                android:src="@drawable/ic_redo_black_24dp"
+                android:tint="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/button_statistics"
                 app:layout_constraintRight_toRightOf="parent"

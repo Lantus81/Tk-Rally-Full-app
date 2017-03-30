@@ -52,7 +52,6 @@
     <style name="score_points_text">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:textColor">@color/grayDark</item>
         <item name="android:textSize">10sp</item>
     </style>
 
@@ -60,7 +59,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginBottom">@dimen/medium_horizontal_margin</item>
-        <item name="android:layout_marginEnd">@dimen/medium_horizontal_margin</item>
+        <item name="android:layout_marginLeft">@dimen/medium_horizontal_margin</item>
         <item name="android:layout_marginRight">@dimen/medium_horizontal_margin</item>
         <item name="android:layout_marginTop">@dimen/medium_horizontal_margin</item>
         <item name="android:maxLength">35</item>

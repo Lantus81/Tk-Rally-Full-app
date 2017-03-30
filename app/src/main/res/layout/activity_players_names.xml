@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
+    android:background="@drawable/background_court"
     tools:context="com.akristic.www.tkrally.PlayersNamesActivity">
 
     <LinearLayout
@@ -12,9 +13,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@color/grayDark"
+        android:background="@color/grayLightWhite"
         android:orientation="vertical"
-        android:padding="8dp"
+        android:padding="@dimen/medium_horizontal_margin"
         tools:visibility="visible">
 
         <EditText
@@ -24,7 +25,7 @@
             android:layout_gravity="center"
             android:hint="@string/player_1"
             android:inputType="textPersonName"
-            android:maxLength="16"
+            android:maxLength="35"
             android:maxLines="1"
             android:textAlignment="center"
             android:textSize="14sp" />
@@ -36,6 +37,7 @@
             android:layout_gravity="center"
             android:scaleType="centerCrop"
             android:src="@drawable/player_silhouette" />
+
 
         <Button
             android:id="@+id/add_picture_player1"
@@ -51,9 +53,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@color/grayDark"
+        android:background="@color/grayLightWhite"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="@dimen/medium_horizontal_margin">
 
         <EditText
             android:id="@+id/player2_change_name"
@@ -62,7 +64,7 @@
             android:layout_gravity="center"
             android:hint="@string/player_2"
             android:inputType="textPersonName"
-            android:maxLength="16"
+            android:maxLength="35"
             android:maxLines="1"
             android:textAlignment="center"
             android:textSize="14sp" />
@@ -73,7 +75,6 @@
             android:layout_height="90dp"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
-
             android:src="@drawable/player_silhouette" />
 
         <Button

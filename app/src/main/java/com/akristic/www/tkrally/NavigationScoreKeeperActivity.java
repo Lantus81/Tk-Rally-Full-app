@@ -49,6 +49,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     private boolean tiebreakFinal = true;
     private boolean playAdvantageFinal = true;
     private int NUMBER_OF_GAMES_FOR_WIN = 6;
+    private int setsScore[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     /**
      * statistic variables
      */
@@ -90,7 +91,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     private ImageView mImagePlayer1;
     private ImageView mImagePlayer2;
 
-    private ArrayList<UndoRedo> savedState = new ArrayList<UndoRedo>();
+    private ArrayList<UndoRedo> savedState = new ArrayList<>();
     private int currentUndoIndex = -1;
 
     @Override
@@ -129,6 +130,9 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
 
 
         if (savedInstanceState != null) {
+            savedState = savedInstanceState.getParcelableArrayList("UNDO_REDO");
+            currentUndoIndex = savedInstanceState.getInt("currentUndoIndex");
+            setsScore = savedInstanceState.getIntArray("setsScore");
             pointsPlayer1 = savedInstanceState.getInt("pointsPlayer1");
             pointsPlayer2 = savedInstanceState.getInt("pointsPlayer2");
             gamesPlayer1 = savedInstanceState.getInt("gamesPlayer1");
@@ -155,12 +159,18 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         setPreferences();
         changePlayersNames();
         setPlayerPictures();
+        showHideSetsView();
         if (!tieBreak) {
             serveChange(serveOfPlayer);
         } else {
             serveChange(serveOfPlayerInTieBreak);
         }
-        saveUndoState(); //* set zero index state for undo and redo ArrayList
+        if (winnerPlayer1 == 0 && winnerPlayer2 == 0 && acePlayer1 == 0 &&
+                acePlayer2 == 0 && faultPlayer1 == 0 && faultPlayer2 == 0 &&
+                forcedErrorPlayer1 == 0 && forcedErrorPlayer2 == 0 && unforcedErrorPlayer1 == 0 && unforcedErrorPlayer2 == 0) {
+            saveUndoState(); //* set zero index state for undo and redo ArrayList
+        }
+
     }
 
     public void openStatistics(View v) {
@@ -200,6 +210,9 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     @Override
     protected void onSaveInstanceState(Bundle state) {
         super.onSaveInstanceState(state);
+        state.putIntArray("setsScore", setsScore);
+        state.putParcelableArrayList("UNDO_REDO", savedState);
+        state.putInt("currentUndoIndex", currentUndoIndex);
         state.putInt("pointsPlayer1", pointsPlayer1);
         state.putInt("pointsPlayer2", pointsPlayer2);
         state.putInt("gamesPlayer1", gamesPlayer1);
@@ -480,46 +493,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
      */
     public void displaySetsForPlayer1(int points) {
         //* Save GAMES before resetting to 0
-        if (setsPlayer1 + setsPlayer2 == 1) {
-            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
-            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
-            saveSetViewPlayer1.setVisibility(View.VISIBLE);
-            saveSetViewPlayer2.setVisibility(View.VISIBLE);
-            saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
-            saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
-        }
-        if (setsPlayer1 + setsPlayer2 == 2) {
-            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_2);
-            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_2);
-            saveSetViewPlayer1.setVisibility(View.VISIBLE);
-            saveSetViewPlayer2.setVisibility(View.VISIBLE);
-            saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
-            saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
-        }
-        if (setsPlayer1 + setsPlayer2 == 3) {
-            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_3);
-            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_3);
-            saveSetViewPlayer1.setVisibility(View.VISIBLE);
-            saveSetViewPlayer2.setVisibility(View.VISIBLE);
-            saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
-            saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
-        }
-        if (setsPlayer1 + setsPlayer2 == 4) {
-            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_4);
-            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_4);
-            saveSetViewPlayer1.setVisibility(View.VISIBLE);
-            saveSetViewPlayer2.setVisibility(View.VISIBLE);
-            saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
-            saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
-        }
-        if (setsPlayer1 + setsPlayer2 == 5) {
-            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_5);
-            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_5);
-            saveSetViewPlayer1.setVisibility(View.VISIBLE);
-            saveSetViewPlayer2.setVisibility(View.VISIBLE);
-            saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
-            saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
-        }
+        displaySetsView();
         // * set Games and POINTS to 0 and manage text
         gamesPlayer1 = 0;
         gamesPlayer2 = 0;
@@ -547,46 +521,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
      */
     public void displaySetsForPlayer2(int points) {
         //* Save GAMES before resetting to 0
-        if (setsPlayer1 + setsPlayer2 == 1) {
-            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
-            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
-            saveSetViewPlayer1.setVisibility(View.VISIBLE);
-            saveSetViewPlayer2.setVisibility(View.VISIBLE);
-            saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
-            saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
-        }
-        if (setsPlayer1 + setsPlayer2 == 2) {
-            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_2);
-            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_2);
-            saveSetViewPlayer1.setVisibility(View.VISIBLE);
-            saveSetViewPlayer2.setVisibility(View.VISIBLE);
-            saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
-            saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
-        }
-        if (setsPlayer1 + setsPlayer2 == 3) {
-            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_3);
-            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_3);
-            saveSetViewPlayer1.setVisibility(View.VISIBLE);
-            saveSetViewPlayer2.setVisibility(View.VISIBLE);
-            saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
-            saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
-        }
-        if (setsPlayer1 + setsPlayer2 == 4) {
-            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_4);
-            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_4);
-            saveSetViewPlayer1.setVisibility(View.VISIBLE);
-            saveSetViewPlayer2.setVisibility(View.VISIBLE);
-            saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
-            saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
-        }
-        if (setsPlayer1 + setsPlayer2 == 5) {
-            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_5);
-            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_5);
-            saveSetViewPlayer1.setVisibility(View.VISIBLE);
-            saveSetViewPlayer2.setVisibility(View.VISIBLE);
-            saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
-            saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
-        }
+        displaySetsView();
         //* set Games and POINTS to 0 and manage text
         gamesPlayer1 = 0;
         gamesPlayer2 = 0;
@@ -609,11 +544,238 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         }
     }
 
+    private void showHideSetsView() {
+        if (setsPlayer1 + setsPlayer2 == 0) {
+            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
+            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
+            saveSetViewPlayer1.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer2.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_2);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_2);
+            saveSetViewPlayer1.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer2.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_3);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_3);
+            saveSetViewPlayer1.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer2.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_4);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_4);
+            saveSetViewPlayer1.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer2.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_5);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_5);
+            saveSetViewPlayer1.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer2.setVisibility(View.INVISIBLE);
+        }
+        if (setsPlayer1 + setsPlayer2 == 1) {
+            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
+            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(setsScore[0]));
+            saveSetViewPlayer2.setText(String.valueOf(setsScore[1]));
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_2);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_2);
+            saveSetViewPlayer1.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer2.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_3);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_3);
+            saveSetViewPlayer1.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer2.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_4);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_4);
+            saveSetViewPlayer1.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer2.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_5);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_5);
+            saveSetViewPlayer1.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer2.setVisibility(View.INVISIBLE);
+        }
+        if (setsPlayer1 + setsPlayer2 == 2) {
+            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
+            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(setsScore[0]));
+            saveSetViewPlayer2.setText(String.valueOf(setsScore[1]));
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_2);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_2);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(setsScore[2]));
+            saveSetViewPlayer2.setText(String.valueOf(setsScore[3]));
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_3);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_3);
+            saveSetViewPlayer1.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer2.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_4);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_4);
+            saveSetViewPlayer1.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer2.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_5);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_5);
+            saveSetViewPlayer1.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer2.setVisibility(View.INVISIBLE);
+        }
+        if (setsPlayer1 + setsPlayer2 == 3) {
+            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
+            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(setsScore[0]));
+            saveSetViewPlayer2.setText(String.valueOf(setsScore[1]));
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_2);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_2);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(setsScore[2]));
+            saveSetViewPlayer2.setText(String.valueOf(setsScore[3]));
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_3);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_3);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(setsScore[4]));
+            saveSetViewPlayer2.setText(String.valueOf(setsScore[5]));
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_4);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_4);
+            saveSetViewPlayer1.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer2.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_5);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_5);
+            saveSetViewPlayer1.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer2.setVisibility(View.INVISIBLE);
+        }
+        if (setsPlayer1 + setsPlayer2 == 4) {
+            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
+            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(setsScore[0]));
+            saveSetViewPlayer2.setText(String.valueOf(setsScore[1]));
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_2);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_2);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(setsScore[2]));
+            saveSetViewPlayer2.setText(String.valueOf(setsScore[3]));
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_3);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_3);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(setsScore[4]));
+            saveSetViewPlayer2.setText(String.valueOf(setsScore[5]));
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_4);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_4);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(setsScore[6]));
+            saveSetViewPlayer2.setText(String.valueOf(setsScore[7]));
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_5);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_5);
+            saveSetViewPlayer1.setVisibility(View.INVISIBLE);
+            saveSetViewPlayer2.setVisibility(View.INVISIBLE);
+        }
+        if (setsPlayer1 + setsPlayer2 == 5) {
+            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
+            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(setsScore[0]));
+            saveSetViewPlayer2.setText(String.valueOf(setsScore[1]));
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_2);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_2);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(setsScore[2]));
+            saveSetViewPlayer2.setText(String.valueOf(setsScore[3]));
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_3);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_3);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(setsScore[4]));
+            saveSetViewPlayer2.setText(String.valueOf(setsScore[5]));
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_4);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_4);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(setsScore[6]));
+            saveSetViewPlayer2.setText(String.valueOf(setsScore[7]));
+            saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_5);
+            saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_5);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(setsScore[8]));
+            saveSetViewPlayer2.setText(String.valueOf(setsScore[9]));
+        }
+    }
+
+    private void displaySetsView() {
+
+        if (setsPlayer1 + setsPlayer2 == 1) {
+            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
+            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
+            saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
+            setsScore[0] = gamesPlayer1;
+            setsScore[1] = gamesPlayer2;
+
+        }
+        if (setsPlayer1 + setsPlayer2 == 2) {
+            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_2);
+            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_2);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
+            saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
+            setsScore[2] = gamesPlayer1;
+            setsScore[3] = gamesPlayer2;
+
+        }
+        if (setsPlayer1 + setsPlayer2 == 3) {
+            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_3);
+            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_3);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
+            saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
+            setsScore[4] = gamesPlayer1;
+            setsScore[5] = gamesPlayer2;
+
+        }
+        if (setsPlayer1 + setsPlayer2 == 4) {
+            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_4);
+            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_4);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
+            saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
+            setsScore[6] = gamesPlayer1;
+            setsScore[7] = gamesPlayer2;
+
+        }
+        if (setsPlayer1 + setsPlayer2 == 5) {
+            TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_5);
+            TextView saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_5);
+            saveSetViewPlayer1.setVisibility(View.VISIBLE);
+            saveSetViewPlayer2.setVisibility(View.VISIBLE);
+            saveSetViewPlayer1.setText(String.valueOf(gamesPlayer1));
+            saveSetViewPlayer2.setText(String.valueOf(gamesPlayer2));
+            setsScore[8] = gamesPlayer1;
+            setsScore[9] = gamesPlayer2;
+        }
+
+    }
+
     private void checkIfPlayerHasWinMatch() {
         if (numberOfSetsForWin == setsPlayer2 || numberOfSetsForWin == setsPlayer1) {
             matchWon = true;
             buttonsLayoutPlayer1.setVisibility(View.GONE);
             buttonsLayoutPlayer2.setVisibility(View.GONE);
+        } else {
+            buttonsLayoutPlayer1.setVisibility(View.VISIBLE);
+            buttonsLayoutPlayer2.setVisibility(View.VISIBLE);
         }
     }
 
@@ -661,188 +823,6 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         }
     }
 
-    /**
-     * Undo and redo methods
-     */
-
-    private void saveUndoState() {
-        String displayPointsPlayer1 = pointsViewPlayer1.getText().toString();
-        String displayGamesPlayer1 = gamesViewPlayer1.getText().toString();
-        String displaySetsPlayer1 = setsViewPlayer1.getText().toString();
-        String displayPointsPlayer2 = pointsViewPlayer2.getText().toString();
-        String displayGamesPlayer2 = gamesViewPlayer2.getText().toString();
-        String displaySetsPlayer2 = setsViewPlayer2.getText().toString();
-        String displayTextMessage = textViewDeuce.getText().toString();
-        currentUndoIndex++;
-        if (currentUndoIndex >= savedState.size()) {
-            savedState.add(new UndoRedo(pointsPlayer1,
-                    pointsPlayer2,
-                    gamesPlayer1,
-                    gamesPlayer2,
-                    setsPlayer1,
-                    setsPlayer2,
-                    numberOfSetsForWin,
-                    numberOfServeInTieBreak,
-                    serveOfPlayer,
-                    serveOfPlayerInTieBreak,
-                    tieBreak,
-                    firstFault,
-                    matchWon,
-                    tiebreakFinal,
-                    winnerPlayer1,
-                    acePlayer1,
-                    faultPlayer1,
-                    doubleFaultPlayer1,
-                    forcedErrorPlayer1,
-                    unforcedErrorPlayer1,
-                    winnerPlayer2,
-                    acePlayer2,
-                    faultPlayer2,
-                    doubleFaultPlayer2,
-                    forcedErrorPlayer2,
-                    unforcedErrorPlayer2,
-                    displayPointsPlayer1,
-                    displayGamesPlayer1,
-                    displaySetsPlayer1,
-                    displayPointsPlayer2,
-                    displayGamesPlayer2,
-                    displaySetsPlayer2,
-                    displayTextMessage));
-        } else {
-            savedState.set(currentUndoIndex, new UndoRedo(pointsPlayer1,
-                    pointsPlayer2,
-                    gamesPlayer1,
-                    gamesPlayer2,
-                    setsPlayer1,
-                    setsPlayer2,
-                    numberOfSetsForWin,
-                    numberOfServeInTieBreak,
-                    serveOfPlayer,
-                    serveOfPlayerInTieBreak,
-                    tieBreak,
-                    firstFault,
-                    matchWon,
-                    tiebreakFinal,
-                    winnerPlayer1,
-                    acePlayer1,
-                    faultPlayer1,
-                    doubleFaultPlayer1,
-                    forcedErrorPlayer1,
-                    unforcedErrorPlayer1,
-                    winnerPlayer2,
-                    acePlayer2,
-                    faultPlayer2,
-                    doubleFaultPlayer2,
-                    forcedErrorPlayer2,
-                    unforcedErrorPlayer2,
-                    displayPointsPlayer1,
-                    displayGamesPlayer1,
-                    displaySetsPlayer1,
-                    displayPointsPlayer2,
-                    displayGamesPlayer2,
-                    displaySetsPlayer2,
-                    displayTextMessage));
-        }
-        /**
-         * remove all data if after currentUndoIndex
-         */
-        for (int i = savedState.size() - 1; i > currentUndoIndex; i--) {
-            savedState.remove(i);
-        }
-
-
-    }
-
-    public void undo(View v) {
-
-        if (currentUndoIndex - 1 < savedState.size() && currentUndoIndex - 1 >= 0) {
-            currentUndoIndex--;
-            pointsPlayer1 = savedState.get(currentUndoIndex).getPointsPlayer1();
-            pointsPlayer2 = savedState.get(currentUndoIndex).getPointsPlayer2();
-            gamesPlayer1 = savedState.get(currentUndoIndex).getGamesPlayer1();
-            gamesPlayer2 = savedState.get(currentUndoIndex).getGamesPlayer2();
-            setsPlayer1 = savedState.get(currentUndoIndex).getSetsPlayer1();
-            setsPlayer2 = savedState.get(currentUndoIndex).getSetsPlayer2();
-            numberOfSetsForWin = savedState.get(currentUndoIndex).getNumberOfSetsForWin();
-            numberOfServeInTieBreak = savedState.get(currentUndoIndex).getNumberOfServeInTieBreak();
-            serveOfPlayer = savedState.get(currentUndoIndex).getServeOfPlayer();
-            serveOfPlayerInTieBreak = savedState.get(currentUndoIndex).getServeOfPlayerInTieBreak();
-            tieBreak = savedState.get(currentUndoIndex).getTieBreak();
-            firstFault = savedState.get(currentUndoIndex).getFirstFault();
-            matchWon = savedState.get(currentUndoIndex).getMatchWon();
-            tiebreakFinal = savedState.get(currentUndoIndex).getTiebreakFinal();
-            winnerPlayer1 = savedState.get(currentUndoIndex).getWinnerPlayer1();
-            acePlayer1 = savedState.get(currentUndoIndex).getAcePlayer1();
-            faultPlayer1 = savedState.get(currentUndoIndex).getFaultPlayer1();
-            doubleFaultPlayer1 = savedState.get(currentUndoIndex).getDoubleFaultPlayer1();
-            forcedErrorPlayer1 = savedState.get(currentUndoIndex).getForcedErrorPlayer1();
-            unforcedErrorPlayer1 = savedState.get(currentUndoIndex).getUnforcedErrorPlayer1();
-            winnerPlayer2 = savedState.get(currentUndoIndex).getWinnerPlayer2();
-            acePlayer2 = savedState.get(currentUndoIndex).getAcePlayer2();
-            faultPlayer2 = savedState.get(currentUndoIndex).getFaultPlayer2();
-            doubleFaultPlayer2 = savedState.get(currentUndoIndex).getDoubleFaultPlayer2();
-            forcedErrorPlayer2 = savedState.get(currentUndoIndex).getForcedErrorPlayer2();
-            unforcedErrorPlayer2 = savedState.get(currentUndoIndex).getUnforcedErrorPlayer2();
-            pointsViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplayPointsPlayer1());
-            gamesViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplayGamesPlayer1());
-            setsViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplaySetsPlayer1());
-            pointsViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplayPointsPlayer2());
-            gamesViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplayGamesPlayer2());
-            setsViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplaySetsPlayer2());
-            textViewDeuce.setText(savedState.get(currentUndoIndex).getDisplayTextMessage());
-            serveChange(serveOfPlayer);
-            displayRightFaultButtonText ();
-
-        } else {
-            Toast.makeText(this, "Can't undo", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    public void redo(View v) {
-
-        if (currentUndoIndex + 1 < savedState.size() && currentUndoIndex + 1 >= 0) {
-            currentUndoIndex++;
-            pointsPlayer1 = savedState.get(currentUndoIndex).getPointsPlayer1();
-            pointsPlayer2 = savedState.get(currentUndoIndex).getPointsPlayer2();
-            gamesPlayer1 = savedState.get(currentUndoIndex).getGamesPlayer1();
-            gamesPlayer2 = savedState.get(currentUndoIndex).getGamesPlayer2();
-            setsPlayer1 = savedState.get(currentUndoIndex).getSetsPlayer1();
-            setsPlayer2 = savedState.get(currentUndoIndex).getSetsPlayer2();
-            numberOfSetsForWin = savedState.get(currentUndoIndex).getNumberOfSetsForWin();
-            numberOfServeInTieBreak = savedState.get(currentUndoIndex).getNumberOfServeInTieBreak();
-            serveOfPlayer = savedState.get(currentUndoIndex).getServeOfPlayer();
-            serveOfPlayerInTieBreak = savedState.get(currentUndoIndex).getServeOfPlayerInTieBreak();
-            tieBreak = savedState.get(currentUndoIndex).getTieBreak();
-            firstFault = savedState.get(currentUndoIndex).getFirstFault();
-            matchWon = savedState.get(currentUndoIndex).getMatchWon();
-            tiebreakFinal = savedState.get(currentUndoIndex).getTiebreakFinal();
-            winnerPlayer1 = savedState.get(currentUndoIndex).getWinnerPlayer1();
-            acePlayer1 = savedState.get(currentUndoIndex).getAcePlayer1();
-            faultPlayer1 = savedState.get(currentUndoIndex).getFaultPlayer1();
-            doubleFaultPlayer1 = savedState.get(currentUndoIndex).getDoubleFaultPlayer1();
-            forcedErrorPlayer1 = savedState.get(currentUndoIndex).getForcedErrorPlayer1();
-            unforcedErrorPlayer1 = savedState.get(currentUndoIndex).getUnforcedErrorPlayer1();
-            winnerPlayer2 = savedState.get(currentUndoIndex).getWinnerPlayer2();
-            acePlayer2 = savedState.get(currentUndoIndex).getAcePlayer2();
-            faultPlayer2 = savedState.get(currentUndoIndex).getFaultPlayer2();
-            doubleFaultPlayer2 = savedState.get(currentUndoIndex).getDoubleFaultPlayer2();
-            forcedErrorPlayer2 = savedState.get(currentUndoIndex).getForcedErrorPlayer2();
-            unforcedErrorPlayer2 = savedState.get(currentUndoIndex).getUnforcedErrorPlayer2();
-            pointsViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplayPointsPlayer1());
-            gamesViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplayGamesPlayer1());
-            setsViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplaySetsPlayer1());
-            pointsViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplayPointsPlayer2());
-            gamesViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplayGamesPlayer2());
-            setsViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplaySetsPlayer2());
-            textViewDeuce.setText(savedState.get(currentUndoIndex).getDisplayTextMessage());
-            serveChange(serveOfPlayer);
-            displayRightFaultButtonText ();
-
-        } else {
-            Toast.makeText(this, "Can't redo", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     /**
      * winner points for player 1
@@ -1013,17 +993,18 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             buttonFaultPlayer2.setText(getString(R.string.fault));
         }
     }
-    private void displayRightFaultButtonText (){
-        if (!firstFault && serveOfPlayer){
+
+    private void displayRightFaultButtonText() {
+        if (!firstFault && serveOfPlayer) {
             buttonFaultPlayer1.setText(getString(R.string.double_fault));
         }
-        if (!firstFault && !serveOfPlayer){
+        if (!firstFault && !serveOfPlayer) {
             buttonFaultPlayer2.setText(getString(R.string.double_fault));
         }
-        if (firstFault && serveOfPlayer){
+        if (firstFault && serveOfPlayer) {
             buttonFaultPlayer1.setText(getString(R.string.fault));
         }
-        if (firstFault && !serveOfPlayer){
+        if (firstFault && !serveOfPlayer) {
             buttonFaultPlayer2.setText(getString(R.string.fault));
         }
     }
@@ -1056,11 +1037,11 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             textViewServePlayer1.setText(getString(R.string.serve));
             textViewServePlayer2.setText("");
 
-            buttonAcePlayer2.setEnabled(false);
-            buttonFaultPlayer2.setEnabled(false);
+            buttonAcePlayer2.setVisibility(View.GONE);
+            buttonFaultPlayer2.setVisibility(View.GONE);
 
-            buttonAcePlayer1.setEnabled(true);
-            buttonFaultPlayer1.setEnabled(true);
+            buttonAcePlayer1.setVisibility(View.VISIBLE);
+            buttonFaultPlayer1.setVisibility(View.VISIBLE);
         } else {
 
             textViewServePlayer1.setBackgroundColor(Color.TRANSPARENT);
@@ -1068,11 +1049,11 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             textViewServePlayer1.setText("");
             textViewServePlayer2.setText(getString(R.string.serve));
 
-            buttonAcePlayer2.setEnabled(true);
-            buttonFaultPlayer2.setEnabled(true);
+            buttonAcePlayer2.setVisibility(View.VISIBLE);
+            buttonFaultPlayer2.setVisibility(View.VISIBLE);
 
-            buttonAcePlayer1.setEnabled(false);
-            buttonFaultPlayer1.setEnabled(false);
+            buttonAcePlayer1.setVisibility(View.GONE);
+            buttonFaultPlayer1.setVisibility(View.GONE);
         }
     }
 
@@ -1092,7 +1073,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                         //* set all variables to default state
                         savedState.clear();
                         currentUndoIndex = -1;
-                        saveUndoState();
+
                         pointsPlayer1 = 0;
                         pointsPlayer2 = 0;
                         gamesPlayer1 = 0;
@@ -1130,36 +1111,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                         setsViewPlayer1.setText("0");
                         setsViewPlayer2.setText("0");
                         //* reset saved SETS
-                        TextView saveSet1ViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
-                        TextView saveSet1ViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_1);
-                        saveSet1ViewPlayer1.setVisibility(View.INVISIBLE);
-                        saveSet1ViewPlayer2.setVisibility(View.INVISIBLE);
-                        saveSet1ViewPlayer1.setText("");
-                        saveSet1ViewPlayer2.setText("");
-                        TextView saveSet2ViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_2);
-                        TextView saveSet2ViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_2);
-                        saveSet2ViewPlayer1.setVisibility(View.INVISIBLE);
-                        saveSet2ViewPlayer2.setVisibility(View.INVISIBLE);
-                        saveSet2ViewPlayer1.setText("");
-                        saveSet2ViewPlayer2.setText("");
-                        TextView saveSet3ViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_3);
-                        TextView saveSet3ViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_3);
-                        saveSet3ViewPlayer1.setVisibility(View.INVISIBLE);
-                        saveSet3ViewPlayer2.setVisibility(View.INVISIBLE);
-                        saveSet3ViewPlayer1.setText("");
-                        saveSet3ViewPlayer2.setText("");
-                        TextView saveSet4ViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_4);
-                        TextView saveSet4ViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_4);
-                        saveSet4ViewPlayer1.setVisibility(View.INVISIBLE);
-                        saveSet4ViewPlayer2.setVisibility(View.INVISIBLE);
-                        saveSet4ViewPlayer1.setText("");
-                        saveSet4ViewPlayer2.setText("");
-                        TextView saveSet5ViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_5);
-                        TextView saveSet5ViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_5);
-                        saveSet5ViewPlayer1.setVisibility(View.INVISIBLE);
-                        saveSet5ViewPlayer2.setVisibility(View.INVISIBLE);
-                        saveSet5ViewPlayer1.setText("");
-                        saveSet5ViewPlayer2.setText("");
+                        showHideSetsView();
                         // * return serve to player 1 first and remove winner text
                         TextView textViewWinner1 = (TextView) findViewById(R.id.serve_color_Player1);
                         textViewWinner1.setText("");
@@ -1171,6 +1123,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                         buttonsLayoutPlayer2.setVisibility(View.VISIBLE);
                         setPreferences();
                         changePlayersNames();
+                        saveUndoState();
                     }
                 })
                 .setNegativeButton(android.R.string.no, null).show();
@@ -1202,4 +1155,196 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
 
         }
     }
+
+    /**
+     * Undo and redo methods
+     */
+
+    private void saveUndoState() {
+        String displayPointsPlayer1 = pointsViewPlayer1.getText().toString();
+        String displayGamesPlayer1 = gamesViewPlayer1.getText().toString();
+        String displaySetsPlayer1 = setsViewPlayer1.getText().toString();
+        String displayPointsPlayer2 = pointsViewPlayer2.getText().toString();
+        String displayGamesPlayer2 = gamesViewPlayer2.getText().toString();
+        String displaySetsPlayer2 = setsViewPlayer2.getText().toString();
+        String displayTextMessage = textViewDeuce.getText().toString();
+        currentUndoIndex++;
+        if (currentUndoIndex >= savedState.size()) {
+            savedState.add(new UndoRedo(pointsPlayer1,
+                    pointsPlayer2,
+                    gamesPlayer1,
+                    gamesPlayer2,
+                    setsPlayer1,
+                    setsPlayer2,
+                    numberOfSetsForWin,
+                    numberOfServeInTieBreak,
+                    serveOfPlayer,
+                    serveOfPlayerInTieBreak,
+                    tieBreak,
+                    firstFault,
+                    matchWon,
+                    tiebreakFinal,
+                    winnerPlayer1,
+                    acePlayer1,
+                    faultPlayer1,
+                    doubleFaultPlayer1,
+                    forcedErrorPlayer1,
+                    unforcedErrorPlayer1,
+                    winnerPlayer2,
+                    acePlayer2,
+                    faultPlayer2,
+                    doubleFaultPlayer2,
+                    forcedErrorPlayer2,
+                    unforcedErrorPlayer2,
+                    displayPointsPlayer1,
+                    displayGamesPlayer1,
+                    displaySetsPlayer1,
+                    displayPointsPlayer2,
+                    displayGamesPlayer2,
+                    displaySetsPlayer2,
+                    displayTextMessage,
+                    setsScore));
+        } else {
+            savedState.set(currentUndoIndex, new UndoRedo(pointsPlayer1,
+                    pointsPlayer2,
+                    gamesPlayer1,
+                    gamesPlayer2,
+                    setsPlayer1,
+                    setsPlayer2,
+                    numberOfSetsForWin,
+                    numberOfServeInTieBreak,
+                    serveOfPlayer,
+                    serveOfPlayerInTieBreak,
+                    tieBreak,
+                    firstFault,
+                    matchWon,
+                    tiebreakFinal,
+                    winnerPlayer1,
+                    acePlayer1,
+                    faultPlayer1,
+                    doubleFaultPlayer1,
+                    forcedErrorPlayer1,
+                    unforcedErrorPlayer1,
+                    winnerPlayer2,
+                    acePlayer2,
+                    faultPlayer2,
+                    doubleFaultPlayer2,
+                    forcedErrorPlayer2,
+                    unforcedErrorPlayer2,
+                    displayPointsPlayer1,
+                    displayGamesPlayer1,
+                    displaySetsPlayer1,
+                    displayPointsPlayer2,
+                    displayGamesPlayer2,
+                    displaySetsPlayer2,
+                    displayTextMessage,
+                    setsScore));
+        }
+        /**
+         * remove all data if after currentUndoIndex
+         */
+        for (int i = savedState.size() - 1; i > currentUndoIndex; i--) {
+            savedState.remove(i);
+        }
+
+
+    }
+
+    public void undo(View v) {
+
+        if (currentUndoIndex - 1 < savedState.size() && currentUndoIndex - 1 >= 0) {
+            currentUndoIndex--;
+            pointsPlayer1 = savedState.get(currentUndoIndex).getPointsPlayer1();
+            pointsPlayer2 = savedState.get(currentUndoIndex).getPointsPlayer2();
+            gamesPlayer1 = savedState.get(currentUndoIndex).getGamesPlayer1();
+            gamesPlayer2 = savedState.get(currentUndoIndex).getGamesPlayer2();
+            setsPlayer1 = savedState.get(currentUndoIndex).getSetsPlayer1();
+            setsPlayer2 = savedState.get(currentUndoIndex).getSetsPlayer2();
+            numberOfSetsForWin = savedState.get(currentUndoIndex).getNumberOfSetsForWin();
+            numberOfServeInTieBreak = savedState.get(currentUndoIndex).getNumberOfServeInTieBreak();
+            serveOfPlayer = savedState.get(currentUndoIndex).getServeOfPlayer();
+            serveOfPlayerInTieBreak = savedState.get(currentUndoIndex).getServeOfPlayerInTieBreak();
+            tieBreak = savedState.get(currentUndoIndex).getTieBreak();
+            firstFault = savedState.get(currentUndoIndex).getFirstFault();
+            matchWon = savedState.get(currentUndoIndex).getMatchWon();
+            tiebreakFinal = savedState.get(currentUndoIndex).getTiebreakFinal();
+            winnerPlayer1 = savedState.get(currentUndoIndex).getWinnerPlayer1();
+            acePlayer1 = savedState.get(currentUndoIndex).getAcePlayer1();
+            faultPlayer1 = savedState.get(currentUndoIndex).getFaultPlayer1();
+            doubleFaultPlayer1 = savedState.get(currentUndoIndex).getDoubleFaultPlayer1();
+            forcedErrorPlayer1 = savedState.get(currentUndoIndex).getForcedErrorPlayer1();
+            unforcedErrorPlayer1 = savedState.get(currentUndoIndex).getUnforcedErrorPlayer1();
+            winnerPlayer2 = savedState.get(currentUndoIndex).getWinnerPlayer2();
+            acePlayer2 = savedState.get(currentUndoIndex).getAcePlayer2();
+            faultPlayer2 = savedState.get(currentUndoIndex).getFaultPlayer2();
+            doubleFaultPlayer2 = savedState.get(currentUndoIndex).getDoubleFaultPlayer2();
+            forcedErrorPlayer2 = savedState.get(currentUndoIndex).getForcedErrorPlayer2();
+            unforcedErrorPlayer2 = savedState.get(currentUndoIndex).getUnforcedErrorPlayer2();
+            pointsViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplayPointsPlayer1());
+            gamesViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplayGamesPlayer1());
+            setsViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplaySetsPlayer1());
+            pointsViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplayPointsPlayer2());
+            gamesViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplayGamesPlayer2());
+            setsViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplaySetsPlayer2());
+            textViewDeuce.setText(savedState.get(currentUndoIndex).getDisplayTextMessage());
+            setsScore=savedState.get(currentUndoIndex).getSetsScore();
+            serveChange(serveOfPlayer);
+            displayRightFaultButtonText();
+            checkIfPlayerHasWinMatch();
+            showHideSetsView();
+
+        } else {
+            Toast.makeText(this, "Can't undo", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void redo(View v) {
+
+        if (currentUndoIndex + 1 < savedState.size() && currentUndoIndex + 1 >= 0) {
+            currentUndoIndex++;
+            pointsPlayer1 = savedState.get(currentUndoIndex).getPointsPlayer1();
+            pointsPlayer2 = savedState.get(currentUndoIndex).getPointsPlayer2();
+            gamesPlayer1 = savedState.get(currentUndoIndex).getGamesPlayer1();
+            gamesPlayer2 = savedState.get(currentUndoIndex).getGamesPlayer2();
+            setsPlayer1 = savedState.get(currentUndoIndex).getSetsPlayer1();
+            setsPlayer2 = savedState.get(currentUndoIndex).getSetsPlayer2();
+            numberOfSetsForWin = savedState.get(currentUndoIndex).getNumberOfSetsForWin();
+            numberOfServeInTieBreak = savedState.get(currentUndoIndex).getNumberOfServeInTieBreak();
+            serveOfPlayer = savedState.get(currentUndoIndex).getServeOfPlayer();
+            serveOfPlayerInTieBreak = savedState.get(currentUndoIndex).getServeOfPlayerInTieBreak();
+            tieBreak = savedState.get(currentUndoIndex).getTieBreak();
+            firstFault = savedState.get(currentUndoIndex).getFirstFault();
+            matchWon = savedState.get(currentUndoIndex).getMatchWon();
+            tiebreakFinal = savedState.get(currentUndoIndex).getTiebreakFinal();
+            winnerPlayer1 = savedState.get(currentUndoIndex).getWinnerPlayer1();
+            acePlayer1 = savedState.get(currentUndoIndex).getAcePlayer1();
+            faultPlayer1 = savedState.get(currentUndoIndex).getFaultPlayer1();
+            doubleFaultPlayer1 = savedState.get(currentUndoIndex).getDoubleFaultPlayer1();
+            forcedErrorPlayer1 = savedState.get(currentUndoIndex).getForcedErrorPlayer1();
+            unforcedErrorPlayer1 = savedState.get(currentUndoIndex).getUnforcedErrorPlayer1();
+            winnerPlayer2 = savedState.get(currentUndoIndex).getWinnerPlayer2();
+            acePlayer2 = savedState.get(currentUndoIndex).getAcePlayer2();
+            faultPlayer2 = savedState.get(currentUndoIndex).getFaultPlayer2();
+            doubleFaultPlayer2 = savedState.get(currentUndoIndex).getDoubleFaultPlayer2();
+            forcedErrorPlayer2 = savedState.get(currentUndoIndex).getForcedErrorPlayer2();
+            unforcedErrorPlayer2 = savedState.get(currentUndoIndex).getUnforcedErrorPlayer2();
+            pointsViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplayPointsPlayer1());
+            gamesViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplayGamesPlayer1());
+            setsViewPlayer1.setText(savedState.get(currentUndoIndex).getDisplaySetsPlayer1());
+            pointsViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplayPointsPlayer2());
+            gamesViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplayGamesPlayer2());
+            setsViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplaySetsPlayer2());
+            textViewDeuce.setText(savedState.get(currentUndoIndex).getDisplayTextMessage());
+            setsScore=savedState.get(currentUndoIndex).getSetsScore();
+            serveChange(serveOfPlayer);
+            displayRightFaultButtonText();
+            checkIfPlayerHasWinMatch();
+            showHideSetsView();
+
+        } else {
+            Toast.makeText(this, "Can't redo", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

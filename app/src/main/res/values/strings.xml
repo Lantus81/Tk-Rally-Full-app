@@ -163,5 +163,10 @@
     <string name="scorekeeper_reset_match">Reset Match</string>
     <string name="scorekeeper_reset_question">Do you really want to reset?</string>
     <string name="scorekeeper_beauty_of_the_game">Discover the Beauty of the Game</string>
+    <string name="score_open_statistics">Open Statistics</string>
+    <string name="score_undo_point">Undo point</string>
+    <string name="score_redo_point">Redo point</string>
+    <string name="score_open_players_information">Open players information</string>
+    <string name="score_change_serve_image">Change who serve first</string>
 
 </resources>
