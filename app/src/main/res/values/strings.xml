@@ -144,9 +144,9 @@
     <string name="radno_vrijeme">Radno vrijeme:</string>
     <string name="od_8_do_22_sati">Od 8 do 22 sati</string>
     <string name="ime_se_bavimo">Čime se bavimo:</string>
-    <string name="na_a_misija_je_pru_iti_kvalitetnu_tenisku_poduku_to_ve_em_broju_ljudi_misija_tim_i_vodstvo_ine_osnovu_na_eg_kluba">Naša misija je pružiti kvalitetnu tenisku poduku što većem broju ljudi. Misija, tim i vodstvo čine osnovu našeg kluba.</string>
-    <string name="sjedi_te">Sjedište:</string>
-    <string name="rebro_46_10_360_sesvete">Sjedište: Rebro 46, 10 360 Sesvete</string>
+    <string name="nasa_misija">Naša misija je pružiti kvalitetnu tenisku poduku što većem broju ljudi. Misija, tim i vodstvo čine osnovu našeg kluba.</string>
+
+    <string name="sjediste">Sjedište: Klinčaselska bb, 10040, Zagreb</string>
     <string name="broj_telefona_385_95_903_44_21">Broj telefona: +385 95 903 44 21</string>
 
 
@@ -168,5 +168,6 @@
     <string name="score_redo_point">Redo point</string>
     <string name="score_open_players_information">Open players information</string>
     <string name="score_change_serve_image">Change who serve first</string>
+    <string name="Error_no_app">Unable to find right application</string>
 
 </resources>

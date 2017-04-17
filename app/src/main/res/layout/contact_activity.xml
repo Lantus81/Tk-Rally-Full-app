@@ -9,7 +9,6 @@
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/grayDark"
         android:orientation="vertical">
 
         <ImageView
@@ -98,7 +97,7 @@
                 android:gravity="center_vertical"
                 android:onClick="openGoogleMaps"
                 android:padding="4dp"
-                android:text="@string/rebro_46_10_360_sesvete"
+                android:text="@string/sjediste"
                 android:textSize="12sp" />
 
             <TextView
@@ -139,7 +138,7 @@
                 android:paddingEnd="16dp"
                 android:paddingLeft="16dp"
                 android:paddingStart="16dp"
-                android:text="@string/na_a_misija_je_pru_iti_kvalitetnu_tenisku_poduku_to_ve_em_broju_ljudi_misija_tim_i_vodstvo_ine_osnovu_na_eg_kluba"
+                android:text="@string/nasa_misija"
                 android:textSize="12sp" />
 
         </RelativeLayout>

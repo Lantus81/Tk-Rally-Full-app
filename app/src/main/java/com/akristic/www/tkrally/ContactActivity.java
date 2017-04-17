@@ -31,8 +31,7 @@ public class ContactActivity extends AppCompatActivity {
         }
     }
     public void openGoogleMaps (View v){
-        String uri = String.format(Locale.ENGLISH, "https://www.google.hr/maps/place/Ul.+Rebro+46,+10360,+Sesvete" +
-                "/@45.8307781,16.1005225,17z/data=!3m1!4b1!4m5!3m4!1s0x476679d3557012a5:0x9817f11323b9c44b!8m2!3d45.8307781!4d16.1027112?hl=en");
+        String uri = String.format(Locale.ENGLISH, "https://www.google.hr/maps/place/Teniski+klub+Rally/@45.8396874,16.0523137,17z/data=!4m5!3m4!1s0x0:0x3f14a0231a6f2e3e!8m2!3d45.8395472!4d16.0550192?hl=en");
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
         startActivity(intent);
     }

@@ -148,8 +148,8 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             matchWon = savedInstanceState.getBoolean("matchWon");
             checkIfPlayerHasWinMatch();
             tiebreakFinal = savedInstanceState.getBoolean("tiebreakFinal");
-            pointsViewPlayer1.setText(String.valueOf(pointsPlayer1));
-            pointsViewPlayer2.setText(String.valueOf(pointsPlayer2));
+            pointsViewPlayer1.setText(savedInstanceState.getString("pointsTextViewPlayer1"));
+            pointsViewPlayer2.setText(savedInstanceState.getString("pointsTextViewPlayer2"));
             gamesViewPlayer1.setText(String.valueOf(gamesPlayer1));
             gamesViewPlayer2.setText(String.valueOf(gamesPlayer2));
             setsViewPlayer1.setText(String.valueOf(setsPlayer1));
@@ -227,6 +227,8 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         state.putBoolean("firstFault", firstFault);
         state.putBoolean("matchWon", matchWon);
         state.putBoolean("tiebreakFinal", tiebreakFinal);
+        state.putString("pointsTextViewPlayer1", pointsViewPlayer1.getText().toString());
+        state.putString("pointsTextViewPlayer2", pointsViewPlayer2.getText().toString());
     }
 
     @Override
@@ -290,19 +292,31 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                 startActivity(intentemail);
             }
         } else if (id == R.id.nav_map) {
-            String uri = String.format(Locale.ENGLISH, "https://www.google.hr/maps/place/Ul.+Rebro+46,+10360,+Sesvete" +
-                    "/@45.8307781,16.1005225,17z/data=!3m1!4b1!4m5!3m4!1s0x476679d3557012a5:0x9817f11323b9c44b!8m2!3d45.8307781!4d16.1027112?hl=en");
+            String uri = String.format(Locale.ENGLISH, "https://www.google.hr/maps/place/Teniski+klub+Rally/@45.8396874,16.0523137,17z/data=!4m5!3m4!1s0x0:0x3f14a0231a6f2e3e!8m2!3d45.8395472!4d16.0550192?hl=en");
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-            startActivity(intent);
+            try {
+                startActivity(intent);
+            }catch (Exception e){
+                Toast.makeText(this, R.string.Error_no_app, Toast.LENGTH_SHORT).show();
+            }
         } else if (id == R.id.nav_contact) {
             Intent intent = new Intent(this, ContactActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_facebook) {
             Intent intentFace = getOpenFacebookIntent(this);
-            startActivity(intentFace);
+            try {
+                startActivity(intentFace);
+            }catch (Exception e){
+                Toast.makeText(this, R.string.Error_no_app, Toast.LENGTH_SHORT).show();
+            }
         } else if (id == R.id.nav_web_page) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.kvalitetnaskolatenisa.com"));
-            startActivity(browserIntent);
+
+            try {
+                startActivity(browserIntent);
+            }catch (Exception e){
+                Toast.makeText(this, R.string.Error_no_app, Toast.LENGTH_SHORT).show();
+            }
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
