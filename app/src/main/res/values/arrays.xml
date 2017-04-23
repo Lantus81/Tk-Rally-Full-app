@@ -56,5 +56,10 @@
         <item>@string/settings_games_12_value</item>
     </string-array>
 
+    <string-array name="array_gender_options">
+        <item>@string/gender_unknown</item>
+        <item>@string/gender_male</item>
+        <item>@string/gender_female</item>
+    </string-array>
 
 </resources>

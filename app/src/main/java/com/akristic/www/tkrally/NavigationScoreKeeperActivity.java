@@ -278,7 +278,10 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_quiz) {
+        if (id == R.id.nav_player_manager) {
+            Intent playerIntent = new Intent(this, PlayerCatalogActivity.class);
+            startActivity(playerIntent);
+        }else if (id == R.id.nav_quiz) {
             Intent quizIntent = new Intent(this, QuizActivity.class);
             startActivity(quizIntent);
         } else if (id == R.id.nav_phone) {
@@ -1149,7 +1152,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
      * @param v imageView silhouette
      */
     public void changePlayersNames(View v) {
-        Intent playersIntent = new Intent(getApplicationContext(), PlayersNamesActivity.class);
+        Intent playersIntent = new Intent(getApplicationContext(), PlayerCatalogActivity.class);
         startActivity(playersIntent);
     }
 

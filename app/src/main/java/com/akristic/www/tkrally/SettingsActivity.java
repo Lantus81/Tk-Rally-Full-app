@@ -16,6 +16,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
     }
+
     public static class MatchPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -34,12 +35,14 @@ public class SettingsActivity extends AppCompatActivity {
             Preference advantageValue = findPreference(getString(R.string.settings_advantage_key));
             bindPreferenceSummaryToValue(advantageValue);
         }
+
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
             preference.setSummary(stringValue);
             return true;
         }
+
         private void bindPreferenceSummaryToValue(Preference preference) {
             preference.setOnPreferenceChangeListener(this);
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());

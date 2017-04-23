@@ -3,6 +3,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_player_manager"
+            android:icon="@drawable/ic_people_black_24dp"
+            android:title="Manage players" />
+        <item
             android:id="@+id/nav_quiz"
             android:icon="@drawable/ic_live_help_black_24dp"
             android:title="Tennis quiz" />

@@ -136,7 +136,6 @@
     <string name="settings_games_12_value" translatable="false">12</string>
 
 
-
     <!-- Label for Contact activity -->
     <string name="teniski_klub_rally">Teniski klub Rally</string>
     <string name="web_adresa_www_kvalitetnaskolatenisa_com">Web adresa: www.kvalitetnaskolatenisa.com</string>
@@ -170,4 +169,60 @@
     <string name="score_change_serve_image">Change who serve first</string>
     <string name="Error_no_app">Unable to find right application</string>
 
+    <!-- Title text for the empty view [CHAR LIMIT=50] -->
+    <string name="empty_view_title_text">It\'s a bit lonely here for play...</string>
+
+    <!-- Subtitle text for the empty view that prompts the user to add a player [CHAR LIMIT=50] -->
+    <string name="empty_view_subtitle_text">Get started by adding a player</string>
+    <string name="Unknown_nationality">Unknown nationality</string>
+    <string name="action_insert_dummy_data">Insert dummy data</string>
+    <string name="action_delete_all_entries">Delete all players</string>
+    <string name="category_overview">Overview</string>
+    <string name="hint_player_name">Player Name</string>
+    <string name="hint_player_nationality">Nationality</string>
+    <string name="category_gender">Gender</string>
+    <string name="category_measurement">Measurement</string>
+    <string name="hint_player_weight">Weight</string>
+    <string name="unit_player_weight">Kg</string>
+    <string name="unit_player_height">Cm</string>
+    <string name="hint_player_height">Height</string>
+    <string name="hint_player_birth">Year of Birth</string>
+    <string name="editor_activity_title_new_player">New Player</string>
+    <string name="editor_activity_title_edit_player">Edit Player</string>
+    <string name="action_delete">Delete player</string>
+    <string name="action_save">Save Player</string>
+
+    <!-- Label for dropdown menu option if the player's gender is unknown [CHAR LIMIT=20] -->
+    <string name="gender_unknown">Unknown</string>
+
+    <!-- Label for dropdown menu option if the player is male [CHAR LIMIT=20] -->
+    <string name="gender_male">Male</string>
+
+    <!-- Label for dropdown menu option if the player is female [CHAR LIMIT=20] -->
+    <string name="gender_female">Female</string>
+
+    <!-- Dialog message to ask the user to confirm deleting the current player [CHAR LIMIT=NONE] -->
+    <string name="delete_dialog_msg">Delete this player?</string>
+    <!-- Dialog button text for the option to confirm deleting the current player [CHAR LIMIT=20] -->
+    <string name="delete">Delete</string>
+    <!-- Dialog button text for the option to cancel deletion of the current player [CHAR LIMIT=20] -->
+    <string name="cancel">Cancel</string>
+    <!-- Toast message in editor when current player was successfully deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_player_successful">Player deleted</string>
+
+    <string name="editor_delete_all_players_successful">All players deleted</string>
+
+    <!-- Toast message in editor when current pet has failed to be deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_player_failed">Error with deleting player</string>
+
+    <string name="editor_delete_all_players_failed">Error with deleting players</string>
+    <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+    <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
+    <string name="discard">Discard</string>
+
+    <!-- Dialog button text for the option to keep editing the current pet [CHAR LIMIT=20] -->
+    <string name="keep_editing">Keep Editing</string>
+    <string name="delete_all_players_dialog_msg">This will delete all players. Are you sure?</string>
+    <string name="title_players_catalog">Players manager</string>
 </resources>
