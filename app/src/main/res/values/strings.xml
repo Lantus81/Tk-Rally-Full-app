@@ -160,7 +160,7 @@
     <string name="quiz_submit_button">Submit</string>
     <string name="quiz_current_score">Your score: 0/10</string>
     <string name="scorekeeper_reset_match">Reset Match</string>
-    <string name="scorekeeper_reset_question">Do you really want to reset?</string>
+    <string name="scorekeeper_reset_question">All unsaved progress will be lost. Do you really want to reset?</string>
     <string name="scorekeeper_beauty_of_the_game">Discover the Beauty of the Game</string>
     <string name="score_open_statistics">Open Statistics</string>
     <string name="score_undo_point">Undo point</string>
@@ -170,12 +170,12 @@
     <string name="Error_no_app">Unable to find right application</string>
 
     <!-- Title text for the empty view [CHAR LIMIT=50] -->
-    <string name="empty_view_title_text">It\'s a bit lonely here for play...</string>
+    <string name="empty_view_title_text">It\'s a bit lonely here to play...</string>
 
     <!-- Subtitle text for the empty view that prompts the user to add a player [CHAR LIMIT=50] -->
     <string name="empty_view_subtitle_text">Get started by adding a player</string>
     <string name="Unknown_nationality">Unknown nationality</string>
-    <string name="action_insert_dummy_data">Insert dummy data</string>
+    <string name="action_insert_dummy_data">Insert Default Player</string>
     <string name="action_delete_all_entries">Delete all players</string>
     <string name="category_overview">Overview</string>
     <string name="hint_player_name">Player Name</string>
@@ -189,7 +189,7 @@
     <string name="hint_player_birth">Year of Birth</string>
     <string name="editor_activity_title_new_player">New Player</string>
     <string name="editor_activity_title_edit_player">Edit Player</string>
-    <string name="action_delete">Delete player</string>
+    <string name="action_delete">Delete Player</string>
     <string name="action_save">Save Player</string>
 
     <!-- Label for dropdown menu option if the player's gender is unknown [CHAR LIMIT=20] -->
@@ -224,5 +224,12 @@
     <!-- Dialog button text for the option to keep editing the current pet [CHAR LIMIT=20] -->
     <string name="keep_editing">Keep Editing</string>
     <string name="delete_all_players_dialog_msg">This will delete all players. Are you sure?</string>
-    <string name="title_players_catalog">Players manager</string>
+    <string name="title_players_catalog">Players Manager</string>
+    <string name="action_play_1">Set As Player 1</string>
+    <string name="action_play_2">Set As Player 2</string>
+    <string name="editor_set_player">Player 1 set successfully</string>
+    <string name="editor_set_player_error">Error with setting player</string>
+    <string name="action_save_new">Save As New</string>
+    <string name="empty_view_subtitle_text_match">But play some tennis first</string>
+    <string name="empty_view_title_text_match">Here are your saved tennis matches</string>
 </resources>

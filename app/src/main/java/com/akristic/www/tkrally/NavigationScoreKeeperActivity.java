@@ -1,9 +1,12 @@
 package com.akristic.www.tkrally;
 
+import android.content.ContentUris;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,6 +26,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.akristic.www.tkrally.data.PlayerContract;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -281,7 +286,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         if (id == R.id.nav_player_manager) {
             Intent playerIntent = new Intent(this, PlayerCatalogActivity.class);
             startActivity(playerIntent);
-        }else if (id == R.id.nav_quiz) {
+        } else if (id == R.id.nav_quiz) {
             Intent quizIntent = new Intent(this, QuizActivity.class);
             startActivity(quizIntent);
         } else if (id == R.id.nav_phone) {
@@ -299,7 +304,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
             try {
                 startActivity(intent);
-            }catch (Exception e){
+            } catch (Exception e) {
                 Toast.makeText(this, R.string.Error_no_app, Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.nav_contact) {
@@ -309,7 +314,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             Intent intentFace = getOpenFacebookIntent(this);
             try {
                 startActivity(intentFace);
-            }catch (Exception e){
+            } catch (Exception e) {
                 Toast.makeText(this, R.string.Error_no_app, Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.nav_web_page) {
@@ -317,7 +322,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
 
             try {
                 startActivity(browserIntent);
-            }catch (Exception e){
+            } catch (Exception e) {
                 Toast.makeText(this, R.string.Error_no_app, Toast.LENGTH_SHORT).show();
             }
         }
@@ -1080,9 +1085,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     public void resetAll() {
 
         new AlertDialog.Builder(this)
-                .setTitle(R.string.scorekeeper_reset_match)
                 .setMessage(R.string.scorekeeper_reset_question)
-                .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
@@ -1157,18 +1160,33 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     }
 
     public void changePlayersNames() {
+        if (PlayerEditorActivity.NAME_PLAYER1 != null) {
+            namePlayer1 = PlayerEditorActivity.NAME_PLAYER1;
+        }
+        if (PlayerEditorActivity.NAME_PLAYER2 != null) {
+            namePlayer2 = PlayerEditorActivity.NAME_PLAYER2;
+        }
         namePlayer1TextView.setText(namePlayer1);
         namePlayer2TextView.setText(namePlayer2);
     }
 
     private void setPlayerPictures() {
+        /**      String[] projection = {
+         PlayerContract.PlayerEntry._ID,
+         PlayerContract.PlayerEntry.COLUMN_PLAYER_NAME,
+         PlayerContract.PlayerEntry.COLUMN_PLAYER_PICTURE};
+         Uri uri = Uri.withAppendedPath(PlayerContract.PlayerEntry.CONTENT_URI,"/0");
+         CursorLoader cursor = new CursorLoader(this, uri,
+         projection, null, null, null);
+         */
 
-        if (PlayersNamesActivity.bitmapPlayer1 != null) {
-            mImagePlayer1.setImageBitmap(PlayersNamesActivity.bitmapPlayer1);
+
+        if (PlayerEditorActivity.BITMAP_PLAYER1 != null) {
+            mImagePlayer1.setImageBitmap(PlayerEditorActivity.BITMAP_PLAYER1);
 
         }
-        if (PlayersNamesActivity.bitmapPlayer2 != null) {
-            mImagePlayer2.setImageBitmap(PlayersNamesActivity.bitmapPlayer2);
+        if (PlayerEditorActivity.BITMAP_PLAYER2 != null) {
+            mImagePlayer2.setImageBitmap(PlayerEditorActivity.BITMAP_PLAYER2);
 
         }
     }
@@ -1304,7 +1322,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             gamesViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplayGamesPlayer2());
             setsViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplaySetsPlayer2());
             textViewDeuce.setText(savedState.get(currentUndoIndex).getDisplayTextMessage());
-            setsScore=savedState.get(currentUndoIndex).getSetsScore();
+            setsScore = savedState.get(currentUndoIndex).getSetsScore();
             serveChange(serveOfPlayer);
             displayRightFaultButtonText();
             checkIfPlayerHasWinMatch();
@@ -1353,7 +1371,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             gamesViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplayGamesPlayer2());
             setsViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplaySetsPlayer2());
             textViewDeuce.setText(savedState.get(currentUndoIndex).getDisplayTextMessage());
-            setsScore=savedState.get(currentUndoIndex).getSetsScore();
+            setsScore = savedState.get(currentUndoIndex).getSetsScore();
             serveChange(serveOfPlayer);
             displayRightFaultButtonText();
             checkIfPlayerHasWinMatch();

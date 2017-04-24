@@ -38,6 +38,7 @@ public class PlayerCatalogActivity extends AppCompatActivity implements LoaderMa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_catalog);
+
         bitmapPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.player_silhouette);
         // Setup FAB to open EditorActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -81,15 +82,14 @@ public class PlayerCatalogActivity extends AppCompatActivity implements LoaderMa
         values.put(PlayerEntry.COLUMN_PLAYER_GENDER, PlayerEntry.GENDER_MALE);
         values.put(PlayerEntry.COLUMN_PLAYER_WEIGHT, 79);
         values.put(PlayerEntry.COLUMN_PLAYER_HEIGHT, 181);
-        values.put(PlayerEntry.COLUMN_PLAYER_PICTURE, 181);
-        values.put(PlayerEntry.COLUMN_PLAYER_PICTURE, image);
+
 
         // Insert the new row, returning the primary key value of the new row
         Uri newUri = getContentResolver().insert(PlayerEntry.CONTENT_URI, values);
         if (newUri != null) {
-            Toast.makeText(this, "Uri: " + newUri.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Default player created", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Error inserting dummy data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error inserting default player", Toast.LENGTH_SHORT).show();
         }
     }
 

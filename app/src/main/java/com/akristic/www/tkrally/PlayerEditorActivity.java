@@ -42,12 +42,17 @@ import java.io.File;
 import java.io.IOException;
 
 import static com.akristic.www.tkrally.PlayersNamesActivity.FILE_NAME;
+import static com.akristic.www.tkrally.PlayersNamesActivity.bitmapPlayer1;
 
 /**
  * Created by Toni on 19.4.2017..
  */
 
 public class PlayerEditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+    public static Bitmap BITMAP_PLAYER1;
+    public static Bitmap BITMAP_PLAYER2;
+    public static String NAME_PLAYER1;
+    public static String NAME_PLAYER2;
 
     private Uri mCurrentPlayerUri;
     private static final int EXISTING_PLAYER_LOADER = 0;
@@ -57,7 +62,7 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
     private static final int GALLERY_IMAGE_REQUEST = 1;
     public static final int CAMERA_PERMISSIONS_REQUEST = 2;
     public static final int CAMERA_IMAGE_REQUEST = 3;
-    public static final int IMAGE_SIZE = 400;
+    public static final int IMAGE_SIZE = 300;
     private ExifInterface exif = null;
     /**
      * EditText field to enter the player's name
@@ -101,10 +106,11 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_editor);
+
         Intent intent = getIntent();
         mCurrentPlayerUri = intent.getData();
         Button addPictureButton = (Button) findViewById(R.id.editor_add_picture_button);
-        bitmapPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.player_silhouette);
+
         if (mCurrentPlayerUri == null) {
             setTitle(R.string.editor_activity_title_new_player);
         } else {
@@ -226,6 +232,7 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
             showImage(Uri.fromFile(getCameraFile()));
         }
     }
+
     /**
      * Not sure what exactly is this for but it do something if user did not give permission for camera or to read internal storage
      *
@@ -264,7 +271,7 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
                 bitmap = rotateBitmap(bitmap, orientation);
                 mPlayerImageView.setImageBitmap(bitmap);
                 bitmapPlayer = bitmap;
-           } catch (IOException e) {
+            } catch (IOException e) {
                 Log.d(TAG, "Image picking failed because " + e.getMessage());
                 Toast.makeText(this, R.string.image_picker_error, Toast.LENGTH_LONG).show();
             }
@@ -391,8 +398,14 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
         super.onPrepareOptionsMenu(menu);
         // If this is a new player, hide the "Delete" menu item.
         if (mCurrentPlayerUri == null) {
-            MenuItem menuItem = menu.findItem(R.id.action_delete);
-            menuItem.setVisible(false);
+            MenuItem menuItem1 = menu.findItem(R.id.action_delete);
+            menuItem1.setVisible(false);
+            MenuItem menuItem2 = menu.findItem(R.id.action_player1);
+            menuItem2.setVisible(false);
+            MenuItem menuItem3 = menu.findItem(R.id.action_player2);
+            menuItem3.setVisible(false);
+            MenuItem menuItem4 = menu.findItem(R.id.action_save_new);
+            menuItem4.setVisible(false);
         }
         return true;
     }
@@ -449,7 +462,6 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
         String yearString = mYearEditText.getText().toString().trim();
 
 
-
         if (TextUtils.isEmpty(weightString)) {
             weight = 0;
         } else {
@@ -466,9 +478,6 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
             year = Integer.parseInt(yearString);
         }
         // Convert bitmap to byte array so it can be saved in database
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bitmapPlayer.compress(Bitmap.CompressFormat.PNG, 0, bos);
-        byte[] image = bos.toByteArray();
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
@@ -478,7 +487,12 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
         values.put(PlayerEntry.COLUMN_PLAYER_GENDER, mGender);
         values.put(PlayerEntry.COLUMN_PLAYER_WEIGHT, weight);
         values.put(PlayerEntry.COLUMN_PLAYER_HEIGHT, height);
-        values.put(PlayerEntry.COLUMN_PLAYER_PICTURE, image);
+        if (bitmapPlayer != null) {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bitmapPlayer.compress(Bitmap.CompressFormat.PNG, 0, bos);
+            byte[] image = bos.toByteArray();
+            values.put(PlayerEntry.COLUMN_PLAYER_PICTURE, image);
+        }
 
 
         // Insert the new row, returning the primary key value of the new row
@@ -542,6 +556,17 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
             case R.id.action_delete:
                 showDeleteConfirmationDialog();
                 return true;
+            case R.id.action_player1:
+                setPlayer1();
+                return true;
+            case R.id.action_player2:
+                setPlayer2();
+                return true;
+            case R.id.action_save_new:
+                mCurrentPlayerUri=null;
+                savePlayer();
+                finish();
+                return true;
             // Respond to a click on the "Up" arrow button in the app bar
             case android.R.id.home:
                 // Navigate back to parent activity (CatalogActivity)
@@ -567,6 +592,30 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setPlayer1() {
+        // Only perform the setting if this is an existing player.
+        if (mCurrentPlayerUri != null) {
+            BITMAP_PLAYER1 = bitmapPlayer;
+            String name = mNameEditText.getText().toString();
+            NAME_PLAYER1 = name;
+            Toast.makeText(this, R.string.editor_set_player, Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, R.string.editor_set_player_error, Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    private void setPlayer2() {
+        // Only perform the setting if this is an existing player.
+        if (mCurrentPlayerUri != null) {
+            BITMAP_PLAYER2 = bitmapPlayer;
+            String name = mNameEditText.getText().toString();
+            NAME_PLAYER2 = name;
+            Toast.makeText(this, R.string.editor_set_player, Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, R.string.editor_set_player_error, Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void showDeleteConfirmationDialog() {
@@ -650,8 +699,10 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
             int gender = cursor.getInt(genderColumnIndex);
             int weight = cursor.getInt(weightColumnIndex);
             int height = cursor.getInt(heightColumnIndex);
-            byte[] imgByte = cursor.getBlob(imageColumnIndex);
-
+            byte[] imgByte = null;
+            if (cursor.getBlob(imageColumnIndex) != null) {
+                imgByte = cursor.getBlob(imageColumnIndex);
+            }
 
             // Update the views on the screen with the values from the database
             mNameEditText.setText(name);
@@ -663,7 +714,7 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
                 bitmapPlayer = BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
                 mPlayerImageView.setImageBitmap(bitmapPlayer);
             } else {
-                mPlayerImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.player_silhouette));
+                mPlayerImageView.setImageBitmap(null);
             }
             // Gender is a dropdown spinner, so map the constant value from the database
             // into one of the dropdown options (0 is Unknown, 1 is Male, 2 is Female).

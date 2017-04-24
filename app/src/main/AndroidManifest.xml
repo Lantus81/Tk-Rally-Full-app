@@ -67,17 +67,19 @@
             android:authorities="com.akristic.www.tkrally"
             android:exported="false" />
 
-        <activity android:name=".PlayerCatalogActivity"
+        <activity
+            android:name=".PlayerCatalogActivity"
             android:label="@string/title_players_catalog">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.akristic.www.tkrally.NavigationScoreKeeperActivity"/>
+                android:value="com.akristic.www.tkrally.NavigationScoreKeeperActivity" />
         </activity>
         <activity android:name=".PlayerEditorActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.akristic.www.tkrally.PlayerCatalogActivity" />
         </activity>
+        <activity android:name=".MatchCatalogActivity"></activity>
     </application>
 
 </manifest>

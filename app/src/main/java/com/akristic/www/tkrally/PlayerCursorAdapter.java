@@ -62,21 +62,25 @@ public class PlayerCursorAdapter extends CursorAdapter {
         TextView playerName = (TextView) view.findViewById(R.id.name);
         TextView playerNationality = (TextView) view.findViewById(R.id.summary);
         ImageView playerImage = (ImageView) view.findViewById(R.id.catalog_player_image);
+
         // Extract properties from cursor
         String name = cursor.getString(cursor.getColumnIndexOrThrow(PlayerContract.PlayerEntry.COLUMN_PLAYER_NAME));
         String nationality = cursor.getString(cursor.getColumnIndexOrThrow(PlayerContract.PlayerEntry.COLUMN_PLAYER_NATIONALITY));
+
         byte[] byteImage = cursor.getBlob(cursor.getColumnIndexOrThrow(PlayerContract.PlayerEntry.COLUMN_PLAYER_PICTURE));
-        if (byteImage == null) {
-            playerImage.setImageBitmap(BitmapFactory.decodeResource(view.getResources(), R.drawable.player_silhouette));
-        } else {
-            Bitmap bitmapPlayer = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
-            playerImage.setImageBitmap(bitmapPlayer);
-        }
+
+
         // Populate fields with extracted properties
         playerName.setText(name);
         if (TextUtils.isEmpty(nationality)) {
             nationality = context.getString(R.string.Unknown_nationality);
         }
         playerNationality.setText(nationality);
+        if (byteImage != null) {
+            Bitmap bitmapPlayer = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
+            playerImage.setImageBitmap(bitmapPlayer);
+        }else {
+            playerImage.setImageBitmap(null);
+        }
     }
 }
