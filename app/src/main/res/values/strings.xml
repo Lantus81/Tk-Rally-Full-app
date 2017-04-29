@@ -227,9 +227,10 @@
     <string name="title_players_catalog">Players Manager</string>
     <string name="action_play_1">Set As Player 1</string>
     <string name="action_play_2">Set As Player 2</string>
-    <string name="editor_set_player">Player 1 set successfully</string>
+    <string name="editor_set_player">Player set successfully</string>
     <string name="editor_set_player_error">Error with setting player</string>
     <string name="action_save_new">Save As New</string>
     <string name="empty_view_subtitle_text_match">But play some tennis first</string>
     <string name="empty_view_title_text_match">Here are your saved tennis matches</string>
+    <string name="title_matches_catalog">Played Matches</string>
 </resources>

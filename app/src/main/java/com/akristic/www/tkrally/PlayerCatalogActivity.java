@@ -32,14 +32,12 @@ import static android.R.attr.id;
 public class PlayerCatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     PlayerCursorAdapter mCursorAdapter;
     private static final int PLAYER_LOADER = 0;
-    private Bitmap bitmapPlayer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_catalog);
-
-        bitmapPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.player_silhouette);
         // Setup FAB to open EditorActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -70,10 +68,7 @@ public class PlayerCatalogActivity extends AppCompatActivity implements LoaderMa
     }
 
     private void insertPlayer() {
-        // Convert bitmap to byte array so it can be saved in database
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bitmapPlayer.compress(Bitmap.CompressFormat.PNG, 0, bos);
-        byte[] image = bos.toByteArray();
+
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
         values.put(PlayerEntry.COLUMN_PLAYER_NAME, "Player");

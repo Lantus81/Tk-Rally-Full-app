@@ -737,10 +737,10 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
         mNameEditText.setText("");
         mNationalityEditText.setText("");
         mYearEditText.setText("");
-        mGenderSpinner.setSelection(0);
+        mGenderSpinner.setSelection(PlayerEntry.GENDER_UNKNOWN);
         mWeightEditText.setText("");
         mHeightEditText.setText("");
-        mPlayerImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.player_silhouette));
+        mPlayerImageView.setImageBitmap(null);
 
     }
 

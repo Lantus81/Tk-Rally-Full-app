@@ -79,7 +79,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.akristic.www.tkrally.PlayerCatalogActivity" />
         </activity>
-        <activity android:name=".MatchCatalogActivity"></activity>
+        <activity android:name=".MatchCatalogActivity"
+            android:label="@string/title_matches_catalog">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.akristic.www.tkrally.NavigationScoreKeeperActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -110,6 +110,16 @@ public class PlayerProvider extends ContentProvider {
                 cursor = database.query(PlayerEntry.TABLE_NAME, projection, selection, selectionArgs,
                         null, null, sortOrder);
                 break;
+            case MATCHES:
+
+                cursor = database.query(MatchEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                break;
+            case MATCH_ID:
+                selection = MatchEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                cursor = database.query(MatchEntry.TABLE_NAME, projection, selection, selectionArgs,
+                        null, null, sortOrder);
+                break;
             default:
                 throw new IllegalArgumentException("Cannot query unknown URI " + uri);
         }
@@ -148,12 +158,13 @@ public class PlayerProvider extends ContentProvider {
                 throw new IllegalArgumentException("Insertion is not supported for " + uri);
         }
     }
+
     private Uri insertMatch(Uri uri, ContentValues values) {
         String arrayList = values.getAsString(MatchEntry.COLUMN_MATCH_ARRAY_LIST);
         if (arrayList == null) {
             throw new IllegalArgumentException("Nothing to save in ArrayList");
         }
-       SQLiteDatabase database = mDbHelper.getWritableDatabase();
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
         long id = database.insert(MatchEntry.TABLE_NAME, null, values);
         // Once we know the ID of the new row in the table,
         if (id == -1) {
@@ -164,6 +175,7 @@ public class PlayerProvider extends ContentProvider {
         getContext().getContentResolver().notifyChange(uri, null);
         return ContentUris.withAppendedId(uri, id);
     }
+
     /**
      * Insert a player into the database with the given content values. Return the new content URI
      * for that specific row in the database.
@@ -211,7 +223,7 @@ public class PlayerProvider extends ContentProvider {
             case PLAYERS:
                 // Delete all rows that match the selection and selection args
                 rowsDeleted = database.delete(PlayerEntry.TABLE_NAME, selection, selectionArgs);
-                if (rowsDeleted !=0){
+                if (rowsDeleted != 0) {
                     getContext().getContentResolver().notifyChange(uri, null);
                 }
                 return rowsDeleted;
@@ -221,14 +233,14 @@ public class PlayerProvider extends ContentProvider {
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 // Delete a single row given by the ID in the URI
                 rowsDeleted = database.delete(PlayerEntry.TABLE_NAME, selection, selectionArgs);
-                if (rowsDeleted !=0){
+                if (rowsDeleted != 0) {
                     getContext().getContentResolver().notifyChange(uri, null);
                 }
                 return rowsDeleted;
             case MATCHES:
                 // Delete all rows that match the selection and selection args
                 rowsDeleted = database.delete(MatchEntry.TABLE_NAME, selection, selectionArgs);
-                if (rowsDeleted !=0){
+                if (rowsDeleted != 0) {
                     getContext().getContentResolver().notifyChange(uri, null);
                 }
                 return rowsDeleted;
@@ -238,7 +250,7 @@ public class PlayerProvider extends ContentProvider {
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 // Delete a single row given by the ID in the URI
                 rowsDeleted = database.delete(MatchEntry.TABLE_NAME, selection, selectionArgs);
-                if (rowsDeleted !=0){
+                if (rowsDeleted != 0) {
                     getContext().getContentResolver().notifyChange(uri, null);
                 }
                 return rowsDeleted;
@@ -273,12 +285,13 @@ public class PlayerProvider extends ContentProvider {
                 throw new IllegalArgumentException("Update is not supported for " + uri);
         }
     }
+
     private int updateMatch(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         // If there are no values to update, then don't try to update the database
         if (values.size() == 0) {
             return 0;
         }
-       if (values.containsKey(MatchEntry.COLUMN_MATCH_ARRAY_LIST)) {
+        if (values.containsKey(MatchEntry.COLUMN_MATCH_ARRAY_LIST)) {
             String array = values.getAsString(MatchEntry.COLUMN_MATCH_ARRAY_LIST);
             if (TextUtils.isEmpty(array)) {
                 throw new IllegalArgumentException("Nothing to save");
@@ -295,6 +308,7 @@ public class PlayerProvider extends ContentProvider {
         }
         return rowsUpdated;
     }
+
     /**
      * Update players in the database with the given content values. Apply the changes to the rows
      * specified in the selection and selection arguments (which could be 0 or 1 or more players).

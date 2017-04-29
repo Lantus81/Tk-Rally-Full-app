@@ -1,12 +1,10 @@
 package com.akristic.www.tkrally;
 
-import android.content.ContentUris;
+
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,7 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.akristic.www.tkrally.data.PlayerContract;
+
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -286,6 +284,9 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         if (id == R.id.nav_player_manager) {
             Intent playerIntent = new Intent(this, PlayerCatalogActivity.class);
             startActivity(playerIntent);
+        } else if (id == R.id.nav_match_manager) {
+            Intent quizIntent = new Intent(this, MatchCatalogActivity.class);
+            startActivity(quizIntent);
         } else if (id == R.id.nav_quiz) {
             Intent quizIntent = new Intent(this, QuizActivity.class);
             startActivity(quizIntent);
