@@ -34,15 +34,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-
 import com.akristic.www.tkrally.data.PlayerContract.PlayerEntry;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-
-import static com.akristic.www.tkrally.PlayersNamesActivity.FILE_NAME;
-import static com.akristic.www.tkrally.PlayersNamesActivity.bitmapPlayer1;
 
 /**
  * Created by Toni on 19.4.2017..
@@ -63,6 +59,7 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
     public static final int CAMERA_PERMISSIONS_REQUEST = 2;
     public static final int CAMERA_IMAGE_REQUEST = 3;
     public static final int IMAGE_SIZE = 300;
+    public static final String FILE_NAME = "temp.jpg";
     private ExifInterface exif = null;
     /**
      * EditText field to enter the player's name

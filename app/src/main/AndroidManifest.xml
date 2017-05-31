@@ -54,13 +54,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.akristic.www.tkrally.NavigationScoreKeeperActivity" />
         </activity>
-        <activity
-            android:name=".PlayersNamesActivity"
-            android:label="@string/title_players_names">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.akristic.www.tkrally.NavigationScoreKeeperActivity" />
-        </activity>
 
         <provider
             android:name=".data.PlayerProvider"

@@ -8,7 +8,7 @@ import android.provider.BaseColumns;
  * Created by Toni on 17.4.2017..
  */
 
-public class PlayerContract {
+public final class PlayerContract {
 
     private PlayerContract(){}
 
