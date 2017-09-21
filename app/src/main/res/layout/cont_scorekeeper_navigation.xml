@@ -59,6 +59,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
             <TextView
                 android:id="@+id/deuce"
                 android:layout_width="wrap_content"
@@ -69,7 +70,7 @@
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </android.support.constraint.ConstraintLayout>
 
@@ -119,10 +120,10 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_margin="@dimen/medium_horizontal_margin"
+                android:background="@drawable/player_black"
                 android:contentDescription="@string/score_open_players_information"
                 android:onClick="changePlayersNames"
                 android:scaleType="centerCrop"
-                android:src="@drawable/player_black"
                 app:layout_constraintBottom_toTopOf="@id/guide_horizontal2_player_1"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -135,10 +136,10 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/mask"
                 app:layout_constraintBottom_toBottomOf="@id/guide_horizontal2_player_1"
-                tools:ignore="contentDescription"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="@id/guide_vertical_player_1"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="contentDescription" />
 
             <TextView
                 android:id="@+id/player1_name"
@@ -153,8 +154,8 @@
                 android:id="@+id/score_ball_serve"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:contentDescription="@string/score_change_serve_image"
                 android:layout_margin="@dimen/minimum_margin"
+                android:contentDescription="@string/score_change_serve_image"
                 android:onClick="changeServeFirstPlayer"
                 android:src="@drawable/tennis_ball"
                 app:layout_constraintBottom_toTopOf="@id/guide_horizontal_player_1"
@@ -457,10 +458,10 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_margin="@dimen/medium_horizontal_margin"
+                android:background="@drawable/player_black"
                 android:contentDescription="@string/score_open_players_information"
                 android:onClick="changePlayersNames"
                 android:scaleType="centerCrop"
-                android:src="@drawable/player_silhouette"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -750,6 +751,27 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/guide_horizontal_bottom">
 
+            <Chronometer
+                android:id="@+id/simpleChronometer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@color/colorAccent"
+                android:drawableLeft="@drawable/ic_pause_white_24dp"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:drawableStart="@drawable/ic_pause_white_24dp"
+                android:foregroundGravity="center_vertical"
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/minimum_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingStart="@dimen/minimum_margin"
+                android:textColor="@color/grayLightWhite"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/button_statistics"
                 android:layout_width="wrap_content"
@@ -760,7 +782,7 @@
                 android:tint="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/simpleChronometer"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
@@ -784,7 +806,7 @@
                 android:tint="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/button_statistics"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/simpleChronometer"
                 app:layout_constraintTop_toTopOf="parent" />
 
 

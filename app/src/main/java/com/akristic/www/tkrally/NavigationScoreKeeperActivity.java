@@ -1,13 +1,16 @@
 package com.akristic.www.tkrally;
 
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
@@ -21,16 +24,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.akristic.www.tkrally.data.PlayerContract.MatchEntry;
+import com.google.gson.Gson;
 
-
+import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
-
+import static android.os.SystemClock.elapsedRealtime;
 import static com.akristic.www.tkrally.R.string.tiebreak;
 
 public class NavigationScoreKeeperActivity extends AppCompatActivity
@@ -69,8 +77,8 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     static int forcedErrorPlayer2 = 0;
     static int unforcedErrorPlayer2 = 0;
 
-    static String namePlayer1 = "Player 1";
-    static String namePlayer2 = "Player 2";
+    static String namePlayer1 = PlayerEditorActivity.NAME_PLAYER1;
+    static String namePlayer2 = PlayerEditorActivity.NAME_PLAYER2;
     /**
      * views
      */
@@ -91,11 +99,17 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     private Button buttonFaultPlayer2;
     private ConstraintLayout buttonsLayoutPlayer1;
     private ConstraintLayout buttonsLayoutPlayer2;
+
     private ImageView mImagePlayer1;
     private ImageView mImagePlayer2;
 
-    private ArrayList<UndoRedo> savedState = new ArrayList<>();
+    public static ArrayList<UndoRedo> savedState = new ArrayList<>();
     private int currentUndoIndex = -1;
+    public static boolean CURRENT_LOAD_MATCH_STATE = false;
+
+    private Chronometer simpleChronometer;
+    private int stopStartChronoIndex = 0;
+    private long chronometerTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +144,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         namePlayer2TextView = (TextView) findViewById(R.id.player2_name);
         mImagePlayer1 = (ImageView) findViewById(R.id.score_image_player1);
         mImagePlayer2 = (ImageView) findViewById(R.id.score_image_player2);
+        simpleChronometer = (Chronometer) findViewById(R.id.simpleChronometer); // initiate a chronometer
 
 
         if (savedInstanceState != null) {
@@ -157,6 +172,9 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             gamesViewPlayer2.setText(String.valueOf(gamesPlayer2));
             setsViewPlayer1.setText(String.valueOf(setsPlayer1));
             setsViewPlayer2.setText(String.valueOf(setsPlayer2));
+            simpleChronometer.setBase(savedInstanceState.getLong("chronometerBase"));
+            chronometerTime = savedInstanceState.getLong("chronometerTime");
+            stopStartChronoIndex = savedInstanceState.getInt("chronometerIndex");
 
         }
         setPreferences();
@@ -173,6 +191,29 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                 forcedErrorPlayer1 == 0 && forcedErrorPlayer2 == 0 && unforcedErrorPlayer1 == 0 && unforcedErrorPlayer2 == 0) {
             saveUndoState(); //* set zero index state for undo and redo ArrayList
         }
+
+        /**
+         * Chronometer code
+         */
+        if (stopStartChronoIndex == 0) {
+            startChronometerTime();
+            simpleChronometer.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_pause_white_24dp, 0, 0, 0);
+        } else {
+            simpleChronometer.setBase(SystemClock.elapsedRealtime() + chronometerTime);
+            simpleChronometer.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_play_arrow_white_24dp, 0, 0, 0);
+        }
+
+        simpleChronometer.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (stopStartChronoIndex == 0) {
+                    stopChronometerTime();
+                } else {
+                    startChronometerTime();
+                }
+            }
+        });
 
     }
 
@@ -212,6 +253,9 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
 
     @Override
     protected void onSaveInstanceState(Bundle state) {
+        if (stopStartChronoIndex == 0) {
+            chronometerTime = simpleChronometer.getBase() - elapsedRealtime();
+        }
         super.onSaveInstanceState(state);
         state.putIntArray("setsScore", setsScore);
         state.putParcelableArrayList("UNDO_REDO", savedState);
@@ -232,6 +276,10 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         state.putBoolean("tiebreakFinal", tiebreakFinal);
         state.putString("pointsTextViewPlayer1", pointsViewPlayer1.getText().toString());
         state.putString("pointsTextViewPlayer2", pointsViewPlayer2.getText().toString());
+        state.putLong("chronometerBase", simpleChronometer.getBase());
+        state.putLong("chronometerTime", chronometerTime);
+        state.putInt("chronometerIndex", stopStartChronoIndex);
+
     }
 
     @Override
@@ -239,8 +287,15 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         super.onResume();
         changePlayersNames();
         setPlayerPictures();
+        onLoadMatch();
     }
-
+    private void onLoadMatch(){
+        if (CURRENT_LOAD_MATCH_STATE){
+            currentUndoIndex = savedState.size() - 2;
+            redo();
+            CURRENT_LOAD_MATCH_STATE = false;
+        }
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -269,8 +324,12 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             startActivity(settingsIntent);
             return true;
         }
-        if (id == R.id.bottombaritem_reset) {
+        if (id == R.id.action_reset) {
             resetAll();
+            return true;
+        }
+        if (id == R.id.action_save) {
+            saveMatch();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -285,8 +344,8 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             Intent playerIntent = new Intent(this, PlayerCatalogActivity.class);
             startActivity(playerIntent);
         } else if (id == R.id.nav_match_manager) {
-            Intent quizIntent = new Intent(this, MatchCatalogActivity.class);
-            startActivity(quizIntent);
+            Intent matchIntent = new Intent(this, MatchCatalogActivity.class);
+            startActivity(matchIntent);
         } else if (id == R.id.nav_quiz) {
             Intent quizIntent = new Intent(this, QuizActivity.class);
             startActivity(quizIntent);
@@ -796,9 +855,11 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             matchWon = true;
             buttonsLayoutPlayer1.setVisibility(View.GONE);
             buttonsLayoutPlayer2.setVisibility(View.GONE);
+            stopChronometerTime();
         } else {
             buttonsLayoutPlayer1.setVisibility(View.VISIBLE);
             buttonsLayoutPlayer2.setVisibility(View.VISIBLE);
+
         }
     }
 
@@ -966,7 +1027,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
      * ace points for player 2
      */
     public void addPointForPlayer2Ace(View v) {
-        acePlayer1++;
+        acePlayer2++;
         managePointsPlayer2();
         //** set first fault to 0
         resetFaultButton();
@@ -1091,6 +1152,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         Toast.makeText(NavigationScoreKeeperActivity.this, R.string.scorekeeper_reset_match, Toast.LENGTH_SHORT).show();
+
                         //* set all variables to default state
                         savedState.clear();
                         currentUndoIndex = -1;
@@ -1121,6 +1183,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                         doubleFaultPlayer2 = 0;
                         forcedErrorPlayer2 = 0;
                         unforcedErrorPlayer2 = 0;
+                        chronometerTime = 0;
                         //* reset POINTS
                         pointsViewPlayer1.setText("0");
                         pointsViewPlayer2.setText("0");
@@ -1142,12 +1205,14 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                         //*show buttons
                         buttonsLayoutPlayer1.setVisibility(View.VISIBLE);
                         buttonsLayoutPlayer2.setVisibility(View.VISIBLE);
+                        startChronometerTime();
                         setPreferences();
                         changePlayersNames();
                         saveUndoState();
                     }
                 })
                 .setNegativeButton(android.R.string.no, null).show();
+
     }
 
     /**
@@ -1172,23 +1237,16 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     }
 
     private void setPlayerPictures() {
-        /**      String[] projection = {
-         PlayerContract.PlayerEntry._ID,
-         PlayerContract.PlayerEntry.COLUMN_PLAYER_NAME,
-         PlayerContract.PlayerEntry.COLUMN_PLAYER_PICTURE};
-         Uri uri = Uri.withAppendedPath(PlayerContract.PlayerEntry.CONTENT_URI,"/0");
-         CursorLoader cursor = new CursorLoader(this, uri,
-         projection, null, null, null);
-         */
-
 
         if (PlayerEditorActivity.BITMAP_PLAYER1 != null) {
             mImagePlayer1.setImageBitmap(PlayerEditorActivity.BITMAP_PLAYER1);
-
+        } else {
+            mImagePlayer1.setImageBitmap(null);
         }
         if (PlayerEditorActivity.BITMAP_PLAYER2 != null) {
             mImagePlayer2.setImageBitmap(PlayerEditorActivity.BITMAP_PLAYER2);
-
+        } else {
+            mImagePlayer2.setImageBitmap(null);
         }
     }
 
@@ -1204,6 +1262,9 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         String displayGamesPlayer2 = gamesViewPlayer2.getText().toString();
         String displaySetsPlayer2 = setsViewPlayer2.getText().toString();
         String displayTextMessage = textViewDeuce.getText().toString();
+        if (stopStartChronoIndex == 0) {
+            chronometerTime = simpleChronometer.getBase() - SystemClock.elapsedRealtime();
+        }
         currentUndoIndex++;
         if (currentUndoIndex >= savedState.size()) {
             savedState.add(new UndoRedo(pointsPlayer1,
@@ -1239,7 +1300,8 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                     displayGamesPlayer2,
                     displaySetsPlayer2,
                     displayTextMessage,
-                    setsScore));
+                    setsScore,
+                    chronometerTime));
         } else {
             savedState.set(currentUndoIndex, new UndoRedo(pointsPlayer1,
                     pointsPlayer2,
@@ -1274,7 +1336,8 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                     displayGamesPlayer2,
                     displaySetsPlayer2,
                     displayTextMessage,
-                    setsScore));
+                    setsScore,
+                    chronometerTime));
         }
         /**
          * remove all data if after currentUndoIndex
@@ -1287,6 +1350,10 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     }
 
     public void undo(View v) {
+        undo();
+    }
+
+    public void undo() {
 
         if (currentUndoIndex - 1 < savedState.size() && currentUndoIndex - 1 >= 0) {
             currentUndoIndex--;
@@ -1324,6 +1391,8 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             setsViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplaySetsPlayer2());
             textViewDeuce.setText(savedState.get(currentUndoIndex).getDisplayTextMessage());
             setsScore = savedState.get(currentUndoIndex).getSetsScore();
+            chronometerTime = savedState.get(currentUndoIndex).getChronometerTime();
+            simpleChronometer.setBase(elapsedRealtime() + chronometerTime);
             serveChange(serveOfPlayer);
             displayRightFaultButtonText();
             checkIfPlayerHasWinMatch();
@@ -1336,6 +1405,10 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     }
 
     public void redo(View v) {
+        redo();
+    }
+
+    public void redo() {
 
         if (currentUndoIndex + 1 < savedState.size() && currentUndoIndex + 1 >= 0) {
             currentUndoIndex++;
@@ -1373,14 +1446,86 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             setsViewPlayer2.setText(savedState.get(currentUndoIndex).getDisplaySetsPlayer2());
             textViewDeuce.setText(savedState.get(currentUndoIndex).getDisplayTextMessage());
             setsScore = savedState.get(currentUndoIndex).getSetsScore();
+            chronometerTime = savedState.get(currentUndoIndex).getChronometerTime();
+            simpleChronometer.setBase(elapsedRealtime() + chronometerTime);
             serveChange(serveOfPlayer);
             displayRightFaultButtonText();
             checkIfPlayerHasWinMatch();
             showHideSetsView();
 
         } else {
-            Toast.makeText(this, "Can't redo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.redo_error, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * Database code
+     */
+    private void saveMatch() {
+        //convert arrayList to json for saving like text in database
+        Gson gson = new Gson();
+        String json = gson.toJson(savedState);
+        Bitmap player1 = PlayerEditorActivity.BITMAP_PLAYER1;
+        Bitmap player2 = PlayerEditorActivity.BITMAP_PLAYER2;
+        //set integer for saving in database;
+        int matchWonInteger;
+        if (matchWon) {
+            matchWonInteger = 1;
+        } else {
+            matchWonInteger = 0;
+        }
+
+        ContentValues values = new ContentValues();
+        values.put(MatchEntry.COLUMN_PLAYER_1_ID, PlayerEditorActivity.ID_PLAYER1);
+        values.put(MatchEntry.COLUMN_PLAYER_2_ID, PlayerEditorActivity.ID_PLAYER2);
+        values.put(MatchEntry.COLUMN_PLAYER_1_NAME, namePlayer1);
+        values.put(MatchEntry.COLUMN_PLAYER_2_NAME, namePlayer2);
+        if (player1 != null) {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            player1.compress(Bitmap.CompressFormat.PNG, 0, bos);
+            byte[] image = bos.toByteArray();
+            values.put(MatchEntry.COLUMN_PLAYER_1_PICTURE, image);
+        }
+        if (player2 != null) {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            player2.compress(Bitmap.CompressFormat.PNG, 0, bos);
+            byte[] image = bos.toByteArray();
+            values.put(MatchEntry.COLUMN_PLAYER_2_PICTURE, image);
+        }
+        values.put(MatchEntry.COLUMN_MATCH_ARRAY_LIST, json);
+
+        String time = simpleChronometer.getText().toString();
+        values.put(MatchEntry.COLUMN_MATCH_TIME, time);
+
+        SimpleDateFormat iso8601Format = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        Date date = new Date();
+        String stringDate = iso8601Format.format(date);
+        values.put(MatchEntry.COLUMN_MATCH_DATE, stringDate);
+        values.put(MatchEntry.COLUMN_MATCH_FINISH, matchWonInteger);
+
+
+        // Insert the new row, returning the primary key value of the new row
+        Uri newUri = getContentResolver().insert(MatchEntry.CONTENT_URI, values);
+        if (newUri != null) {
+            Toast.makeText(this, R.string.saving_match_ok, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, R.string.saving_match_error, Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void stopChronometerTime() {
+        chronometerTime = simpleChronometer.getBase() - elapsedRealtime();
+        simpleChronometer.stop();
+        simpleChronometer.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_play_arrow_white_24dp, 0, 0, 0);
+        stopStartChronoIndex = 1;
+    }
+
+    private void startChronometerTime() {
+        simpleChronometer.setBase(elapsedRealtime() + chronometerTime);
+        simpleChronometer.start();
+        simpleChronometer.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_pause_white_24dp, 0, 0, 0);
+        stopStartChronoIndex = 0;
     }
 
 }

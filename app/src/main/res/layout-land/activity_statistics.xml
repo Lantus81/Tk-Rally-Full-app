@@ -5,10 +5,10 @@
     android:id="@+id/content_navigation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/small_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/small_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <android.support.constraint.ConstraintLayout
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.22"
+            app:layout_constraintGuide_percent="0.2"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="186dp" />
 
@@ -40,20 +40,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.3"
+            app:layout_constraintGuide_percent="0.35"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="225dp" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/view1"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/small_horizontal_margin"
             android:innerRadius="0dp"
             android:shape="ring"
             android:thicknessRatio="1.9"
-            app:cardCornerRadius="45dp"
+            app:cardCornerRadius="30dp"
             app:layout_constraintBottom_toTopOf="@+id/statistic_guide_horizontal"
             app:layout_constraintLeft_toLeftOf="@+id/statistic_guide_vertical"
             app:layout_constraintRight_toRightOf="parent"
@@ -61,8 +61,8 @@
 
             <ImageView
                 android:id="@+id/statistics_image_player_2"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/player_silhouette"
@@ -99,14 +99,14 @@
 
         <android.support.v7.widget.CardView
             android:id="@+id/view2"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/small_horizontal_margin"
             android:innerRadius="0dp"
             android:shape="ring"
             android:thicknessRatio="1.9"
-            app:cardCornerRadius="45dp"
+            app:cardCornerRadius="30dp"
             app:layout_constraintBottom_toTopOf="@+id/statistic_guide_horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/statistic_guide_vertical"
@@ -114,8 +114,8 @@
 
             <ImageView
                 android:id="@+id/statistics_image_player_1"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/player_silhouette"

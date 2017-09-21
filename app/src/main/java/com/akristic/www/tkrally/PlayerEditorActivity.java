@@ -18,6 +18,7 @@ import android.app.LoaderManager;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -39,6 +40,10 @@ import com.akristic.www.tkrally.data.PlayerContract.PlayerEntry;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by Toni on 19.4.2017..
@@ -47,8 +52,11 @@ import java.io.IOException;
 public class PlayerEditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     public static Bitmap BITMAP_PLAYER1;
     public static Bitmap BITMAP_PLAYER2;
-    public static String NAME_PLAYER1;
-    public static String NAME_PLAYER2;
+    public static String NAME_PLAYER1 = "Player 1";
+    public static String NAME_PLAYER2 = "Player 2";
+    public static int ID_PLAYER1 = -1;
+    public static int ID_PLAYER2 = -1;
+    int currentPlayerID;
 
     private Uri mCurrentPlayerUri;
     private static final int EXISTING_PLAYER_LOADER = 0;
@@ -59,8 +67,9 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
     public static final int CAMERA_PERMISSIONS_REQUEST = 2;
     public static final int CAMERA_IMAGE_REQUEST = 3;
     public static final int IMAGE_SIZE = 300;
-    public static final String FILE_NAME = "temp.jpg";
     private ExifInterface exif = null;
+
+    private String mCurrentPhotoPath; //path of image file from camera because of crash on api level above 23
     /**
      * EditText field to enter the player's name
      */
@@ -133,9 +142,7 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
         mHeightEditText.setOnTouchListener(mTouchListener);
         mYearEditText.setOnTouchListener(mTouchListener);
 
-        /**
-         * addPicture buttons
-         */
+        //addPicture buttons
         addPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,18 +195,42 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
                 CAMERA_PERMISSIONS_REQUEST,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.CAMERA)) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getCameraFile()));
-            startActivityForResult(intent, CAMERA_IMAGE_REQUEST);
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                // Create the File where the photo should go
+                File photoFile = null;
+                try {
+                    photoFile = createImageFile();
+                } catch (IOException ex) {
+                    // Error occurred while creating the File
+                    return;
+                }
+                if (photoFile != null) {
+                    Uri photoUri = FileProvider.getUriForFile(PlayerEditorActivity.this,
+                            BuildConfig.APPLICATION_ID + ".provider",
+                            photoFile);
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                    startActivityForResult(takePictureIntent, CAMERA_IMAGE_REQUEST);
+                }
+            }
         }
     }
 
-    /**
-     * @return picture file taken from camera
-     */
-    public File getCameraFile() {
-        File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        return new File(dir, FILE_NAME);
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DCIM), "Camera");
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        return image;
     }
 
     /**
@@ -221,12 +252,14 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
             }
             showImage(data.getData());
         } else if (requestCode == CAMERA_IMAGE_REQUEST && resultCode == RESULT_OK) {
+            Uri imageUri = Uri.parse(mCurrentPhotoPath);
+            File file = new File(imageUri.getPath());
             try {
-                exif = new ExifInterface(Uri.fromFile(getCameraFile()).getPath());
+                exif = new ExifInterface(Uri.fromFile(file).getPath());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            showImage(Uri.fromFile(getCameraFile()));
+            showImage(Uri.fromFile(file));
         }
     }
 
@@ -511,17 +544,17 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
 
     private void showToastMassage(Uri newUri) {
         if (newUri == null) {
-            Toast.makeText(this, "Error saving Player", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.saving_player_error, Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Player Saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.saving_player_ok, Toast.LENGTH_SHORT).show();
         }
     }
 
     private void showToastMassage(int id) {
         if (id == 0) {
-            Toast.makeText(this, "Error saving Player", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.saving_player_error, Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Player Saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.saving_player_ok, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -546,7 +579,7 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
                     finish();
                     return true;
                 } else {
-                    Toast.makeText(this, "Player name is required", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.player_name_required, Toast.LENGTH_SHORT).show();
                 }
                 return true;
             // Respond to a click on the "Delete" menu option
@@ -560,7 +593,7 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
                 setPlayer2();
                 return true;
             case R.id.action_save_new:
-                mCurrentPlayerUri=null;
+                mCurrentPlayerUri = null;
                 savePlayer();
                 finish();
                 return true;
@@ -597,20 +630,23 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
             BITMAP_PLAYER1 = bitmapPlayer;
             String name = mNameEditText.getText().toString();
             NAME_PLAYER1 = name;
+            ID_PLAYER1 = currentPlayerID;
             Toast.makeText(this, R.string.editor_set_player, Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             Toast.makeText(this, R.string.editor_set_player_error, Toast.LENGTH_SHORT).show();
         }
 
     }
+
     private void setPlayer2() {
         // Only perform the setting if this is an existing player.
         if (mCurrentPlayerUri != null) {
             BITMAP_PLAYER2 = bitmapPlayer;
             String name = mNameEditText.getText().toString();
             NAME_PLAYER2 = name;
+            ID_PLAYER2 = currentPlayerID;
             Toast.makeText(this, R.string.editor_set_player, Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             Toast.makeText(this, R.string.editor_set_player_error, Toast.LENGTH_SHORT).show();
         }
     }
@@ -681,6 +717,7 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if (cursor.moveToFirst()) {
             // Find the columns of player attributes that we're interested in
+            int idColumnIndex = cursor.getColumnIndex(PlayerEntry._ID);
             int nameColumnIndex = cursor.getColumnIndex(PlayerEntry.COLUMN_PLAYER_NAME);
             int nationalityColumnIndex = cursor.getColumnIndex(PlayerEntry.COLUMN_PLAYER_NATIONALITY);
             int genderColumnIndex = cursor.getColumnIndex(PlayerEntry.COLUMN_PLAYER_GENDER);
@@ -690,6 +727,7 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
             int imageColumnIndex = cursor.getColumnIndex(PlayerEntry.COLUMN_PLAYER_PICTURE);
 
             // Extract out the value from the Cursor for the given column index
+            currentPlayerID = cursor.getInt(idColumnIndex);
             String name = cursor.getString(nameColumnIndex);
             String nationality = cursor.getString(nationalityColumnIndex);
             int year = cursor.getInt(yearColumnIndex);

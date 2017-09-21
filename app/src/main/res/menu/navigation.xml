@@ -6,12 +6,18 @@
         android:orderInCategory="1"
         android:icon="@drawable/ic_more_vert_white_24dp"
         android:title="@string/action_settings"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom|withText" />
 
     <item
-        android:id="@+id/bottombaritem_reset"
-        android:icon="@drawable/ic_power_settings_new_white_24dp"
-        android:title="Reset"
+        android:id="@+id/action_reset"
+        android:icon="@drawable/ic_refresh_white_24dp"
+        android:title="@string/reset"
+        app:showAsAction="ifRoom|withText"
+        />
+    <item
+        android:id="@+id/action_save"
+        android:icon="@drawable/ic_save_white_24dp"
+        android:title="@string/action_save_match"
         app:showAsAction="ifRoom|withText"
         />
 </menu>

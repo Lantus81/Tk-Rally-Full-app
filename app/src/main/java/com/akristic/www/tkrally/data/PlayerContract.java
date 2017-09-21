@@ -93,7 +93,7 @@ public final class PlayerContract {
         public final static String COLUMN_PLAYER_HEIGHT = "height";
 
         /**
-         * Height of the player.
+         * Picture of the player.
          *
          * Type: BLOB
          */
@@ -136,6 +136,13 @@ public final class PlayerContract {
          */
         public final static String COLUMN_PLAYER_1_ID ="player1";
         public final static String COLUMN_PLAYER_2_ID ="player2";
+        /**
+         * copy from players table THIS MUST BE REMOVED AND REFACTORED BECAUSE IT IS NOT GOOD PRACTISE
+         */
+        public final static String COLUMN_PLAYER_1_NAME ="player1name";
+        public final static String COLUMN_PLAYER_2_NAME ="player2name";
+        public final static String COLUMN_PLAYER_1_PICTURE ="player1picture";
+        public final static String COLUMN_PLAYER_2_PICTURE ="player2picture";
 
         /**
          * ArrayList of the player. Must be converted to JSON

@@ -3,18 +3,6 @@ package com.akristic.www.tkrally;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.acePlayer1;
-import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.acePlayer2;
-import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.doubleFaultPlayer1;
-import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.doubleFaultPlayer2;
-import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.faultPlayer1;
-import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.faultPlayer2;
-import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.forcedErrorPlayer1;
-import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.forcedErrorPlayer2;
-import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.unforcedErrorPlayer1;
-import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.unforcedErrorPlayer2;
-import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.winnerPlayer1;
-import static com.akristic.www.tkrally.NavigationScoreKeeperActivity.winnerPlayer2;
 
 /**
  * Created by Toni on 7.3.2017..
@@ -62,6 +50,8 @@ public class UndoRedo implements Parcelable {
     private String mDisplaySetsPlayer2;
     private String mDisplayTextMessage;
 
+    private long mChronometerTime;
+
     public UndoRedo(int pointsPlayer1,
                     int pointsPlayer2,
                     int gamesPlayer1,
@@ -95,7 +85,8 @@ public class UndoRedo implements Parcelable {
                     String displayGamesPlayer2,
                     String displaySetsPlayer2,
                     String displayTextMessage,
-                    int setsScore []) {
+                    int setsScore [],
+                    long chronometerTime) {
 
         mPointsPlayer1 = pointsPlayer1;
         mPointsPlayer2 = pointsPlayer2;
@@ -139,6 +130,8 @@ public class UndoRedo implements Parcelable {
         mDisplayGamesPlayer2 = displayGamesPlayer2;
         mDisplaySetsPlayer2 = displaySetsPlayer2;
         mDisplayTextMessage = displayTextMessage;
+
+        mChronometerTime = chronometerTime;
     }
 
     protected UndoRedo(Parcel in) {
@@ -185,6 +178,8 @@ public class UndoRedo implements Parcelable {
         mDisplayGamesPlayer2 = in.readString();
         mDisplaySetsPlayer2 = in.readString();
         mDisplayTextMessage = in.readString();
+
+        mChronometerTime = in.readLong();
     }
 
     @Override
@@ -233,6 +228,8 @@ public class UndoRedo implements Parcelable {
         dest.writeString(mDisplayGamesPlayer2);
         dest.writeString(mDisplaySetsPlayer2);
         dest.writeString(mDisplayTextMessage);
+
+        dest.writeLong(mChronometerTime);
 
     }
 
@@ -381,5 +378,9 @@ public class UndoRedo implements Parcelable {
 
     public String getDisplayTextMessage() {
         return mDisplayTextMessage;
+    }
+
+    public long getChronometerTime(){
+        return mChronometerTime;
     }
 }

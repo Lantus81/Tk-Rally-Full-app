@@ -8,8 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -24,9 +23,7 @@ import android.widget.Toast;
 
 import com.akristic.www.tkrally.data.PlayerContract.PlayerEntry;
 
-import java.io.ByteArrayOutputStream;
 
-import static android.R.attr.id;
 
 
 public class PlayerCatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -54,6 +51,7 @@ public class PlayerCatalogActivity extends AppCompatActivity implements LoaderMa
 
         mCursorAdapter = new PlayerCursorAdapter(this, null);
         playerListView.setAdapter(mCursorAdapter);
+
         playerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -67,12 +65,13 @@ public class PlayerCatalogActivity extends AppCompatActivity implements LoaderMa
         getLoaderManager().initLoader(PLAYER_LOADER, null, this);
     }
 
+
     private void insertPlayer() {
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(PlayerEntry.COLUMN_PLAYER_NAME, "Player");
-        values.put(PlayerEntry.COLUMN_PLAYER_NATIONALITY, "Croatian");
+        values.put(PlayerEntry.COLUMN_PLAYER_NAME, getString(R.string.player));
+        values.put(PlayerEntry.COLUMN_PLAYER_NATIONALITY, getString(R.string.nationality));
         values.put(PlayerEntry.COLUMN_PLAYER_YEAR_BORN, 1981);
         values.put(PlayerEntry.COLUMN_PLAYER_GENDER, PlayerEntry.GENDER_MALE);
         values.put(PlayerEntry.COLUMN_PLAYER_WEIGHT, 79);
@@ -82,9 +81,9 @@ public class PlayerCatalogActivity extends AppCompatActivity implements LoaderMa
         // Insert the new row, returning the primary key value of the new row
         Uri newUri = getContentResolver().insert(PlayerEntry.CONTENT_URI, values);
         if (newUri != null) {
-            Toast.makeText(this, "Default player created", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.default_player_ok, Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Error inserting default player", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.default_player_error, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -174,4 +173,7 @@ public class PlayerCatalogActivity extends AppCompatActivity implements LoaderMa
             Toast.makeText(this, R.string.editor_delete_all_players_failed, Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
 }

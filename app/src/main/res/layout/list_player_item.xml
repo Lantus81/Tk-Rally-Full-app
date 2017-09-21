@@ -13,7 +13,6 @@
         android:layout_height="60dp"
         android:layout_gravity="center_vertical"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:elevation="12dp"
         android:innerRadius="0dp"
         android:shape="ring"
         android:thicknessRatio="1.9"
@@ -29,11 +28,14 @@
     </android.support.v7.widget.CardView>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="5"
         android:layout_marginLeft="@dimen/small_horizontal_margin"
+        android:layout_marginStart="@dimen/small_horizontal_margin"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/medium_horizontal_margin"
+        android:layout_marginEnd="@dimen/medium_horizontal_margin"
         android:orientation="vertical"
 >
 
@@ -58,4 +60,12 @@
 
 
     </LinearLayout>
+    <ImageView
+        android:id="@+id/player_catalog_item_menu_more"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_more_vert_black_24dp"/>
 </LinearLayout>

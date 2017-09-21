@@ -2,8 +2,10 @@ package com.akristic.www.tkrally;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.MergeCursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.support.v4.widget.CursorAdapter;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -13,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.akristic.www.tkrally.data.PlayerContract;
+
+import java.sql.Blob;
 
 /**
  * Created by Toni on 24.4.2017..
@@ -57,28 +61,35 @@ public class MatchCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         // Find fields to populate in inflated template
-        TextView playerName = (TextView) view.findViewById(R.id.name);
-        TextView playerNationality = (TextView) view.findViewById(R.id.summary);
-        ImageView playerImage = (ImageView) view.findViewById(R.id.catalog_player_image);
+        TextView matchPlayer1Id = (TextView) view.findViewById(R.id.match_player_1);
+        TextView matchPlayer2Id = (TextView) view.findViewById(R.id.match_player_2);
+        TextView matchDate = (TextView) view.findViewById(R.id.match_date);
+        ImageView imagePlayer1 = (ImageView) view.findViewById(R.id.catalog_player1_image);
+        ImageView imagePlayer2 = (ImageView) view.findViewById(R.id.catalog_player2_image);
 
         // Extract properties from cursor
-        String name = cursor.getString(cursor.getColumnIndexOrThrow(PlayerContract.PlayerEntry.COLUMN_PLAYER_NAME));
-        String nationality = cursor.getString(cursor.getColumnIndexOrThrow(PlayerContract.PlayerEntry.COLUMN_PLAYER_NATIONALITY));
-
-        byte[] byteImage = cursor.getBlob(cursor.getColumnIndexOrThrow(PlayerContract.PlayerEntry.COLUMN_PLAYER_PICTURE));
-
+        String player1 = cursor.getString(cursor.getColumnIndexOrThrow(PlayerContract.MatchEntry.COLUMN_PLAYER_1_NAME));
+        String player2 = cursor.getString(cursor.getColumnIndexOrThrow(PlayerContract.MatchEntry.COLUMN_PLAYER_2_NAME));
+        String date = cursor.getString(cursor.getColumnIndexOrThrow(PlayerContract.MatchEntry.COLUMN_MATCH_DATE));
+        byte[] byteImagePlayer1 = cursor.getBlob(cursor.getColumnIndexOrThrow(PlayerContract.MatchEntry.COLUMN_PLAYER_1_PICTURE));
+        byte[] byteImagePlayer2 = cursor.getBlob(cursor.getColumnIndexOrThrow(PlayerContract.MatchEntry.COLUMN_PLAYER_2_PICTURE));
+        if (byteImagePlayer1 != null) {
+            Bitmap bitmapPlayer1 = BitmapFactory.decodeByteArray(byteImagePlayer1, 0, byteImagePlayer1.length);
+            imagePlayer1.setImageBitmap(bitmapPlayer1);
+        } else {
+            imagePlayer1.setImageBitmap(null);
+        }
+        if (byteImagePlayer2 != null) {
+            Bitmap bitmapPlayer2 = BitmapFactory.decodeByteArray(byteImagePlayer2, 0, byteImagePlayer2.length);
+            imagePlayer2.setImageBitmap(bitmapPlayer2);
+        } else {
+            imagePlayer2.setImageBitmap(null);
+        }
 
         // Populate fields with extracted properties
-        playerName.setText(name);
-        if (TextUtils.isEmpty(nationality)) {
-            nationality = context.getString(R.string.Unknown_nationality);
-        }
-        playerNationality.setText(nationality);
-        if (byteImage != null) {
-            Bitmap bitmapPlayer = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
-            playerImage.setImageBitmap(bitmapPlayer);
-        }else {
-            playerImage.setImageBitmap(null);
-        }
+        matchPlayer1Id.setText(player1);
+        matchPlayer2Id.setText(player2);
+        matchDate.setText(date);
+
     }
 }

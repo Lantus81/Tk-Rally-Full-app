@@ -111,8 +111,7 @@ public class PlayerProvider extends ContentProvider {
                         null, null, sortOrder);
                 break;
             case MATCHES:
-
-                cursor = database.query(MatchEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+              cursor = database.query(MatchEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             case MATCH_ID:
                 selection = MatchEntry._ID + "=?";

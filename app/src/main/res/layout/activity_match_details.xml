@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/medium_horizontal_margin"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/match_details_player_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Player 1 ID: 9"/>
+   <TextView
+        android:id="@+id/match_details_player_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Player 2 ID: 7"/>
+    <TextView
+        android:id="@+id/match_details_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Date: 21.12.2017."/>
+    <TextView
+        android:id="@+id/match_details_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Duration: 2:35"/>
+    <TextView
+        android:id="@+id/match_details_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Match finished: Yes"/>
+    <TextView
+        android:id="@+id/match_details_array"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="ArrayList string"/>
+    <Button
+        android:onClick="loadArrayList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Load Match"/>
+</LinearLayout>
+
+</ScrollView>

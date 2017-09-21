@@ -20,12 +20,18 @@ import android.widget.Toast;
 
 
 import com.akristic.www.tkrally.data.PlayerContract;
+
 import com.akristic.www.tkrally.data.PlayerContract.MatchEntry;
+
+
+
 
 public class MatchCatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     MatchCursorAdapter mCursorAdapter;
     private static final int MATCH_LOADER = 0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +47,7 @@ public class MatchCatalogActivity extends AppCompatActivity implements LoaderMan
         playerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MatchCatalogActivity.this, PlayerEditorActivity.class);
+                Intent intent = new Intent(MatchCatalogActivity.this, MatchDetailsActivity.class);
                 Uri currentMatchUri = ContentUris.withAppendedId(PlayerContract.MatchEntry.CONTENT_URI, id);
                 intent.setData(currentMatchUri);
                 startActivity(intent);
@@ -49,26 +55,32 @@ public class MatchCatalogActivity extends AppCompatActivity implements LoaderMan
         });
 
         getLoaderManager().initLoader(MATCH_LOADER, null, this);
+
     }
 
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+
         String[] projection = {
                 MatchEntry._ID,
                 MatchEntry.COLUMN_PLAYER_1_ID,
                 MatchEntry.COLUMN_PLAYER_2_ID,
+                MatchEntry.COLUMN_PLAYER_1_NAME,
+                MatchEntry.COLUMN_PLAYER_2_NAME,
+                MatchEntry.COLUMN_PLAYER_1_PICTURE,
+                MatchEntry.COLUMN_PLAYER_2_PICTURE,
                 MatchEntry.COLUMN_MATCH_ARRAY_LIST,
                 MatchEntry.COLUMN_MATCH_TIME,
                 MatchEntry.COLUMN_MATCH_DATE,
                 MatchEntry.COLUMN_MATCH_FINISH};
 
-        return new CursorLoader(this, MatchEntry.CONTENT_URI,
-                projection, null, null, null);
+        return new CursorLoader(this, MatchEntry.CONTENT_URI, projection, null, null, null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+
         mCursorAdapter.swapCursor(cursor);
     }
 
@@ -77,11 +89,29 @@ public class MatchCatalogActivity extends AppCompatActivity implements LoaderMan
         mCursorAdapter.swapCursor(null);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu options from the res/menu/menu_catalog.xml file.
+        // This adds menu items to the app bar.
+        getMenuInflater().inflate(R.menu.menu_matches_catalog, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // User clicked on a menu option in the app bar overflow menu
+        switch (item.getItemId()) {
+            case R.id.action_delete_all_matches:
+                showDeleteConfirmationDialog();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void showDeleteConfirmationDialog() {
         // Create an AlertDialog.Builder and set the message, and click listeners
-        // for the postivie and negative buttons on the dialog.
+        // for the positive and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.delete_all_players_dialog_msg);
+        builder.setMessage(R.string.delete_all_matches_dialog_msg);
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked the "Delete" button, so delete the player.
@@ -104,16 +134,16 @@ public class MatchCatalogActivity extends AppCompatActivity implements LoaderMan
     }
 
     /**
-     * Perform the deletion of the player in the database.
+     * Perform the deletion of the match in the database.
      */
     private void deleteMatch() {
-        // Only perform the delete if this is an existing player.
+        // Only perform the delete if this is an existing match.
 
         int deletedMatch = getContentResolver().delete(MatchEntry.CONTENT_URI, null, null);
         if (deletedMatch != 0) {
-            Toast.makeText(this, R.string.editor_delete_all_players_successful, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.editor_delete_all_matches_successful, Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, R.string.editor_delete_all_players_failed, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.editor_delete_all_matches_failed, Toast.LENGTH_SHORT).show();
         }
     }
 }

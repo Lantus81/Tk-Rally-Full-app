@@ -40,7 +40,7 @@
     <string name="player_1">Enter player 1 name</string>
     <string name="player_2">Enter player 2 name</string>
     <string name="previous_sets">PREVIOUS SETS</string>
-    <string name="reset">reset</string>
+    <string name="reset">New Match</string>
     <string name="statistic">Statistics</string>
 
     <!-- Unforced error button [CHAR LIMIT=7] -->
@@ -137,16 +137,16 @@
 
 
     <!-- Label for Contact activity -->
-    <string name="teniski_klub_rally">Teniski klub Rally</string>
-    <string name="web_adresa_www_kvalitetnaskolatenisa_com">Web adresa: www.kvalitetnaskolatenisa.com</string>
+    <string name="teniski_klub_rally">Tennis Club Rally</string>
+    <string name="web_adresa_www_kvalitetnaskolatenisa_com">Web address: www.kvalitetnaskolatenisa.com</string>
     <string name="email_info_revoloop_hr">Email: info@revoloop.hr</string>
-    <string name="radno_vrijeme">Radno vrijeme:</string>
-    <string name="od_8_do_22_sati">Od 8 do 22 sati</string>
-    <string name="ime_se_bavimo">Čime se bavimo:</string>
-    <string name="nasa_misija">Naša misija je pružiti kvalitetnu tenisku poduku što većem broju ljudi. Misija, tim i vodstvo čine osnovu našeg kluba.</string>
+    <string name="radno_vrijeme">Working Hours:</string>
+    <string name="od_8_do_22_sati">From 8 to 22 hours</string>
+    <string name="ime_se_bavimo">What are we do:</string>
+    <string name="nasa_misija">Our mission is to provide quality tennis lessons to large number of people. Mission, team and leadership are foundations of our club.</string>
 
-    <string name="sjediste">Sjedište: Klinčaselska bb, 10040, Zagreb</string>
-    <string name="broj_telefona_385_95_903_44_21">Broj telefona: +385 95 903 44 21</string>
+    <string name="sjediste">Address: Klinčaselska bb, 10040, Zagreb</string>
+    <string name="broj_telefona_385_95_903_44_21">Phone Number: +385 95 903 44 21</string>
 
 
     <string name="title_activity_quiz">QuizActivity</string>
@@ -159,8 +159,8 @@
     <string name="quiz_next_button">Next</string>
     <string name="quiz_submit_button">Submit</string>
     <string name="quiz_current_score">Your score: 0/10</string>
-    <string name="scorekeeper_reset_match">Reset Match</string>
-    <string name="scorekeeper_reset_question">All unsaved progress will be lost. Do you really want to reset?</string>
+    <string name="scorekeeper_reset_match">Match Reset</string>
+    <string name="scorekeeper_reset_question">All unsaved progress will be lost. Do you really want to start a new match?</string>
     <string name="scorekeeper_beauty_of_the_game">Discover the Beauty of the Game</string>
     <string name="score_open_statistics">Open Statistics</string>
     <string name="score_undo_point">Undo point</string>
@@ -170,13 +170,14 @@
     <string name="Error_no_app">Unable to find right application</string>
 
     <!-- Title text for the empty view [CHAR LIMIT=50] -->
-    <string name="empty_view_title_text">It\'s a bit lonely here to play...</string>
+    <string name="empty_view_title_text">It\'s a bit lonely here to play.</string>
 
     <!-- Subtitle text for the empty view that prompts the user to add a player [CHAR LIMIT=50] -->
     <string name="empty_view_subtitle_text">Get started by adding a player</string>
     <string name="Unknown_nationality">Unknown nationality</string>
     <string name="action_insert_dummy_data">Insert Default Player</string>
-    <string name="action_delete_all_entries">Delete all players</string>
+    <string name="action_delete_all_entries">Delete All Players</string>
+    <string name="action_delete_all_matches">Delete All Matches</string>
     <string name="category_overview">Overview</string>
     <string name="hint_player_name">Player Name</string>
     <string name="hint_player_nationality">Nationality</string>
@@ -191,6 +192,7 @@
     <string name="editor_activity_title_edit_player">Edit Player</string>
     <string name="action_delete">Delete Player</string>
     <string name="action_save">Save Player</string>
+    <string name="action_save_match">Save Match</string>
 
     <!-- Label for dropdown menu option if the player's gender is unknown [CHAR LIMIT=20] -->
     <string name="gender_unknown">Unknown</string>
@@ -221,9 +223,10 @@
     <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
     <string name="discard">Discard</string>
 
-    <!-- Dialog button text for the option to keep editing the current pet [CHAR LIMIT=20] -->
+
     <string name="keep_editing">Keep Editing</string>
     <string name="delete_all_players_dialog_msg">This will delete all players. Are you sure?</string>
+    <string name="delete_all_matches_dialog_msg">This will delete all matches ever played. Are you sure?</string>
     <string name="title_players_catalog">Players Manager</string>
     <string name="action_play_1">Set As Player 1</string>
     <string name="action_play_2">Set As Player 2</string>
@@ -233,4 +236,31 @@
     <string name="empty_view_subtitle_text_match">But play some tennis first</string>
     <string name="empty_view_title_text_match">Here are your saved tennis matches</string>
     <string name="title_matches_catalog">Played Matches</string>
+    <string name="title_matches_details">Match Details</string>
+    <string name="editor_delete_all_matches_successful">All Matches Deleted</string>
+    <string name="editor_delete_all_matches_failed">Error Deleting All Matches</string>
+    <string name="player">Player</string>
+    <string name="nationality">English</string>
+    <string name="default_player_ok">Default player created</string>
+    <string name="default_player_error">Error inserting default player</string>
+    <string name="is_player_1">is player 1</string>
+    <string name="is_player_2">is player 2</string>
+    <string name="saving_player_error">Error saving Player</string>
+    <string name="saving_player_ok">Player Saved</string>
+    <string name="player_name_required">Player name is required</string>
+    <string name="default_player_2">Player 2</string>
+    <string name="default_player_1">Player 1</string>
+    <string name="redo_error">Can\'t redo</string>
+    <string name="saving_match_error">Error Saving Match</string>
+    <string name="saving_match_ok">Match Saved</string>
+    <string name="date">Date</string>
+    <string name="time_played">Time played</string>
+    <string name="match_finished">Match is finished</string>
+    <string name="match_not_finished">Match is incomplete</string>
+    <string name="statistics_winners">Winners</string>
+    <string name="statistics_unforced_errors">Unforced Errors</string>
+    <string name="statistic_forced_errors">Forced Errors</string>
+    <string name="statistics_double_faults">Double Faults</string>
+    <string name="statistics_faults">Faults</string>
+    <string name="statistics_aces">Aces</string>
 </resources>

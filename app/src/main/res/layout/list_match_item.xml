@@ -6,57 +6,92 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     >
-
     <android.support.v7.widget.CardView
-        android:id="@+id/view2"
+        android:id="@+id/view1"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="center_vertical"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:elevation="12dp"
         android:innerRadius="0dp"
         android:shape="ring"
         android:thicknessRatio="1.9"
         app:cardCornerRadius="30dp">
 
         <ImageView
-            android:id="@+id/catalog_player_image"
+            android:id="@+id/catalog_player1_image"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:scaleType="centerCrop"
             android:background="@drawable/player_silhouette"
             tools:src="@drawable/player_silhouette" />
     </android.support.v7.widget.CardView>
-
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/small_horizontal_margin"
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/medium_horizontal_margin"
+        android:layout_marginStart="@dimen/medium_horizontal_margin"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/medium_horizontal_margin"
+        android:layout_marginEnd="@dimen/medium_horizontal_margin"
+        android:gravity="center"
         android:orientation="vertical"
         >
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/match_player_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="#2B3D4D"
-            tools:text="Ante Kristic"/>
-
+            tools:text="Player 1"/>
         <TextView
-            android:id="@+id/summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
             android:textAppearance="?android:textAppearanceSmall"
             android:textColor="#AEB6BD"
-            tools:text="Croatian"/>
+            android:text="VS"/>
+        <TextView
+            android:id="@+id/match_player_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#2B3D4D"
+            tools:text="Player 2"/>
+
+        <TextView
+            android:id="@+id/match_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="#AEB6BD"
+            tools:text="12.12.2017."/>
 
 
 
     </LinearLayout>
+    <android.support.v7.widget.CardView
+        android:id="@+id/view2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        android:thicknessRatio="1.9"
+        app:cardCornerRadius="30dp">
+
+        <ImageView
+            android:id="@+id/catalog_player2_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/player_silhouette"
+            tools:src="@drawable/player_silhouette" />
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

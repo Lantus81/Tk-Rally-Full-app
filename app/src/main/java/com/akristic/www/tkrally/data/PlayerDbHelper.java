@@ -43,6 +43,10 @@ public class PlayerDbHelper extends SQLiteOpenHelper {
                         MatchEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         MatchEntry.COLUMN_PLAYER_1_ID + " INTEGER, " +
                         MatchEntry.COLUMN_PLAYER_2_ID + " INTEGER, " +
+                        MatchEntry.COLUMN_PLAYER_1_NAME + " TEXT, " +
+                        MatchEntry.COLUMN_PLAYER_2_NAME + " TEXT, " +
+                        MatchEntry.COLUMN_PLAYER_1_PICTURE + " BLOB, " +
+                        MatchEntry.COLUMN_PLAYER_2_PICTURE + " BLOB, " +
                         MatchEntry.COLUMN_MATCH_ARRAY_LIST + " TEXT, " +
                         MatchEntry.COLUMN_MATCH_TIME + " TEXT, " +
                         MatchEntry.COLUMN_MATCH_DATE + " TEXT, " +
@@ -54,10 +58,6 @@ public class PlayerDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // This database is only a cache for online data, so its upgrade policy is
-        // to simply to discard the data and start over
-        db.execSQL(SQL_DELETE_ENTRIES);
-        db.execSQL(SQL_DELETE_ENTRIES_MATCH);
         onCreate(db);
     }
 }
