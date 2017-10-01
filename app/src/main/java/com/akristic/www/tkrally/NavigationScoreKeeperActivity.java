@@ -1,12 +1,18 @@
 package com.akristic.www.tkrally;
 
 
+import android.app.LoaderManager;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,6 +35,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.akristic.www.tkrally.data.PlayerContract;
 import com.akristic.www.tkrally.data.PlayerContract.MatchEntry;
 import com.google.gson.Gson;
 
@@ -38,11 +45,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+
 import static android.os.SystemClock.elapsedRealtime;
+
 import static com.akristic.www.tkrally.R.string.tiebreak;
 
 public class NavigationScoreKeeperActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, LoaderManager.LoaderCallbacks<Cursor> {
+
+    private static final int PLAYER_LOADER = 0;
 
     private int pointsPlayer1 = 0;
     private int pointsPlayer2 = 0;
@@ -79,6 +90,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
 
     static String namePlayer1 = PlayerEditorActivity.NAME_PLAYER1;
     static String namePlayer2 = PlayerEditorActivity.NAME_PLAYER2;
+
     /**
      * views
      */
@@ -110,6 +122,11 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     private Chronometer simpleChronometer;
     private int stopStartChronoIndex = 0;
     private long chronometerTime = 0;
+    public static Uri mCurrentMatchUri;
+
+    public static final String PLAYER_1_KEY = "Default_Player_1_Id";
+    public static final String PLAYER_2_KEY = "Default_Player_2_Id";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,6 +198,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         changePlayersNames();
         setPlayerPictures();
         showHideSetsView();
+        setDefaultPlayers();
         if (!tieBreak) {
             serveChange(serveOfPlayer);
         } else {
@@ -192,9 +210,6 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             saveUndoState(); //* set zero index state for undo and redo ArrayList
         }
 
-        /**
-         * Chronometer code
-         */
         if (stopStartChronoIndex == 0) {
             startChronometerTime();
             simpleChronometer.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_pause_white_24dp, 0, 0, 0);
@@ -214,7 +229,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                 }
             }
         });
-
+        getLoaderManager().initLoader(PLAYER_LOADER, null, this);
     }
 
     public void openStatistics(View v) {
@@ -232,11 +247,9 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         String tiebreakFinalString = sharedPrefs.getString(
                 getString(R.string.settings_tiebreak_key),
                 getString(R.string.settings_tiebreak_default));
-        if (tiebreakFinalString.equals("No")) {
-            tiebreakFinal = false;
-        } else {
-            tiebreakFinal = true;
-        }
+
+        tiebreakFinal = !tiebreakFinalString.equals(getString(R.string.settings_tiebreak_false_value));
+
         String gamesNumber = sharedPrefs.getString(
                 getString(R.string.settings_number_of_games_key),
                 getString(R.string.settings_number_of_games_default));
@@ -244,11 +257,23 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         String advantageFinalString = sharedPrefs.getString(
                 getString(R.string.settings_advantage_key),
                 getString(R.string.settings_advantage_default));
-        if (advantageFinalString.equals("No")) {
-            playAdvantageFinal = false;
-        } else {
-            playAdvantageFinal = true;
-        }
+        playAdvantageFinal = !advantageFinalString.equals(getString(R.string.settings_advantage_false_value));
+    }
+
+    public void setCurrentPlayersAsDefaultPlayers() {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.putInt(PLAYER_1_KEY, PlayerEditorActivity.ID_PLAYER1);
+        editor.putInt(PLAYER_2_KEY, PlayerEditorActivity.ID_PLAYER2);
+        editor.apply();
+        Toast.makeText(this, R.string.saving_default_players, Toast.LENGTH_LONG).show();
+
+    }
+
+    public void setDefaultPlayers() {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        PlayerEditorActivity.ID_PLAYER1 = sharedPrefs.getInt(PLAYER_1_KEY, -1);
+        PlayerEditorActivity.ID_PLAYER2 = sharedPrefs.getInt(PLAYER_2_KEY, -1);
     }
 
     @Override
@@ -289,13 +314,17 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         setPlayerPictures();
         onLoadMatch();
     }
-    private void onLoadMatch(){
-        if (CURRENT_LOAD_MATCH_STATE){
+
+    private void onLoadMatch() {
+        if (CURRENT_LOAD_MATCH_STATE) {
             currentUndoIndex = savedState.size() - 2;
+            changePlayersNames();
+            setPlayerPictures();
             redo();
             CURRENT_LOAD_MATCH_STATE = false;
         }
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -329,7 +358,11 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             return true;
         }
         if (id == R.id.action_save) {
-            saveMatch();
+            showSaveConfirmationDialog();
+            return true;
+        }
+        if (id == R.id.action_set_default_players) {
+            setCurrentPlayersAsDefaultPlayers();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -598,6 +631,41 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
 
     }
 
+    private void setSetsScore() {
+        if (setsPlayer1 + setsPlayer2 == 0) {
+            setsScore[0] = 0;
+            setsScore[1] = 0;
+        }
+        if (setsPlayer1 + setsPlayer2 == 1) {
+            setsScore[2] = 0;
+            setsScore[3] = 0;
+            setsScore[4] = 0;
+            setsScore[5] = 0;
+            setsScore[6] = 0;
+            setsScore[7] = 0;
+            setsScore[8] = 0;
+            setsScore[9] = 0;
+        }
+        if (setsPlayer1 + setsPlayer2 == 2) {
+            setsScore[4] = 0;
+            setsScore[5] = 0;
+            setsScore[6] = 0;
+            setsScore[7] = 0;
+            setsScore[8] = 0;
+            setsScore[9] = 0;
+        }
+        if (setsPlayer1 + setsPlayer2 == 3) {
+            setsScore[6] = 0;
+            setsScore[7] = 0;
+            setsScore[8] = 0;
+            setsScore[9] = 0;
+        }
+        if (setsPlayer1 + setsPlayer2 == 4) {
+            setsScore[8] = 0;
+            setsScore[9] = 0;
+        }
+    }
+
     /**
      * Displays the score of SETS for Player 2. and reset points for games
      */
@@ -648,6 +716,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             saveSetViewPlayer2 = (TextView) findViewById(R.id.save_sets_player2_set_5);
             saveSetViewPlayer1.setVisibility(View.INVISIBLE);
             saveSetViewPlayer2.setVisibility(View.INVISIBLE);
+
         }
         if (setsPlayer1 + setsPlayer2 == 1) {
             TextView saveSetViewPlayer1 = (TextView) findViewById(R.id.save_sets_player1_set_1);
@@ -1339,9 +1408,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
                     setsScore,
                     chronometerTime));
         }
-        /**
-         * remove all data if after currentUndoIndex
-         */
+
         for (int i = savedState.size() - 1; i > currentUndoIndex; i--) {
             savedState.remove(i);
         }
@@ -1399,7 +1466,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             showHideSetsView();
 
         } else {
-            Toast.makeText(this, "Can't undo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.undo_error, Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -1452,6 +1519,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             displayRightFaultButtonText();
             checkIfPlayerHasWinMatch();
             showHideSetsView();
+            setSetsScore();
 
         } else {
             Toast.makeText(this, R.string.redo_error, Toast.LENGTH_SHORT).show();
@@ -1461,7 +1529,7 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
     /**
      * Database code
      */
-    private void saveMatch() {
+    private void saveMatch(boolean overwrite) {
         //convert arrayList to json for saving like text in database
         Gson gson = new Gson();
         String json = gson.toJson(savedState);
@@ -1503,15 +1571,36 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         values.put(MatchEntry.COLUMN_MATCH_DATE, stringDate);
         values.put(MatchEntry.COLUMN_MATCH_FINISH, matchWonInteger);
 
-
-        // Insert the new row, returning the primary key value of the new row
-        Uri newUri = getContentResolver().insert(MatchEntry.CONTENT_URI, values);
-        if (newUri != null) {
-            Toast.makeText(this, R.string.saving_match_ok, Toast.LENGTH_SHORT).show();
+        if (overwrite) {
+            // Insert the new row, returning the primary key value of the new row
+            Uri newUri = getContentResolver().insert(MatchEntry.CONTENT_URI, values);
+            if (newUri != null) {
+                Toast.makeText(this, R.string.saving_match_ok, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, R.string.saving_match_error, Toast.LENGTH_SHORT).show();
+            }
+            mCurrentMatchUri = newUri;
         } else {
-            Toast.makeText(this, R.string.saving_match_error, Toast.LENGTH_SHORT).show();
-        }
+            if (mCurrentMatchUri != null) {
+                // save to existing row
+                int matchIdUpdated = getContentResolver().update(mCurrentMatchUri, values, null, null);
+                if (matchIdUpdated == 0) {
+                    Toast.makeText(this, R.string.saving_match_error, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, R.string.saving_match_ok, Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                // save to new row
+                Uri newUri = getContentResolver().insert(MatchEntry.CONTENT_URI, values);
+                if (newUri != null) {
+                    Toast.makeText(this, R.string.saving_match_ok, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, R.string.saving_match_error, Toast.LENGTH_SHORT).show();
+                }
+                mCurrentMatchUri = newUri;
+            }
 
+        }
     }
 
     private void stopChronometerTime() {
@@ -1528,4 +1617,107 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
         stopStartChronoIndex = 0;
     }
 
+    private void showSaveConfirmationDialog() {
+        // Create an AlertDialog.Builder and set the message, and click listeners
+        // for the positive and negative buttons on the dialog.
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.save_match_dialog_msg);
+
+        builder.setNeutralButton(R.string.save_match_dialog_msg_cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked the "Cancel" button, so dismiss the dialog
+                // and continue editing the player.
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.setNegativeButton(R.string.save_match_dialog_msg_new, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                saveMatch(true);
+            }
+        });
+        builder.setPositiveButton(R.string.save_match_dialog_msg_existing, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked the "Overwrite" button, so save as new row in table.
+                saveMatch(false);
+            }
+        });
+
+        // Create and show the AlertDialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        String[] projection = {
+                PlayerContract.PlayerEntry._ID,
+                PlayerContract.PlayerEntry.COLUMN_PLAYER_NAME,
+                PlayerContract.PlayerEntry.COLUMN_PLAYER_PICTURE
+        };
+
+        return new CursorLoader(this, PlayerContract.PlayerEntry.CONTENT_URI,
+                projection, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        if (cursor.moveToFirst()) {
+            // Find the columns of player attributes that we're interested in
+            int idColumnIndex = cursor.getColumnIndex(PlayerContract.PlayerEntry._ID);
+            int nameColumnIndex = cursor.getColumnIndex(PlayerContract.PlayerEntry.COLUMN_PLAYER_NAME);
+            int imageColumnIndex = cursor.getColumnIndex(PlayerContract.PlayerEntry.COLUMN_PLAYER_PICTURE);
+
+            // Extract out the value from the Cursor for the given column index
+            while (!cursor.isAfterLast()) {
+                if (cursor.getInt(idColumnIndex) == PlayerEditorActivity.ID_PLAYER1) {
+                    String name = cursor.getString(nameColumnIndex);
+                    byte[] imgByte = null;
+                    if (cursor.getBlob(imageColumnIndex) != null) {
+                        imgByte = cursor.getBlob(imageColumnIndex);
+                    }
+
+                    // Update the views on the screen with the values from the database
+                    namePlayer1TextView.setText(name);
+                    PlayerEditorActivity.NAME_PLAYER1 = name;
+                    if (imgByte != null) {
+                        PlayerEditorActivity.BITMAP_PLAYER1 = BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
+                        mImagePlayer1.setImageBitmap(PlayerEditorActivity.BITMAP_PLAYER1);
+
+                    } else {
+                        mImagePlayer1.setImageBitmap(null);
+                    }
+                }
+                if (cursor.getInt(idColumnIndex) == PlayerEditorActivity.ID_PLAYER2) {
+                    String name = cursor.getString(nameColumnIndex);
+                    byte[] imgByte = null;
+                    if (cursor.getBlob(imageColumnIndex) != null) {
+                        imgByte = cursor.getBlob(imageColumnIndex);
+                    }
+                    // Update the views on the screen with the values from the database
+                    namePlayer2TextView.setText(name);
+                    PlayerEditorActivity.NAME_PLAYER2 = name;
+                    if (imgByte != null) {
+                        PlayerEditorActivity.BITMAP_PLAYER2 = BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
+                        mImagePlayer2.setImageBitmap(PlayerEditorActivity.BITMAP_PLAYER2);
+
+                    } else {
+                        mImagePlayer2.setImageBitmap(null);
+                    }
+                }
+                cursor.moveToNext();
+            }
+
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        namePlayer1TextView.setText(getString(R.string.default_player_1));
+        namePlayer2TextView.setText(getString(R.string.default_player_2));
+        mImagePlayer1.setImageBitmap(null);
+        mImagePlayer2.setImageBitmap(null);
+
+    }
 }

@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_navigation"
+    android:id="@+id/content_match_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/small_horizontal_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    android:paddingTop="@dimen/small_horizontal_margin">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="81dp">
+        android:layout_height="match_parent">
+
         <!-- HORIZONTAL GUIDELINE -->
         <android.support.constraint.Guideline
             android:id="@+id/statistic_guide_vertical"
@@ -29,34 +28,45 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.22" />
+            app:layout_constraintGuide_percent="0.5" />
 
         <android.support.constraint.Guideline
             android:id="@+id/statistic_guide_horizontal_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.3" />
+            app:layout_constraintGuide_percent="0.65" />
+
+        <TextView
+            android:id="@+id/match_details_players_sets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small_horizontal_margin"
+            android:layout_marginRight="@dimen/small_horizontal_margin"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@id/view1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/view1"
+            app:layout_constraintTop_toBottomOf="@id/view2"
+            tools:text="3-2" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/view1"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/small_horizontal_margin"
             android:innerRadius="0dp"
             android:shape="ring"
             android:thicknessRatio="1.9"
-            app:cardCornerRadius="45dp"
-            app:layout_constraintBottom_toTopOf="@id/statistic_guide_horizontal"
-            app:layout_constraintLeft_toLeftOf="@id/statistic_guide_vertical"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:cardCornerRadius="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistic_guide_horizontal">
 
             <ImageView
-                android:id="@+id/statistics_image_player_2"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:id="@+id/match_details_image_player_2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/player_silhouette"
@@ -65,52 +75,39 @@
         </android.support.v7.widget.CardView>
 
         <TextView
-            android:id="@+id/statistic_player2_name"
+            android:id="@+id/match_details_player_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/small_horizontal_margin"
             android:layout_marginStart="@dimen/small_horizontal_margin"
             android:background="@color/colorPrimary"
             android:gravity="center"
-            android:maxLines="1"
             android:padding="@dimen/small_horizontal_margin"
             android:text="@string/default_player_2"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/statistic_guide_horizontal_name"
-            app:layout_constraintLeft_toLeftOf="@id/statistic_guide_vertical"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/statistic_guide_horizontal" />
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/view1"
+            app:layout_constraintLeft_toRightOf="@id/view1"
+            app:layout_constraintRight_toLeftOf="@id/statistic_guide_vertical"
+            app:layout_constraintTop_toTopOf="@id/view1" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/small_horizontal_margin"
-            android:text="@string/vs"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toTopOf="@id/statistic_guide_horizontal"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/view2"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/small_horizontal_margin"
             android:innerRadius="0dp"
             android:shape="ring"
             android:thicknessRatio="1.9"
-            app:cardCornerRadius="45dp"
-            app:layout_constraintBottom_toTopOf="@id/statistic_guide_horizontal"
+            app:cardCornerRadius="30dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/statistic_guide_vertical"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/statistics_image_player_1"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:id="@+id/match_details_image_player_1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/player_silhouette"
@@ -119,21 +116,102 @@
         </android.support.v7.widget.CardView>
 
         <TextView
-            android:id="@+id/statistic_player1_name"
+            android:id="@+id/match_details_player_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/small_horizontal_margin"
             android:layout_marginRight="@dimen/small_horizontal_margin"
             android:background="@color/colorAccent"
             android:gravity="center"
-            android:maxLines="1"
             android:padding="@dimen/small_horizontal_margin"
             android:text="@string/default_player_1"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/statistic_guide_horizontal_name"
-            app:layout_constraintLeft_toLeftOf="parent"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/view2"
+            app:layout_constraintLeft_toRightOf="@id/view2"
             app:layout_constraintRight_toLeftOf="@id/statistic_guide_vertical"
-            app:layout_constraintTop_toTopOf="@id/statistic_guide_horizontal" />
+            app:layout_constraintTop_toTopOf="@id/view2" />
+
+        <TextView
+            android:id="@+id/match_details_players_set_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small_horizontal_margin"
+            android:layout_marginRight="@dimen/small_horizontal_margin"
+            android:paddingEnd="0dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="0dp"
+            android:paddingStart="2dp"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="@id/match_details_player_1"
+            app:layout_constraintRight_toRightOf="@id/match_details_player_1"
+            app:layout_constraintTop_toBottomOf="@id/match_details_player_1"
+            app:layout_constraintBottom_toTopOf="@id/match_details_player_2"
+            tools:text="6 : 4 \n6 : 4" />
+
+        <TextView
+            android:id="@+id/match_details_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small_horizontal_margin"
+            android:layout_marginRight="@dimen/small_horizontal_margin"
+            android:padding="@dimen/small_horizontal_margin"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:text="Date played: 26.10.2017." />
+
+        <TextView
+            android:id="@+id/match_details_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small_horizontal_margin"
+            android:layout_marginRight="@dimen/small_horizontal_margin"
+            android:padding="@dimen/small_horizontal_margin"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toRightOf="@id/match_details_date"
+            app:layout_constraintTop_toTopOf="@id/match_details_date"
+            tools:text="Time played: 1:55:56" />
+
+        <TextView
+            android:id="@+id/match_details_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small_horizontal_margin"
+            android:layout_marginRight="@dimen/small_horizontal_margin"
+            android:padding="@dimen/small_horizontal_margin"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toRightOf="@id/match_details_time"
+
+            app:layout_constraintTop_toTopOf="@id/match_details_time"
+            tools:text="The Match is finished" />
+
+        <TextView
+            android:id="@+id/match_details_array"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small_horizontal_margin"
+            android:layout_marginRight="@dimen/small_horizontal_margin"
+            android:padding="@dimen/small_horizontal_margin"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/match_details_time" />
+
+        <TextView
+            android:id="@+id/statistics"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/small_horizontal_margin"
+            android:layout_marginEnd="@dimen/small_horizontal_margin"
+            android:layout_marginRight="@dimen/small_horizontal_margin"
+            android:gravity="center"
+            android:padding="@dimen/small_horizontal_margin"
+            android:text="@string/statistics_title"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toRightOf="@id/statistic_guide_vertical"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/statistics_winners_player_1"
@@ -144,9 +222,12 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/minimum_margin"
             android:paddingStart="@dimen/activity_horizontal_margin"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/statistic_guide_horizontal_name"
+            app:layout_constraintLeft_toLeftOf="@id/statistic_guide_vertical"
+            app:layout_constraintTop_toBottomOf="@id/statistics"
             tools:text="1" />
+
+
+
 
         <LinearLayout
             android:id="@+id/statistics_winners_line"
@@ -166,18 +247,9 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/minimum_margin"
             android:paddingStart="@dimen/activity_horizontal_margin"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/statistic_guide_vertical"
             app:layout_constraintTop_toBottomOf="@id/statistics_winners_line"
             tools:text="15" />
-
-        <LinearLayout
-            android:id="@+id/statistics_aces_line"
-            android:layout_width="0dp"
-            android:layout_height="4dp"
-            android:orientation="horizontal"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/statistics_aces_player_1"></LinearLayout>
 
         <TextView
             android:id="@+id/statistics_faults_player_1"
@@ -188,7 +260,7 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/minimum_margin"
             android:paddingStart="@dimen/activity_horizontal_margin"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/statistic_guide_vertical"
             app:layout_constraintTop_toBottomOf="@id/statistics_aces_line"
             tools:text="15" />
 
@@ -210,7 +282,7 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/minimum_margin"
             android:paddingStart="@dimen/activity_horizontal_margin"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/statistic_guide_vertical"
             app:layout_constraintTop_toBottomOf="@id/statistics_faults_line"
             tools:text="15" />
 
@@ -232,7 +304,7 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/minimum_margin"
             android:paddingStart="@dimen/activity_horizontal_margin"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/statistic_guide_vertical"
             app:layout_constraintTop_toBottomOf="@id/statistics_double_faults_line"
             tools:text="15" />
 
@@ -254,7 +326,7 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/minimum_margin"
             android:paddingStart="@dimen/activity_horizontal_margin"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/statistic_guide_vertical"
             app:layout_constraintTop_toBottomOf="@id/statistics_forced_errors_line"
             tools:text="15" />
 
@@ -321,7 +393,8 @@
             android:paddingStart="@dimen/minimum_margin"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/statistics_double_faults_line"
-            tools:text="15" />
+            tools:text="15"
+            />
 
         <TextView
             android:id="@+id/statistics_unforced_errors_player_2"
@@ -361,10 +434,10 @@
             style="@style/StatisticsProgressBar"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/statistics_faults_player_1"
-            app:layout_constraintLeft_toRightOf="@id/statistics_winners_player_1"
-            app:layout_constraintRight_toLeftOf="@id/statistics_winners_player_2"
-            app:layout_constraintTop_toTopOf="@id/statistics_faults_player_1" />
+            app:layout_constraintBottom_toBottomOf="@+id/statistics_faults_player_1"
+            app:layout_constraintLeft_toRightOf="@+id/statistics_winners_player_1"
+            app:layout_constraintRight_toLeftOf="@+id/statistics_winners_player_2"
+            app:layout_constraintTop_toTopOf="@+id/statistics_faults_player_1" />
 
         <ProgressBar
             android:id="@+id/statistics_bar_double_faults"
@@ -391,6 +464,7 @@
             style="@style/StatisticsProgressBar"
             android:layout_width="0dp"
             android:layout_height="0dp"
+
             app:layout_constraintBottom_toBottomOf="@id/statistics_unforced_errors_player_1"
             app:layout_constraintLeft_toRightOf="@id/statistics_winners_player_1"
             app:layout_constraintRight_toLeftOf="@id/statistics_winners_player_2"
@@ -403,7 +477,7 @@
             android:layout_height="wrap_content"
             android:text="@string/statistics_winners"
             app:layout_constraintBottom_toBottomOf="@id/statistics_winners_player_1"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/statistic_guide_vertical"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/statistics_winners_player_1" />
 
@@ -414,7 +488,7 @@
             android:layout_height="wrap_content"
             android:text="@string/statistics_aces"
             app:layout_constraintBottom_toBottomOf="@id/statistics_aces_player_1"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/statistic_guide_vertical"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/statistics_aces_player_1" />
 
@@ -425,7 +499,7 @@
             android:layout_height="wrap_content"
             android:text="@string/statistics_faults"
             app:layout_constraintBottom_toBottomOf="@id/statistics_faults_player_1"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/statistic_guide_vertical"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/statistics_faults_player_1" />
 
@@ -436,7 +510,7 @@
             android:layout_height="wrap_content"
             android:text="@string/statistics_double_faults"
             app:layout_constraintBottom_toBottomOf="@id/statistics_double_faults_player_1"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/statistic_guide_vertical"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/statistics_double_faults_player_1" />
 
@@ -447,7 +521,7 @@
             android:layout_height="wrap_content"
             android:text="@string/statistic_forced_errors"
             app:layout_constraintBottom_toBottomOf="@id/statistics_forced_errors_player_1"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/statistic_guide_vertical"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/statistics_forced_errors_player_1" />
 
@@ -458,11 +532,32 @@
             android:layout_height="wrap_content"
             android:text="@string/statistics_unforced_errors"
             app:layout_constraintBottom_toBottomOf="@id/statistics_unforced_errors_player_1"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/statistic_guide_vertical"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/statistics_unforced_errors_player_1" />
 
+        <LinearLayout
+            android:id="@+id/statistics_aces_line"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_aces_player_1"></LinearLayout>
+
+        <Button
+            style="@style/score_btn_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="loadArrayList"
+            android:text="@string/load_match"
+            android:padding="@dimen/activity_horizontal_margin"
+            app:layout_constraintBottom_toTopOf="@id/match_details_finish"
+            app:layout_constraintLeft_toLeftOf="@id/statistic_guide_vertical"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_unforced_errors" />
 
     </android.support.constraint.ConstraintLayout>
-
 </LinearLayout>

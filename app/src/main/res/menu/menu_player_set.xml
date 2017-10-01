@@ -13,4 +13,8 @@
         android:id="@+id/action_player2_set"
         android:title="@string/action_play_2"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_player_delete"
+        android:title="@string/action_play_delete"
+        app:showAsAction="never" />
 </menu>

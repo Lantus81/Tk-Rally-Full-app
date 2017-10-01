@@ -114,14 +114,13 @@ public class MatchCatalogActivity extends AppCompatActivity implements LoaderMan
         builder.setMessage(R.string.delete_all_matches_dialog_msg);
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User clicked the "Delete" button, so delete the player.
+                // User clicked the "Delete" button, so delete the matches.
                 deleteMatch();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked the "Cancel" button, so dismiss the dialog
-                // and continue editing the player.
                 if (dialog != null) {
                     dialog.dismiss();
                 }

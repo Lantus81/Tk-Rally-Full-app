@@ -5,45 +5,45 @@
         <item
             android:id="@+id/nav_player_manager"
             android:icon="@drawable/ic_people_black_24dp"
-            android:title="Manage Players" />
+            android:title="@string/manage_players" />
         <item
             android:id="@+id/nav_match_manager"
             android:icon="@drawable/ic_storage_black_24dp"
-            android:title="Played Matches" />
+            android:title="@string/played_matches" />
         <item
             android:id="@+id/nav_quiz"
             android:icon="@drawable/ic_live_help_black_24dp"
-            android:title="Tennis Quiz" />
+            android:title="@string/tennis_quiz" />
         <item
             android:id="@+id/nav_web_page"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="Web Address" />
+            android:title="@string/web_address" />
         <item
             android:id="@+id/nav_facebook"
             android:icon="@drawable/ic_thumb_up_black_24dp"
-            android:title="Visit Us On Facebook" />
+            android:title="@string/visit_us_on_facebook" />
         <item
             android:id="@+id/nav_map"
             android:icon="@drawable/ic_place_black_24dp"
-            android:title="Where Are We" />
+            android:title="@string/where_are_we" />
     </group>
 
-    <item android:title="Comunication:">
+    <item android:title="@string/communication">
         <menu>
             <item
                 android:id="@+id/nav_phone"
                 android:icon="@drawable/ic_phone_black_24dp"
-                android:title="Call Us"
+                android:title="@string/call_us"
 
                 />
             <item
                 android:id="@+id/nav_email"
                 android:icon="@drawable/ic_mail_black_24dp"
-                android:title="Email Us" />
+                android:title="@string/email_us" />
             <item
                 android:id="@+id/nav_contact"
                 android:icon="@drawable/ic_info_black_24dp"
-                android:title="Contact Information" />
+                android:title="@string/contact_information" />
         </menu>
     </item>
 

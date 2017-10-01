@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TkRally</string>
+
+    <string name="navigation_drawer_open">Otvori meni</string>
+    <string name="navigation_drawer_close">Zatvori meni</string>
+
+    <string name="action_settings">Postavke Meča</string>
+
+    <string name="dialog_select_prompt">Izaberi sliku</string>
+    <string name="dialog_select_camera">Kamera</string>
+    <string name="dialog_select_gallery">Galerija</string>
+    <string name="image_picker_error">Nešto nije u redu sa ovom slikom. Molim vas da izaberete neku drugu.</string>
+
+
+    <string name="deuce">Izjednačenje</string>
+    <string name="points_40">40</string>
+    <string name="advance">AD</string>
+    <string name="break_point_player1">Break Lopta Igrač 1</string>
+    <string name="break_point_player2">Break Lopta Igrač 2</string>
+    <string name="game_for_player1">Gem za Igrača 1</string>
+    <string name="tiebreak">Tiebreak</string>
+    <string name="game_for_player2">Gem za Igrača 2</string>
+    <string name="set_for_player1">Set za Igrača 1</string>
+    <string name="game_set_match_player1">Gem, Set, Match Igrač 1</string>
+    <string name="set_for_player2">Set za Igrača 2</string>
+    <string name="game_set_match_player2">Gem, Set, Match Igrač 2</string>
+    <string name="fault">Greška</string>
+    <string name="double_fault">D.Greška</string>
+
+    <string name="toast_message_serve">Servis se ne može mjenjati u sredini meča</string>
+    <string name="reset">Novi Meč</string>
+
+    <!-- Unforced error button [CHAR LIMIT=7] -->
+    <string name="unf_error_button">N.Greška</string>
+    <!-- Forced error button [CHAR LIMIT=7] -->
+    <string name="forced_error_button">P.Greška</string>
+
+
+    <string name="sets">SETOVI</string>
+    <string name="games">GEMOVI</string>
+    <string name="points">POENI</string>
+    <string name="ace">As</string>
+    <string name="winner">Winner</string>
+    <string name="winner_player">POBJEDNIK</string>
+    <string name="serve">Servis</string>
+    <!-- Settings Activity Title [CHAR LIMIT=NONE] -->
+    <string name="settings_title">Postavke Meča</string>
+    <string name="statistics_title">Statistika Meča</string>
+
+    <!-- Strings For Minimum Number Of Sets Preference [CHAR LIMIT=30] -->
+    <string name="settings_number_of_sets_label">Broj setova u meču</string>
+    <string name="settings_number_of_sets_key" translatable="false">number_of_sets</string>
+    <string name="settings_number_of_sets_default" translatable="false">2</string>
+
+    <!-- Strings For Minimum Number Of Games Preference [CHAR LIMIT=30] -->
+    <string name="settings_number_of_games_label">Broj gemova u setu</string>
+    <string name="settings_number_of_games_key" translatable="false">number_of_games</string>
+    <string name="settings_number_of_games_default" translatable="false">6</string>
+
+    <!-- Strings For Tiebreak Preference [CHAR LIMIT=30] -->
+    <string name="settings_tiebreak_label">Tiebreak</string>
+    <string name="settings_tiebreak_key" translatable="false">tiebreak_value</string>
+    <string name="settings_tiebreak_default" translatable="false">@string/settings_tiebreak_true_value</string>
+
+    <!-- Label for Tiebreak true option [CHAR LIMIT=20] -->
+    <string name="settings_tiebreak_true_label">Igraj Tiebreak</string>
+    <string name="settings_tiebreak_true_value" translatable="false">Da</string>
+
+    <!-- Label for Tiebreak false option [CHAR LIMIT=20] -->
+    <string name="settings_tiebreak_false_label">Bez Tiebreaka</string>
+    <string name="settings_tiebreak_false_value" translatable="false">Ne</string>
+
+    <!-- Strings For Advantage Preference [CHAR LIMIT=30] -->
+    <string name="settings_advantage_label">Prednost</string>
+    <string name="settings_advantage_key" translatable="false">advantage_value</string>
+    <string name="settings_advantage_default" translatable="false">@string/settings_advantage_true_value</string>
+    <!-- Label for Advantage true option [CHAR LIMIT=20] -->
+    <string name="settings_advantage_true_label">Igraj Prednost</string>
+    <string name="settings_advantage_true_value" translatable="false">Da</string>
+    <!-- Label for Advantage false option [CHAR LIMIT=20] -->
+    <string name="settings_advantage_false_label">Bez Prednostie</string>
+    <string name="settings_advantage_false_value" translatable="false">Ne</string>
+
+    <!-- Label for Sets option [CHAR LIMIT=20] -->
+    <string name="settings_sets_1_label">Igraj 1 set u meču</string>
+    <string name="settings_sets_1_value" translatable="false">1</string>
+
+    <!-- Label for Sets option [CHAR LIMIT=20] -->
+    <string name="settings_sets_2_label">Igraj 2 seta u meču</string>
+    <string name="settings_sets_2_value" translatable="false">2</string>
+    <!-- Label for Sets option [CHAR LIMIT=20] -->
+    <string name="settings_sets_3_label">Igraj 3 seta u meču</string>
+    <string name="settings_sets_3_value" translatable="false">3</string>
+
+    <!-- Label for Games option [CHAR LIMIT=20] -->
+    <string name="settings_games_02_label">Igraj 2 Gema u Setu</string>
+    <string name="settings_games_03_label">Igraj 3 Gema u Setu</string>
+    <string name="settings_games_04_label">Igraj 4 Gema u Setu</string>
+    <string name="settings_games_05_label">Igraj 5 Gemova u Setu</string>
+    <string name="settings_games_06_label">Igraj 6 Gemova u Setu</string>
+    <string name="settings_games_07_label">Igraj 7 Gemova u Setu</string>
+    <string name="settings_games_08_label">Igraj 8 Gemova u Setu</string>
+    <string name="settings_games_09_label">Igraj 9 Gemova u Setu</string>
+    <string name="settings_games_10_label">Igraj 10 Gemova u Setu</string>
+    <string name="settings_games_11_label">Igraj 11 Gemova u Setu</string>
+    <string name="settings_games_12_label">Igraj 12 Gemova u Setu</string>
+    <string name="settings_games_02_value" translatable="false">2</string>
+    <string name="settings_games_03_value" translatable="false">3</string>
+    <string name="settings_games_04_value" translatable="false">4</string>
+    <string name="settings_games_05_value" translatable="false">5</string>
+    <string name="settings_games_06_value" translatable="false">6</string>
+    <string name="settings_games_07_value" translatable="false">7</string>
+    <string name="settings_games_08_value" translatable="false">8</string>
+    <string name="settings_games_09_value" translatable="false">9</string>
+    <string name="settings_games_10_value" translatable="false">10</string>
+    <string name="settings_games_11_value" translatable="false">11</string>
+    <string name="settings_games_12_value" translatable="false">12</string>
+
+
+    <!-- Label for Contact activity -->
+    <string name="teniski_klub_rally">Teniski Klub Rally</string>
+    <string name="web_adresa_www_kvalitetnaskolatenisa_com">Web adresa: www.kvalitetnaskolatenisa.com</string>
+    <string name="email_info_revoloop_hr">Email: info@revoloop.hr</string>
+    <string name="radno_vrijeme">Radno vrijeme:</string>
+    <string name="od_8_do_22_sati">Od 8 do 22 sata</string>
+    <string name="ime_se_bavimo">Čime se bavimo:</string>
+    <string name="nasa_misija">Naša misija je pružiti kvalitetnu tenisku poduku što većem broju ljudi. Misija, tim i vodstvo čine osnovu našeg kluba.</string>
+
+    <string name="sjediste">Adresa: Klinčaselska bb, 10040, Zagreb</string>
+    <string name="broj_telefona_385_95_903_44_21">Tel: +385 95 903 44 21</string>
+
+    <string name="vs">VS</string>
+    <string name="scorekeeper_reset_match">Novi Meč</string>
+    <string name="scorekeeper_reset_question">Sve što niste spremili biti će izgubljeno. Želite li započeti novi meč?</string>
+    <string name="scorekeeper_beauty_of_the_game">Otkrij ljepotu igre</string>
+    <string name="score_open_statistics">Otvori statistiku</string>
+    <string name="score_undo_point">Nazad poen</string>
+    <string name="score_redo_point">Naprijed poen</string>
+    <string name="score_open_players_information">Otvori info igrača</string>
+    <string name="score_change_serve_image">Promjeni tko servira prvi</string>
+    <string name="Error_no_app">Nemogu naći pravu aplikaciju</string>
+
+    <!-- Title text for the empty view [CHAR LIMIT=50] -->
+    <string name="empty_view_title_text">Ovdje nema nikoga za igru.</string>
+
+    <!-- Subtitle text for the empty view that prompts the user to add a player [CHAR LIMIT=50] -->
+    <string name="empty_view_subtitle_text">Započni dodavanjem novoga igrača</string>
+    <string name="Unknown_nationality">Nepoznata nacionalnost</string>
+    <string name="action_insert_dummy_data">Unesi Standardnog Igrača</string>
+    <string name="action_delete_all_entries">Obriši Sve Igrače</string>
+    <string name="action_delete_all_matches">Obriši Sve Mečeve</string>
+    <string name="category_overview">Pregled</string>
+    <string name="hint_player_name">Ime Igrača</string>
+    <string name="hint_player_nationality">Nacionalnost</string>
+    <string name="category_gender">Spol</string>
+    <string name="category_measurement">Mjere</string>
+    <string name="hint_player_weight">Weight</string>
+    <string name="unit_player_weight">Kg</string>
+    <string name="unit_player_height">Cm</string>
+    <string name="hint_player_height">Visina</string>
+    <string name="hint_player_birth">Godina rođenja</string>
+    <string name="editor_activity_title_new_player">Novi Igrač</string>
+    <string name="editor_activity_title_edit_player">Uredi Igrača</string>
+    <string name="action_delete">Obriši Igrača</string>
+    <string name="action_save">Spremi Igrača</string>
+    <string name="action_save_match">Spremi Meč</string>
+    <string name="action_set_default_players">Spremi Igrače Kao Standardne</string>
+    <string name="saving_default_players">Trenutni igrači su spremljeni kao početni pri pokretanju aplikacije</string>
+
+    <!-- Label for dropdown menu option if the player's gender is unknown [CHAR LIMIT=20] -->
+    <string name="gender_unknown">Nepoznato</string>
+
+    <!-- Label for dropdown menu option if the player is male [CHAR LIMIT=20] -->
+    <string name="gender_male">Muško</string>
+
+    <!-- Label for dropdown menu option if the player is female [CHAR LIMIT=20] -->
+    <string name="gender_female">Žensko</string>
+
+    <!-- Dialog message to ask the user to confirm deleting the current player [CHAR LIMIT=NONE] -->
+    <string name="delete_dialog_msg">Želite li obrisati igrača?</string>
+    <!-- Dialog button text for the option to confirm deleting the current player [CHAR LIMIT=20] -->
+    <string name="delete">Obriši</string>
+    <!-- Dialog button text for the option to cancel deletion of the current player [CHAR LIMIT=20] -->
+    <string name="cancel">Odustani</string>
+    <!-- Toast message in editor when current player was successfully deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_player_successful">Igrač je obrisan</string>
+
+    <string name="editor_delete_all_players_successful">Svi igrači su obrisani</string>
+
+    <!-- Toast message in editor when current pet has failed to be deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_player_failed">Došlo je do greške prilikom brisanja igrača</string>
+
+    <string name="editor_delete_all_players_failed">Došlo je do greške prilikom brisanja igrača</string>
+    <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
+    <string name="unsaved_changes_dialog_msg">Želite li odbaciti sve promjene i odustati od izmjena?</string>
+    <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
+    <string name="discard">Odbaci</string>
+
+
+    <string name="keep_editing">Nastavi sa uređivanjem</string>
+    <string name="delete_all_players_dialog_msg">Ovo će obrisati sve igrače. Da li ste sigurni?</string>
+    <string name="delete_all_matches_dialog_msg">Ovo će obrisati sve mečeve. Da li ste sigurni?</string>
+    <string name="save_match_dialog_msg">Spremi meč</string>
+    <string name="save_match_dialog_msg_new">Kao Novi</string>
+    <string name="save_match_dialog_msg_existing">Kao Postojeći</string>
+    <string name="save_match_dialog_msg_cancel">Odustani</string>
+    <string name="title_players_catalog">Upravljanje Igračima</string>
+    <string name="action_play_1">Postavi za Igrača 1</string>
+    <string name="action_play_2">Postavi za Igrača 2</string>
+    <string name="action_play_delete">Obriši</string>
+    <string name="action_match_load">Učitaj</string>
+    <string name="action_match_delete">Obriši</string>
+    <string name="editor_set_player">Igrač je uspješno postavljen</string>
+    <string name="editor_set_player_error">Došlo je do pogreške prilikom postavljanja igrača</string>
+    <string name="action_save_new">Spremi kao Novo</string>
+    <string name="empty_view_subtitle_text_match">Ajmo prvo igrati malo tenisa</string>
+    <string name="empty_view_title_text_match">Ovdje su Vaši spremljeni teniski mečevi</string>
+    <string name="title_matches_catalog">Odigrani Mečevi</string>
+    <string name="title_matches_details">Detalji o meču</string>
+    <string name="editor_delete_all_matches_successful">Svi Mečevi Izbrisani</string>
+    <string name="editor_delete_all_matches_failed">Došlo je do greške prilikom brisanja svih mečeva</string>
+    <string name="editor_delete_match_successful">Meč je obrisan</string>
+    <string name="editor_delete_match_failed">Došlo je do pogreške prilikom brisanja meča</string>
+    <string name="player">Igrač</string>
+    <string name="nationality">Croatian</string>
+    <string name="default_player_ok">Zadani igrač napravljen</string>
+    <string name="default_player_error">Došlo je do greške prilikom kreiranja zadanog igrača</string>
+    <string name="is_player_1">je igrač 1</string>
+    <string name="is_player_2">je igrač 2</string>
+    <string name="saving_player_error">Došlo je do pogreške prilikom spremanja igrača</string>
+    <string name="saving_player_ok">Igrač je spremljen</string>
+    <string name="player_name_required">Ime igrača je obavezno</string>
+    <string name="default_player_2">Igrač 2</string>
+    <string name="default_player_1">Igrač 1</string>
+    <string name="redo_error">Ne mogu naprijed</string>
+    <string name="saving_match_error">Došlo je do greške prilikom spremanja meča</string>
+    <string name="saving_match_ok">Meč je spremljen</string>
+    <string name="date">Datum igranja</string>
+    <string name="time_played">Trajanje meča</string>
+    <string name="match_finished">Meč je završen</string>
+    <string name="match_not_finished">Meč nije završen</string>
+    <string name="statistics_winners">Winners</string>
+    <string name="statistics_unforced_errors">Neprisiljene Greške</string>
+    <string name="statistic_forced_errors">Prisiljene Greške</string>
+    <string name="statistics_double_faults">Duple Greške</string>
+    <string name="statistics_faults">Greška</string>
+    <string name="statistics_aces">Asevi</string>
+    <string name="load_match">Učitaj Meč</string>
+    <string name="undo_error">Ne mogu nazad</string>
+
+    <!-- quiz strings -->
+    <string name="title_activity_quiz">Kviz</string>
+    <string name="quiz_number_counter">Pitanje broj: 1</string>
+    <string name="quiz_text_question">Ovo je tekst pitanja</string>
+    <string name="quiz_answer_hint">Upiši svoj odgovor ovdje</string>
+    <string name="quiz_try_again_button">Pokušaj Ponovo</string>
+    <string name="quiz_next_button">Dalje</string>
+    <string name="quiz_submit_button">Unesi</string>
+    <string name="quiz_current_score">Tvoj rezultat: 0/10</string>
+    <string name="quiz_current_score_is">Tvoj rezultat:\u0020</string>
+    <string name="question_number">Pitanje broj:\u0020</string>
+    <string name="that_is_correct">To je točno</string>
+    <string name="dont_worry_u_get_next_one">Ne brini, uspjet ćeš iduće</string>
+    <string name="error_no_questions">Greška: nema više pitanja</string>
+    <string name="best_5_star_message">Ti si najbolji od najboljih! Savršen rezultat! Možeš li to ponoviti?</string>
+    <string name="best_4_star_message">Skoro savršen rezultat. Ti si fenomenalan!</string>
+    <string name="best_3_star_message">Izvrstan rezultat! Nastavi sa dobrim radom.</string>
+    <string name="best_2_star_message">Dobro napravljeno! Sigurno možeš i bolje.</string>
+    <string name="best_1_star_message">Trudiš se. Vježbaj i ostvari savršen rezultat!</string>
+    <string name="best_0_star_message">Ovo si namjerno napravio!</string>
+
+    <!-- quiz questions -->
+    <string name="Q_1_text">Promašiti i prvi i drugi servis zove se:</string>
+    <string name="Q_1_answer_1">dupla greška</string>
+    <string name="Q_2_text">Igrač koji započinje poen stavljanjem loptice u igru zove se</string>
+    <string name="Q_2_answer_2">server</string>
+    <string name="Q_3_text">Servis koji je dobar i nedodirnut od drugog igrača zove se</string>
+    <string name="Q_3_answer">as</string>
+    <string name="MQ_1_text">Odgovori točno ili netočno: Igra tenisa može biti igrana sa 2 ili 4 igrača.</string>
+    <string name="MQ_choice_true">Točno</string>
+    <string name="MQ_choice_false">Netočno</string>
+    <string name="MQ_2_text">Odgovori točno ili netočno: Igra tenisa može biti igrana sa 2 do 6 igrača.</string>
+    <string name="MQ_3_text">Odgovori točno ili netočno: Ako lopta padne na crtu, onda je to vani.</string>
+    <string name="MQ_4_text">Odgovori točno ili netočno: Bodovanje bez prednosti odnosi se na sistem bodovanja gdje se zbrajaju svi poeni u igri da se odredi pobjednika.</string>
+    <string name="MQ_5_text">Odgovori točno ili netočno: Server ima dva pokušaja da napravi dobar servis.</string>
+    <string name="MQ_6_text">Točan redosljed bodovanja je:</string>
+    <string name="MQ_6_answer_1">45, 35, 20, 10</string>
+    <string name="MQ_6_answer_2">love, 15, 30, 40</string>
+    <string name="MQ_6_answer_3">15, 30, 45, love</string>
+    <string name="MQ_6_answer_4">15, 30, 40, love</string>
+    <string name="MQ_7_text">U tenisu \"love\" znači:</string>
+    <string name="MQ_7_answer_1">oba tima su izjednačena na 40</string>
+    <string name="MQ_7_answer_2">upravo sam te pobjedio ali još uvijek ti želim biti prijatelj</string>
+    <string name="MQ_7_answer_3">isto što i 15</string>
+    <string name="MQ_7_answer_4">nula</string>
+    <string name="MQ_8_text">Ako ja serviram i dobijem prva dva poena u gemu, rezultat gema je sada:</string>
+    <string name="MQ_8_answer_1">love, 30</string>
+    <string name="MQ_8_answer_2">20, love</string>
+    <string name="MQ_8_answer_3">deuce</string>
+    <string name="MQ_8_answer_4">30, love</string>
+    <string name="MQ_9_text">Kako se odlučuje tko započinje igru u tenisu?</string>
+    <string name="MQ_9_answer_1">trči se kilometar</string>
+    <string name="MQ_9_answer_2">bacanjem novčića</string>
+    <string name="MQ_9_answer_3">pačjim hodom</string>
+    <string name="MQ_9_answer_4">dogovorom</string>
+    <string name="MQ_10_text">As u tenisu je</string>
+    <string name="MQ_10_answer_1">servis koji ode van</string>
+    <string name="MQ_10_answer_2">servis koji udari mrežu i onda padne u polje</string>
+    <string name="MQ_10_answer_3">servis koji je dobar i nedirnut od drugog igrača</string>
+    <string name="MQ_10_answer_4">servis koji je udaren sliceom</string>
+    <string name="MQ_11_text">Tipovi udaraca u tenisu (više točnih odgovora):</string>
+    <string name="MQ_11_answer_1">Underhand</string>
+    <string name="MQ_11_answer_2">Forehand</string>
+    <string name="MQ_11_answer_3">Lefthand</string>
+    <string name="MQ_11_answer_4">Righthand</string>
+    <string name="MQ_11_answer_5">Backhand</string>
+    <string name="MQ_12_text">Igranje tenisa je dobro za</string>
+    <string name="MQ_12_answer_1">Kordinaciju oka i ruke</string>
+    <string name="MQ_12_answer_2">Brzinu</string>
+    <string name="MQ_12_answer_3">Izdržljivost</string>
+    <string name="MQ_13_text">Tipovi podloge teniskih terena su:</string>
+    <string name="MQ_13_answer_1">glina</string>
+    <string name="MQ_13_answer_2">tepih</string>
+    <string name="MQ_13_answer_3">drvo</string>
+    <string name="MQ_13_answer_4">guma</string>
+    <string name="MQ_14_text">Različiti tipovi teniskih udaraca uključuju:</string>
+    <string name="MQ_14_answer_1">overhands</string>
+    <string name="MQ_14_answer_2">rallies</string>
+    <string name="MQ_14_answer_3">backhands</string>
+    <string name="MQ_14_answer_4">forehands</string>
+    <string name="MQ_14_answer_5">underhands</string>
+    <string name="MQ_15_text">Koji su neki od načina na koji se može igrati tenis?</string>
+    <string name="MQ_15_answer_1">single</string>
+    <string name="MQ_15_answer_2">parovi</string>
+    <string name="MQ_15_answer_3">muško žensko</string>
+    <string name="MQ_15_answer_4">sve od navedenog</string>
+    <!--menu strings-->
+    <string name="manage_players">Spremljeni Igrači</string>
+    <string name="played_matches">Spremljeni Mečevi</string>
+    <string name="tennis_quiz">Teniski Kviz</string>
+    <string name="web_address">Web Adresa</string>
+    <string name="visit_us_on_facebook">Naš Facebook</string>
+    <string name="where_are_we">Gdje se nalazimo</string>
+    <string name="communication">Komunikacija:</string>
+    <string name="call_us">Nazovite nas</string>
+    <string name="email_us">Pošaljite nam mail</string>
+    <string name="contact_information">Kontakt Informacije</string>
+</resources>

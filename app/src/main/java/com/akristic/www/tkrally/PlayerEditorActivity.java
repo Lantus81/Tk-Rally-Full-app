@@ -43,7 +43,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static java.security.AccessController.getContext;
+
 
 /**
  * Created by Toni on 19.4.2017..

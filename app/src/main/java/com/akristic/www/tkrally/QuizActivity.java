@@ -1,5 +1,6 @@
 package com.akristic.www.tkrally;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -56,7 +57,7 @@ public class QuizActivity extends AppCompatActivity {
 
 
         //** Creates and populates questions in ArrayList
-        questions = new ArrayList<Question>();
+        questions = new ArrayList<>();
         populateQuestionArrayList();
         if (savedInstanceState != null) {
             // Then the application is being reloaded
@@ -67,7 +68,7 @@ public class QuizActivity extends AppCompatActivity {
             questions = savedInstanceState.getParcelableArrayList("QUESTIONS");
             submitPressed = savedInstanceState.getBoolean("SUBMIT_PRESSED");
             quizEnd = savedInstanceState.getBoolean("QUIZ_END");
-            scoreTextView.setText("Your score is: " + score + "/10");
+            scoreTextView.setText(R.string.quiz_current_score_is + score + "/10");
 
 
         }
@@ -116,24 +117,24 @@ public class QuizActivity extends AppCompatActivity {
      */
     private void populateQuestionArrayList() {
         questions.clear();
-        questions.add(new Question("Missing both first and second serves is called a:", "double fault"));
-        questions.add(new Question("The player who deliver the ball to start the points is called the ......?", "server"));
-        questions.add(new Question("Serve that is good and untouched by the returner is called ...", "ace"));
-        questions.add(new MultiChoiceQuestion("Answer true or false:\nThe game of tennis can be played with 2 to 4 players.", "1", "True", "False"));
-        questions.add(new MultiChoiceQuestion("Answer true or false:\nThe game of tennis can be played with 1 to 6 players.", "2", "True", "False"));
-        questions.add(new MultiChoiceQuestion("Answer true or false:\nIf the ball lands on the line, it is out.", "2", "True", "False"));
-        questions.add(new MultiChoiceQuestion("No Ad scoring refers to a scoring system that adds up all the game scores to determine the winner.", "2", "True", "False"));
-        questions.add(new MultiChoiceQuestion("Answer true or false:\nThe server gets two attempts to make a good serve.", "1", "True", "False"));
-        questions.add(new MultiChoiceQuestion("Correct scorekeeping order is:", "2", "45, 35, 20, 10", "love, 15, 30, 40", "15, 30, 45, love", "15, 30, 40, love"));
-        questions.add(new MultiChoiceQuestion("In tennis \"love\" means:", "4", "both teams are tied at 40", "I just won but I still want to be friends", "the same as 15", "zero"));
-        questions.add(new MultiChoiceQuestion("If I'm serving and I win the first 2 points of the game, the game score is now:", "4", "love, 30", "20, love", "deuce", "30, love"));
-        questions.add(new MultiChoiceQuestion("How do you begin the game of tennis?", "2", "run a mile", "toss a coin", "duck walk", "who ever wants to go first"));
-        questions.add(new MultiChoiceQuestion("An ace is a", "3", "serve that goes out", "serve that hits the net and then goes in the box", "serve that is good and untouched by the returner", "serve that is hit with slice"));
-        questions.add(new MultiAnswerQuestion("The types of hittings swings include (more than one answer may apply):", "25", "Underhand", "Forehand", "Lefthand", "Righthand", "Backhand"));
-        questions.add(new MultiAnswerQuestion("Playing tennis is good for", "123", "Eye hand coordination", "Quickness", "Endurance"));
-        questions.add(new MultiAnswerQuestion("Types of court surface used to play tennis are", "124", "clay", "carpet", "wood", "rubber"));
-        questions.add(new MultiAnswerQuestion("Different types of tennis strokes include:", "34", "overhands", "rallies", "backhands", "forehands", "underhands"));
-        questions.add(new MultiAnswerQuestion("What are some ways tennis can be played?", "12", "single", "double", "mixed gender", "all of the above"));
+        questions.add(new Question(getString(R.string.Q_1_text), getString(R.string.Q_1_answer_1)));
+        questions.add(new Question(getString(R.string.Q_2_text), getString(R.string.Q_2_answer_2)));
+        questions.add(new Question(getString(R.string.Q_3_text), getString(R.string.Q_3_answer)));
+        questions.add(new MultiChoiceQuestion(getString(R.string.MQ_1_text), "1", getString(R.string.MQ_choice_true), getString(R.string.MQ_choice_false)));
+        questions.add(new MultiChoiceQuestion(getString(R.string.MQ_2_text), "2", getString(R.string.MQ_choice_true), getString(R.string.MQ_choice_false)));
+        questions.add(new MultiChoiceQuestion(getString(R.string.MQ_3_text), "2", getString(R.string.MQ_choice_true), getString(R.string.MQ_choice_false)));
+        questions.add(new MultiChoiceQuestion(getString(R.string.MQ_4_text), "2", getString(R.string.MQ_choice_true), getString(R.string.MQ_choice_false)));
+        questions.add(new MultiChoiceQuestion(getString(R.string.MQ_5_text), "1", getString(R.string.MQ_choice_true), getString(R.string.MQ_choice_false)));
+        questions.add(new MultiChoiceQuestion(getString(R.string.MQ_6_text), "2", getString(R.string.MQ_6_answer_1), getString(R.string.MQ_6_answer_2), getString(R.string.MQ_6_answer_3), getString(R.string.MQ_6_answer_4)));
+        questions.add(new MultiChoiceQuestion(getString(R.string.MQ_7_text), "4", getString(R.string.MQ_7_answer_1), getString(R.string.MQ_7_answer_2), getString(R.string.MQ_7_answer_3), getString(R.string.MQ_7_answer_4)));
+        questions.add(new MultiChoiceQuestion(getString(R.string.MQ_8_text), "4", getString(R.string.MQ_8_answer_1), getString(R.string.MQ_8_answer_2), getString(R.string.MQ_8_answer_3), getString(R.string.MQ_8_answer_4)));
+        questions.add(new MultiChoiceQuestion(getString(R.string.MQ_9_text), "2", getString(R.string.MQ_9_answer_1), getString(R.string.MQ_9_answer_2), getString(R.string.MQ_9_answer_3), getString(R.string.MQ_9_answer_4)));
+        questions.add(new MultiChoiceQuestion(getString(R.string.MQ_10_text), "3", getString(R.string.MQ_10_answer_1), getString(R.string.MQ_10_answer_2), getString(R.string.MQ_10_answer_3), getString(R.string.MQ_10_answer_4)));
+        questions.add(new MultiAnswerQuestion(getString(R.string.MQ_11_text), "25", getString(R.string.MQ_11_answer_1), getString(R.string.MQ_11_answer_2), getString(R.string.MQ_11_answer_3), getString(R.string.MQ_11_answer_4), getString(R.string.MQ_11_answer_5)));
+        questions.add(new MultiAnswerQuestion(getString(R.string.MQ_12_text), "123", getString(R.string.MQ_12_answer_1), getString(R.string.MQ_12_answer_2), getString(R.string.MQ_12_answer_3)));
+        questions.add(new MultiAnswerQuestion(getString(R.string.MQ_13_text), "124", getString(R.string.MQ_13_answer_1), getString(R.string.MQ_13_answer_2), getString(R.string.MQ_13_answer_3), getString(R.string.MQ_13_answer_4)));
+        questions.add(new MultiAnswerQuestion(getString(R.string.MQ_14_text), "34", getString(R.string.MQ_14_answer_1), getString(R.string.MQ_14_answer_2), getString(R.string.MQ_14_answer_3), getString(R.string.MQ_14_answer_4), getString(R.string.MQ_14_answer_5)));
+        questions.add(new MultiAnswerQuestion(getString(R.string.MQ_15_text), "12", getString(R.string.MQ_15_answer_1), getString(R.string.MQ_15_answer_2), getString(R.string.MQ_15_answer_3), getString(R.string.MQ_15_answer_4)));
     }
 
     /**
@@ -166,7 +167,7 @@ public class QuizActivity extends AppCompatActivity {
             questionTextView.setText(currentQuestion.getText());
             answerEditText.setText("");
             choiceRadioGroup.clearCheck();
-            questionNumberTextView.setText("Question number: " + questionNumber + "/" + NUMBER_OF_QUESTIONS);
+            questionNumberTextView.setText(getString(R.string.question_number) + questionNumber + "/" + NUMBER_OF_QUESTIONS);
             if (currentQuestion instanceof MultiChoiceQuestion) {
                 answerEditText.setVisibility(View.INVISIBLE);
                 choiceRadioGroup.setVisibility(View.VISIBLE);
@@ -199,8 +200,7 @@ public class QuizActivity extends AppCompatActivity {
      * @return String answer that user has put in EditText R.id.question_answer
      */
     private String getUserAnswer() {
-        String answer = answerEditText.getText().toString();
-        return answer;
+        return answerEditText.getText().toString();
     }
 
     /**
@@ -231,8 +231,6 @@ public class QuizActivity extends AppCompatActivity {
 
     /**
      * Restart the quiz and try again
-     *
-     * @param v
      */
     public void tryAgain(View v) {
         quizEnd = false;
@@ -248,7 +246,7 @@ public class QuizActivity extends AppCompatActivity {
         answerEditText.setVisibility(View.INVISIBLE);
         questionTextView.setVisibility(View.VISIBLE);
         displayQuestion();
-        scoreTextView.setText("Your score is: " + score + "/10");
+        scoreTextView.setText(getString(R.string.quiz_current_score_is) + score + "/10");
     }
 
     /**
@@ -260,9 +258,9 @@ public class QuizActivity extends AppCompatActivity {
         addScore(answer);
         answerEditText.setText(currentQuestion.getAnswer());
         if (answer.compareTo(currentQuestion.getAnswer()) == 0) {
-            answerEditText.setTextColor(getResources().getColor(R.color.colorAccent));
+            answerEditText.setTextColor(ContextCompat.getColor(this, R.color.colorAccent));
         } else {
-            answerEditText.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            answerEditText.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         }
     }
 
@@ -278,15 +276,15 @@ public class QuizActivity extends AppCompatActivity {
             if (nextChoice.isChecked()) {
                 answer = "" + (i + 1);
                 if (answer.compareTo(currentQuestion.getAnswer()) == 0) {
-                    nextChoice.setTextColor(getResources().getColor(R.color.colorAccent));
+                    nextChoice.setTextColor(ContextCompat.getColor(this, R.color.colorAccent));
                 } else {
-                    nextChoice.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                    nextChoice.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
                 }
             }
         }
         int i = Integer.parseInt(currentQuestion.getAnswer());
         nextChoice = (RadioButton) choiceRadioGroup.getChildAt(i - 1);
-        nextChoice.setTextColor(getResources().getColor(R.color.colorAccent));
+        nextChoice.setTextColor(ContextCompat.getColor(this, R.color.colorAccent));
         addScore(answer);
     }
 
@@ -302,13 +300,13 @@ public class QuizActivity extends AppCompatActivity {
             if (((CheckBox) choiceRadioGroup.getChildAt(i)).isChecked()) {
                 answer += (i + 1);//make answer string like "23" if second and third answer are correct
                 if (currentQuestion.getAnswer().contains(answer)) {
-                    nextChoice.setTextColor(getResources().getColor(R.color.colorAccent));
+                    nextChoice.setTextColor(ContextCompat.getColor(this, R.color.colorAccent));
                 } else {
-                    nextChoice.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                    nextChoice.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
                 }
             }
             if (currentQuestion.getAnswer().contains("" + (i + 1))) {
-                nextChoice.setTextColor(getResources().getColor(R.color.colorAccent));
+                nextChoice.setTextColor(ContextCompat.getColor(this, R.color.colorAccent));
             }
         }
         addScore(answer);
@@ -337,11 +335,11 @@ public class QuizActivity extends AppCompatActivity {
         int i = currentQuestion.checkAnswer(answer);
         if (i == 0) {
             score++;
-            Toast.makeText(this, "That is correct", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.that_is_correct, Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Don't worry, you will get next one", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.dont_worry_u_get_next_one, Toast.LENGTH_SHORT).show();
         }
-        scoreTextView.setText("Your score is: " + score + "/10");
+        scoreTextView.setText(getString(R.string.quiz_current_score_is) + score + "/10");
     }
 
 
@@ -353,7 +351,7 @@ public class QuizActivity extends AppCompatActivity {
         if (randomIndex < questions.size()) {
             questions.remove(randomIndex);
         } else {
-            scoreTextView.setText("Error: no more questions");
+            scoreTextView.setText(R.string.error_no_questions);
         }
     }
 
@@ -374,22 +372,22 @@ public class QuizActivity extends AppCompatActivity {
         scoreRatingBar.setRating(stars);
         switch (stars) {
             case 5:
-                questionTextView.setText("You are the best of the best! Perfect score! Can you do it again?");
+                questionTextView.setText(R.string.best_5_star_message);
                 break;
             case 4:
-                questionTextView.setText("OMG Almost perfect score.You are awesome!");
+                questionTextView.setText(R.string.best_4_star_message);
                 break;
             case 3:
-                questionTextView.setText("Excellent score! Keep up the good work.");
+                questionTextView.setText(R.string.best_3_star_message);
                 break;
             case 2:
-                questionTextView.setText("Good job! I bet you can do better...");
+                questionTextView.setText(R.string.best_2_star_message);
                 break;
             case 1:
-                questionTextView.setText("You are trying. Practice more and make perfect score!");
+                questionTextView.setText(R.string.best_1_star_message);
                 break;
             default:
-                questionTextView.setText("You did this on purpose!");
+                questionTextView.setText(R.string.best_0_star_message);
                 break;
         }
     }

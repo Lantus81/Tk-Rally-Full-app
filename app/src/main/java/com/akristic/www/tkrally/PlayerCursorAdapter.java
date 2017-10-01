@@ -1,9 +1,11 @@
 package com.akristic.www.tkrally;
 
+import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.widget.PopupMenu;
 import android.text.TextUtils;
@@ -16,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akristic.www.tkrally.data.PlayerContract;
+
+import static android.R.attr.id;
 
 
 public class PlayerCursorAdapter extends CursorAdapter {
@@ -55,7 +59,7 @@ public class PlayerCursorAdapter extends CursorAdapter {
      *                correct row.
      */
     @Override
-    public void bindView(View view, Context context, Cursor cursor) {
+    public void bindView(View view, final Context context, Cursor cursor) {
         // Find fields to populate in inflated template
         TextView playerName = (TextView) view.findViewById(R.id.name);
         TextView playerNationality = (TextView) view.findViewById(R.id.summary);
@@ -106,6 +110,7 @@ public class PlayerCursorAdapter extends CursorAdapter {
                                         PlayerEditorActivity.ID_PLAYER1 = playerID;
                                         PlayerEditorActivity.NAME_PLAYER1 = name;
                                         Toast.makeText(view.getContext(), name + " " + view.getContext().getString(R.string.is_player_1), Toast.LENGTH_LONG).show();
+
                                         break;
 
                                     case R.id.action_player2_set:
@@ -119,7 +124,19 @@ public class PlayerCursorAdapter extends CursorAdapter {
                                         Toast.makeText(view.getContext(), name + " " + view.getContext().getString(R.string.is_player_2), Toast.LENGTH_LONG).show();
 
                                         break;
-
+                                    case R.id.action_player_delete:
+                                        Uri currentPlayerUri = ContentUris.withAppendedId(PlayerContract.PlayerEntry.CONTENT_URI, playerID);
+                                        // Only perform the delete if this is an existing player.
+                                        if (currentPlayerUri != null) {
+                                            // Call the ContentResolver to delete the player at the given content URI.
+                                            int deletedPlayer = context.getContentResolver().delete(currentPlayerUri, null, null);
+                                            if (deletedPlayer != 0) {
+                                                Toast.makeText(context, R.string.editor_delete_player_successful, Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(context, R.string.editor_delete_player_failed, Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                        break;
                                     default:
                                         break;
                                 }

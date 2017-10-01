@@ -20,4 +20,9 @@
         android:title="@string/action_save_match"
         app:showAsAction="ifRoom|withText"
         />
+    <item
+        android:id="@+id/action_set_default_players"
+        android:title="@string/action_set_default_players"
+        app:showAsAction="never"
+        />
 </menu>

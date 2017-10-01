@@ -4,94 +4,124 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    >
-    <android.support.v7.widget.CardView
-        android:id="@+id/view1"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:innerRadius="0dp"
-        android:shape="ring"
-        android:thicknessRatio="1.9"
-        app:cardCornerRadius="30dp">
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/match_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:paddingRight="45dp"
+        android:paddingEnd="45dp"
+        android:layout_gravity="center"
+        android:textColor="#AEB6BD"
+        tools:text="12.12.2017." />
 
-        <ImageView
-            android:id="@+id/catalog_player1_image"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:scaleType="centerCrop"
-            android:background="@drawable/player_silhouette"
-            tools:src="@drawable/player_silhouette" />
-    </android.support.v7.widget.CardView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginLeft="@dimen/medium_horizontal_margin"
-        android:layout_marginStart="@dimen/medium_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/medium_horizontal_margin"
-        android:layout_marginEnd="@dimen/medium_horizontal_margin"
-        android:gravity="center"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/view1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thicknessRatio="1.9"
+            app:cardCornerRadius="30dp">
+
+            <ImageView
+                android:id="@+id/catalog_player1_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/player_silhouette"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/player_silhouette" />
+        </android.support.v7.widget.CardView>
 
         <TextView
             android:id="@+id/match_player_1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="#2B3D4D"
-            tools:text="Player 1"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="#AEB6BD"
-            android:text="VS"/>
-        <TextView
-            android:id="@+id/match_player_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="#2B3D4D"
-            tools:text="Player 2"/>
+            tools:text="Player 1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
 
         <TextView
-            android:id="@+id/match_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
+            android:text="@string/vs"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="#AEB6BD"
-            tools:text="12.12.2017."/>
-
+            android:textColor="#AEB6BD" />
 
 
     </LinearLayout>
-    <android.support.v7.widget.CardView
-        android:id="@+id/view2"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:innerRadius="0dp"
-        android:shape="ring"
-        android:thicknessRatio="1.9"
-        app:cardCornerRadius="30dp">
 
-        <ImageView
-            android:id="@+id/catalog_player2_image"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/view2"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:scaleType="centerCrop"
-            android:background="@drawable/player_silhouette"
-            tools:src="@drawable/player_silhouette" />
-    </android.support.v7.widget.CardView>
+            android:layout_gravity="center"
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thicknessRatio="1.9"
+            app:cardCornerRadius="30dp">
 
+            <ImageView
+                android:id="@+id/catalog_player2_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/player_silhouette"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/player_silhouette" />
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/match_player_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#2B3D4D"
+            tools:text="Player 2" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/match_catalog_item_menu_more"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/medium_vertical_margin"
+        android:src="@drawable/ic_more_vert_black_24dp" />
+    </LinearLayout>
 </LinearLayout>

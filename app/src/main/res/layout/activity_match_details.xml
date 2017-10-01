@@ -1,50 +1,563 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_match_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/medium_horizontal_margin"
-    >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <TextView
-        android:id="@+id/match_details_player_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Player 1 ID: 9"/>
-   <TextView
-        android:id="@+id/match_details_player_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Player 2 ID: 7"/>
-    <TextView
-        android:id="@+id/match_details_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Date: 21.12.2017."/>
-    <TextView
-        android:id="@+id/match_details_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Duration: 2:35"/>
-    <TextView
-        android:id="@+id/match_details_finish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Match finished: Yes"/>
-    <TextView
-        android:id="@+id/match_details_array"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="ArrayList string"/>
-    <Button
-        android:onClick="loadArrayList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Load Match"/>
-</LinearLayout>
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
-</ScrollView>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- HORIZONTAL GUIDELINE -->
+        <android.support.constraint.Guideline
+            android:id="@+id/statistic_guide_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+        <!-- HORIZONTAL GUIDELINE -->
+        <android.support.constraint.Guideline
+            android:id="@+id/statistic_guide_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.22" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/statistic_guide_horizontal_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.65" />
+
+        <TextView
+            android:id="@+id/match_details_players_sets"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/small_horizontal_margin"
+            android:layout_marginRight="@dimen/small_horizontal_margin"
+            android:textSize="24sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="3 : 2" />
+
+        <TextView
+            android:id="@+id/match_details_players_set_score"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/small_horizontal_margin"
+            android:layout_marginRight="@dimen/small_horizontal_margin"
+            android:paddingEnd="0dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="0dp"
+            android:paddingStart="2dp"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/match_details_players_sets"
+            tools:text="6 : 4 \n6 : 4" />
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/view1"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/small_horizontal_margin"
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thicknessRatio="1.9"
+            app:cardCornerRadius="45dp"
+            app:layout_constraintBottom_toTopOf="@id/statistic_guide_horizontal"
+            app:layout_constraintLeft_toLeftOf="@id/statistic_guide_vertical"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/match_details_image_player_2"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/player_silhouette"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/player_silhouette" />
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/match_details_player_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_horizontal_margin"
+            android:layout_marginStart="@dimen/small_horizontal_margin"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="@dimen/small_horizontal_margin"
+            android:text="@string/default_player_2"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="@id/statistic_guide_vertical"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/statistic_guide_horizontal" />
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/view2"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/small_horizontal_margin"
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thicknessRatio="1.9"
+            app:cardCornerRadius="45dp"
+            app:layout_constraintBottom_toTopOf="@id/statistic_guide_horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/statistic_guide_vertical"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/match_details_image_player_1"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/player_silhouette"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/player_silhouette" />
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/match_details_player_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small_horizontal_margin"
+            android:layout_marginRight="@dimen/small_horizontal_margin"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="@dimen/small_horizontal_margin"
+            android:text="@string/default_player_1"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/statistic_guide_vertical"
+            app:layout_constraintTop_toTopOf="@id/statistic_guide_horizontal" />
+
+
+        <TextView
+            android:id="@+id/match_details_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small_horizontal_margin"
+            android:layout_marginRight="@dimen/small_horizontal_margin"
+            android:padding="@dimen/small_horizontal_margin"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/match_details_player_1"
+            tools:text="Date played: 26.10.2017." />
+
+        <TextView
+            android:id="@+id/match_details_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small_horizontal_margin"
+            android:layout_marginRight="@dimen/small_horizontal_margin"
+            android:padding="@dimen/small_horizontal_margin"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/match_details_date"
+            tools:text="Time played: 1:55:56" />
+
+        <TextView
+            android:id="@+id/match_details_finish"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small_horizontal_margin"
+            android:layout_marginRight="@dimen/small_horizontal_margin"
+            android:padding="@dimen/small_horizontal_margin"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/match_details_time"
+            tools:text="Match is finished" />
+
+        <TextView
+            android:id="@+id/match_details_array"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small_horizontal_margin"
+            android:layout_marginRight="@dimen/small_horizontal_margin"
+            android:padding="@dimen/small_horizontal_margin"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/match_details_time" />
+
+        <TextView
+            android:id="@+id/statistics_winners_player_1"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/minimum_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/minimum_margin"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/statistic_guide_horizontal_name"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/statistics"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/small_horizontal_margin"
+            android:layout_marginEnd="@dimen/small_horizontal_margin"
+            android:layout_marginRight="@dimen/small_horizontal_margin"
+            android:gravity="center"
+            android:padding="@dimen/small_horizontal_margin"
+            android:text="@string/statistics_title"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/statistic_guide_horizontal_name"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <Button
+            style="@style/score_btn_style"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:onClick="loadArrayList"
+            android:text="@string/load_match"
+            app:layout_constraintBottom_toTopOf="@id/statistics"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/match_details_finish" />
+
+        <LinearLayout
+            android:id="@+id/statistics_winners_line"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_winners_player_1"></LinearLayout>
+
+        <TextView
+            android:id="@+id/statistics_aces_player_1"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/minimum_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/minimum_margin"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_winners_line"
+            tools:text="15" />
+
+        <LinearLayout
+            android:id="@+id/statistics_aces_line"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_aces_player_1"></LinearLayout>
+
+        <TextView
+            android:id="@+id/statistics_faults_player_1"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/minimum_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/minimum_margin"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_aces_line"
+            tools:text="15" />
+
+        <LinearLayout
+            android:id="@+id/statistics_faults_line"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_faults_player_1"></LinearLayout>
+
+        <TextView
+            android:id="@+id/statistics_double_faults_player_1"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/minimum_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/minimum_margin"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_faults_line"
+            tools:text="15" />
+
+        <LinearLayout
+            android:id="@+id/statistics_double_faults_line"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_double_faults_player_1"></LinearLayout>
+
+        <TextView
+            android:id="@+id/statistics_forced_errors_player_1"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/minimum_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/minimum_margin"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_double_faults_line"
+            tools:text="15" />
+
+        <LinearLayout
+            android:id="@+id/statistics_forced_errors_line"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_forced_errors_player_1"></LinearLayout>
+
+        <TextView
+            android:id="@+id/statistics_unforced_errors_player_1"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/minimum_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/minimum_margin"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_forced_errors_line"
+            tools:text="15" />
+
+        <TextView
+            android:id="@+id/statistics_winners_player_2"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingLeft="@dimen/minimum_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingStart="@dimen/minimum_margin"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/statistics_winners_player_1"
+            tools:text="15" />
+
+        <TextView
+            android:id="@+id/statistics_aces_player_2"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingLeft="@dimen/minimum_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingStart="@dimen/minimum_margin"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_winners_line"
+            tools:text="15" />
+
+        <TextView
+            android:id="@+id/statistics_faults_player_2"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingLeft="@dimen/minimum_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingStart="@dimen/minimum_margin"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_aces_line"
+            tools:text="15" />
+
+        <TextView
+            android:id="@+id/statistics_double_faults_player_2"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingLeft="@dimen/minimum_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingStart="@dimen/minimum_margin"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_faults_line"
+            tools:text="15" />
+
+        <TextView
+            android:id="@+id/statistics_forced_errors_player_2"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingLeft="@dimen/minimum_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingStart="@dimen/minimum_margin"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_double_faults_line"
+            tools:text="15" />
+
+        <TextView
+            android:id="@+id/statistics_unforced_errors_player_2"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingLeft="@dimen/minimum_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingStart="@dimen/minimum_margin"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_forced_errors_line"
+            tools:text="15" />
+
+        <ProgressBar
+            android:id="@+id/statistics_bar_winners"
+            style="@style/StatisticsProgressBar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/statistics_winners_player_1"
+            app:layout_constraintLeft_toRightOf="@id/statistics_winners_player_1"
+            app:layout_constraintRight_toLeftOf="@id/statistics_winners_player_2"
+            app:layout_constraintTop_toTopOf="@id/statistics_winners_player_1" />
+
+        <ProgressBar
+            android:id="@+id/statistics_bar_aces"
+            style="@style/StatisticsProgressBar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/statistics_aces_player_1"
+            app:layout_constraintLeft_toRightOf="@id/statistics_winners_player_1"
+            app:layout_constraintRight_toLeftOf="@id/statistics_winners_player_2"
+            app:layout_constraintTop_toTopOf="@id/statistics_aces_player_1" />
+
+        <ProgressBar
+            android:id="@+id/statistics_bar_faults"
+            style="@style/StatisticsProgressBar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/statistics_faults_player_1"
+            app:layout_constraintLeft_toRightOf="@+id/statistics_winners_player_1"
+            app:layout_constraintRight_toLeftOf="@+id/statistics_winners_player_2"
+            app:layout_constraintTop_toTopOf="@+id/statistics_faults_player_1" />
+
+        <ProgressBar
+            android:id="@+id/statistics_bar_double_faults"
+            style="@style/StatisticsProgressBar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/statistics_double_faults_player_1"
+            app:layout_constraintLeft_toRightOf="@id/statistics_winners_player_1"
+            app:layout_constraintRight_toLeftOf="@id/statistics_winners_player_2"
+            app:layout_constraintTop_toTopOf="@id/statistics_double_faults_player_1" />
+
+        <ProgressBar
+            android:id="@+id/statistics_bar_forced_errors"
+            style="@style/StatisticsProgressBar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/statistics_forced_errors_player_1"
+            app:layout_constraintLeft_toRightOf="@id/statistics_winners_player_1"
+            app:layout_constraintRight_toLeftOf="@id/statistics_winners_player_2"
+            app:layout_constraintTop_toTopOf="@id/statistics_forced_errors_player_1" />
+
+        <ProgressBar
+            android:id="@+id/statistics_bar_unforced_errors"
+            style="@style/StatisticsProgressBar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintBottom_toBottomOf="@id/statistics_unforced_errors_player_1"
+            app:layout_constraintLeft_toRightOf="@id/statistics_winners_player_1"
+            app:layout_constraintRight_toLeftOf="@id/statistics_winners_player_2"
+            app:layout_constraintTop_toTopOf="@id/statistics_unforced_errors_player_1" />
+
+        <TextView
+            android:id="@+id/statistics_winners"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/statistics_winners"
+            app:layout_constraintBottom_toBottomOf="@id/statistics_winners_player_1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/statistics_winners_player_1" />
+
+        <TextView
+            android:id="@+id/statistics_aces"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/statistics_aces"
+            app:layout_constraintBottom_toBottomOf="@id/statistics_aces_player_1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/statistics_aces_player_1" />
+
+        <TextView
+            android:id="@+id/statistics_faults"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/statistics_faults"
+            app:layout_constraintBottom_toBottomOf="@id/statistics_faults_player_1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/statistics_faults_player_1" />
+
+        <TextView
+            android:id="@+id/statistics_double_faults"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/statistics_double_faults"
+            app:layout_constraintBottom_toBottomOf="@id/statistics_double_faults_player_1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/statistics_double_faults_player_1" />
+
+        <TextView
+            android:id="@+id/statistics_forced_errors"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/statistic_forced_errors"
+            app:layout_constraintBottom_toBottomOf="@id/statistics_forced_errors_player_1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/statistics_forced_errors_player_1" />
+
+        <TextView
+            android:id="@+id/statistics_unforced_errors"
+            style="@style/StatisticsTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/statistics_unforced_errors"
+            app:layout_constraintBottom_toBottomOf="@id/statistics_unforced_errors_player_1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/statistics_unforced_errors_player_1" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</LinearLayout>

@@ -4,15 +4,14 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Match Settings</string>
 
     <string name="dialog_select_prompt">Choose a picture</string>
     <string name="dialog_select_camera">Camera</string>
     <string name="dialog_select_gallery">Gallery</string>
     <string name="image_picker_error">Something is wrong with that image. Pick a different one please.</string>
 
-    <string name="_0"></string>
-    <string name="show_0">0</string>
+
     <string name="deuce">Deuce</string>
     <string name="points_40">40</string>
     <string name="advance">AD</string>
@@ -27,21 +26,11 @@
     <string name="game_set_match_player2">Game, Set, Match Player 2</string>
     <string name="fault">Fault</string>
     <string name="double_fault">D.Fault</string>
-    <string name="check_for_5_set_match">Check for 3 set match</string>
-    <string name="winners">" :Winners: "</string>
-    <string name="aces">" :Aces: "</string>
-    <string name="faults">" :Faults: "</string>
-    <string name="double_faults">" :Double Fault: "</string>
-    <string name="forced_errors">" :Forced Errors: "</string>
-    <string name="unforced_errors">" :Unforced Errors: "</string>
-    <string name="toast_message">Can\'t change rules in the middle of match.\n\nPress RESET and than change rules</string>
-    <string name="toast_message_serve">Can\'t change serve in the middle of match</string>
-    <string name="players">Players</string>
-    <string name="player_1">Enter player 1 name</string>
-    <string name="player_2">Enter player 2 name</string>
-    <string name="previous_sets">PREVIOUS SETS</string>
+
+    <string name="toast_message_serve">Can\'t change the serve in the middle of the match</string>
+
+
     <string name="reset">New Match</string>
-    <string name="statistic">Statistics</string>
 
     <!-- Unforced error button [CHAR LIMIT=7] -->
     <string name="unf_error_button">U.Error</string>
@@ -56,22 +45,19 @@
     <string name="winner">Winner</string>
     <string name="winner_player">WINNER</string>
     <string name="serve">Serve</string>
-    <!-- Settings Menu Main Item [CHAR LIMIT=NONE] -->
-    <string name="settings_menu_main_item">Main</string>
 
-    <!-- Settings Menu Item [CHAR LIMIT=NONE] -->
-    <string name="settings_menu_item">Settings</string>
+
     <!-- Settings Activity Title [CHAR LIMIT=NONE] -->
     <string name="settings_title">Match Settings</string>
     <string name="statistics_title">Match Statistics</string>
 
     <!-- Strings For Minimum Number Of Sets Preference [CHAR LIMIT=30] -->
-    <string name="settings_number_of_sets_label">Number of Sets in Match</string>
+    <string name="settings_number_of_sets_label">Number of Sets in the Match</string>
     <string name="settings_number_of_sets_key" translatable="false">number_of_sets</string>
     <string name="settings_number_of_sets_default" translatable="false">2</string>
 
     <!-- Strings For Minimum Number Of Games Preference [CHAR LIMIT=30] -->
-    <string name="settings_number_of_games_label">Number of Games in Set</string>
+    <string name="settings_number_of_games_label">Number of Games in the Set</string>
     <string name="settings_number_of_games_key" translatable="false">number_of_games</string>
     <string name="settings_number_of_games_default" translatable="false">6</string>
 
@@ -90,15 +76,14 @@
 
     <!-- Strings For Advantage Preference [CHAR LIMIT=30] -->
     <string name="settings_advantage_label">Advantage</string>
-    <string name="settings_advantage_key" translatable="false">advantage_value</string>
-    <string name="settings_advantage_default" translatable="false">@string/settings_advantage_true_value</string>
+    <string name="settings_advantage_key">advantage_value</string>
+    <string name="settings_advantage_default">@string/settings_advantage_true_value</string>
     <!-- Label for Advantage true option [CHAR LIMIT=20] -->
     <string name="settings_advantage_true_label">Play Advantage</string>
-    <string name="settings_advantage_true_value" translatable="false">Yes</string>
+    <string name="settings_advantage_true_value">Yes</string>
     <!-- Label for Advantage false option [CHAR LIMIT=20] -->
     <string name="settings_advantage_false_label">No Advantage</string>
-    <string name="settings_advantage_false_value" translatable="false">No</string>
-
+    <string name="settings_advantage_false_value">No</string>
 
     <!-- Label for Sets option [CHAR LIMIT=20] -->
     <string name="settings_sets_1_label">Play 1 set Match</string>
@@ -142,23 +127,14 @@
     <string name="email_info_revoloop_hr">Email: info@revoloop.hr</string>
     <string name="radno_vrijeme">Working Hours:</string>
     <string name="od_8_do_22_sati">From 8 to 22 hours</string>
-    <string name="ime_se_bavimo">What are we do:</string>
-    <string name="nasa_misija">Our mission is to provide quality tennis lessons to large number of people. Mission, team and leadership are foundations of our club.</string>
+    <string name="ime_se_bavimo">What do we do:</string>
+    <string name="nasa_misija">Our mission is to provide high quality tennis lessons to large number of people. Mission, team and leadership are foundations of our club.</string>
 
     <string name="sjediste">Address: Klinčaselska bb, 10040, Zagreb</string>
     <string name="broj_telefona_385_95_903_44_21">Phone Number: +385 95 903 44 21</string>
 
 
-    <string name="title_activity_quiz">QuizActivity</string>
-    <string name="title_players_names">Player Names</string>
     <string name="vs">VS</string>
-    <string name="quiz_number_counter">Question number: 1</string>
-    <string name="quiz_text_question">This is question text</string>
-    <string name="quiz_answer_hint">Your answer here</string>
-    <string name="quiz_try_again_button">Try Again</string>
-    <string name="quiz_next_button">Next</string>
-    <string name="quiz_submit_button">Submit</string>
-    <string name="quiz_current_score">Your score: 0/10</string>
     <string name="scorekeeper_reset_match">Match Reset</string>
     <string name="scorekeeper_reset_question">All unsaved progress will be lost. Do you really want to start a new match?</string>
     <string name="scorekeeper_beauty_of_the_game">Discover the Beauty of the Game</string>
@@ -166,7 +142,7 @@
     <string name="score_undo_point">Undo point</string>
     <string name="score_redo_point">Redo point</string>
     <string name="score_open_players_information">Open players information</string>
-    <string name="score_change_serve_image">Change who serve first</string>
+    <string name="score_change_serve_image">Change who serves first</string>
     <string name="Error_no_app">Unable to find right application</string>
 
     <!-- Title text for the empty view [CHAR LIMIT=50] -->
@@ -193,6 +169,8 @@
     <string name="action_delete">Delete Player</string>
     <string name="action_save">Save Player</string>
     <string name="action_save_match">Save Match</string>
+    <string name="action_set_default_players">Set Players As Default</string>
+    <string name="saving_default_players">Current Players Are Set As Defaults</string>
 
     <!-- Label for dropdown menu option if the player's gender is unknown [CHAR LIMIT=20] -->
     <string name="gender_unknown">Unknown</string>
@@ -204,7 +182,7 @@
     <string name="gender_female">Female</string>
 
     <!-- Dialog message to ask the user to confirm deleting the current player [CHAR LIMIT=NONE] -->
-    <string name="delete_dialog_msg">Delete this player?</string>
+    <string name="delete_dialog_msg">Do you want to delete this player?</string>
     <!-- Dialog button text for the option to confirm deleting the current player [CHAR LIMIT=20] -->
     <string name="delete">Delete</string>
     <!-- Dialog button text for the option to cancel deletion of the current player [CHAR LIMIT=20] -->
@@ -215,11 +193,11 @@
     <string name="editor_delete_all_players_successful">All players deleted</string>
 
     <!-- Toast message in editor when current pet has failed to be deleted [CHAR LIMIT=NONE] -->
-    <string name="editor_delete_player_failed">Error with deleting player</string>
+    <string name="editor_delete_player_failed">An error occurred while deleting the player</string>
 
-    <string name="editor_delete_all_players_failed">Error with deleting players</string>
+    <string name="editor_delete_all_players_failed">An error occurred while deleting players</string>
     <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
-    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+    <string name="unsaved_changes_dialog_msg">Do you want to discard your changes and quit editing?</string>
     <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
     <string name="discard">Discard</string>
 
@@ -227,40 +205,151 @@
     <string name="keep_editing">Keep Editing</string>
     <string name="delete_all_players_dialog_msg">This will delete all players. Are you sure?</string>
     <string name="delete_all_matches_dialog_msg">This will delete all matches ever played. Are you sure?</string>
+    <string name="save_match_dialog_msg">Save you match</string>
+    <string name="save_match_dialog_msg_new">As new</string>
+    <string name="save_match_dialog_msg_existing">Overwrite</string>
+    <string name="save_match_dialog_msg_cancel">Cancel</string>
     <string name="title_players_catalog">Players Manager</string>
     <string name="action_play_1">Set As Player 1</string>
     <string name="action_play_2">Set As Player 2</string>
-    <string name="editor_set_player">Player set successfully</string>
-    <string name="editor_set_player_error">Error with setting player</string>
+    <string name="action_play_delete">Delete</string>
+    <string name="action_match_load">Load</string>
+    <string name="action_match_delete">Delete</string>
+    <string name="editor_set_player">Player is set successfully</string>
+    <string name="editor_set_player_error">An error occurred while setting the player</string>
     <string name="action_save_new">Save As New</string>
-    <string name="empty_view_subtitle_text_match">But play some tennis first</string>
+    <string name="empty_view_subtitle_text_match">But, let\'s play some tennis first</string>
     <string name="empty_view_title_text_match">Here are your saved tennis matches</string>
     <string name="title_matches_catalog">Played Matches</string>
     <string name="title_matches_details">Match Details</string>
     <string name="editor_delete_all_matches_successful">All Matches Deleted</string>
-    <string name="editor_delete_all_matches_failed">Error Deleting All Matches</string>
+    <string name="editor_delete_all_matches_failed">An error occurred while deleting all matches</string>
+    <string name="editor_delete_match_successful">Match Deleted</string>
+    <string name="editor_delete_match_failed">An error occurred while deleting match</string>
     <string name="player">Player</string>
     <string name="nationality">English</string>
     <string name="default_player_ok">Default player created</string>
-    <string name="default_player_error">Error inserting default player</string>
+    <string name="default_player_error">An error occurred while inserting default player</string>
     <string name="is_player_1">is player 1</string>
     <string name="is_player_2">is player 2</string>
-    <string name="saving_player_error">Error saving Player</string>
+    <string name="saving_player_error">An error occurred while saving Player</string>
     <string name="saving_player_ok">Player Saved</string>
     <string name="player_name_required">Player name is required</string>
     <string name="default_player_2">Player 2</string>
     <string name="default_player_1">Player 1</string>
     <string name="redo_error">Can\'t redo</string>
-    <string name="saving_match_error">Error Saving Match</string>
+    <string name="saving_match_error">An error occurred while saving match</string>
     <string name="saving_match_ok">Match Saved</string>
-    <string name="date">Date</string>
+    <string name="date">Date played</string>
     <string name="time_played">Time played</string>
-    <string name="match_finished">Match is finished</string>
-    <string name="match_not_finished">Match is incomplete</string>
+    <string name="match_finished">The match is finished</string>
+    <string name="match_not_finished">The match is incomplete</string>
     <string name="statistics_winners">Winners</string>
     <string name="statistics_unforced_errors">Unforced Errors</string>
     <string name="statistic_forced_errors">Forced Errors</string>
     <string name="statistics_double_faults">Double Faults</string>
     <string name="statistics_faults">Faults</string>
     <string name="statistics_aces">Aces</string>
+    <string name="load_match">Load Match</string>
+    <string name="undo_error">Can\'t undo</string>
+
+    <!-- quiz strings -->
+    <string name="title_activity_quiz">Quiz</string>
+    <string name="quiz_number_counter">Question number: 1</string>
+    <string name="quiz_text_question">This is question text</string>
+    <string name="quiz_answer_hint">Type your answer here</string>
+    <string name="quiz_try_again_button">Try Again</string>
+    <string name="quiz_next_button">Next</string>
+    <string name="quiz_submit_button">Submit</string>
+    <string name="quiz_current_score">Your score: 0/10</string>
+    <string name="quiz_current_score_is">Your score:\u0020</string>
+    <string name="question_number">Question number:\u0020</string>
+    <string name="that_is_correct">That is correct</string>
+    <string name="dont_worry_u_get_next_one">Don\'t worry, you will get next one</string>
+    <string name="error_no_questions">Error: no more questions</string>
+    <string name="best_5_star_message">You are the best of the best! Perfect score! Can you do it again?</string>
+    <string name="best_4_star_message">Almost perfect score.You are awesome!</string>
+    <string name="best_3_star_message">Excellent score! Keep up the good work.</string>
+    <string name="best_2_star_message">Good job! I bet you can do better.</string>
+    <string name="best_1_star_message">You are trying. Practice more and make perfect score!</string>
+    <string name="best_0_star_message">You did this on purpose!</string>
+
+    <!-- quiz questions -->
+    <string name="Q_1_text">Missing both first and second serves is called a:</string>
+    <string name="Q_1_answer_1">double fault</string>
+    <string name="Q_2_text">The player who deliver the ball to start the points is called the ......?</string>
+    <string name="Q_2_answer_2">server</string>
+    <string name="Q_3_text">Serve that is good and untouched by the returner is called</string>
+    <string name="Q_3_answer">ace</string>
+    <string name="MQ_1_text">Answer true or false: The game of tennis can be played with 2 to 4 players.</string>
+    <string name="MQ_choice_true">True</string>
+    <string name="MQ_choice_false">False</string>
+    <string name="MQ_2_text">Answer true or false: The game of tennis can be played with 1 to 6 players.</string>
+    <string name="MQ_3_text">Answer true or false: If the ball lands on the line, it is out.</string>
+    <string name="MQ_4_text">Answer true or false: No Ad scoring refers to a scoring system that adds up all the game scores to determine the winner.</string>
+    <string name="MQ_5_text">Answer true or false: The server gets two attempts to make a good serve.</string>
+    <string name="MQ_6_text">Correct scorekeeping order is:</string>
+    <string name="MQ_6_answer_1">45, 35, 20, 10</string>
+    <string name="MQ_6_answer_2">love, 15, 30, 40</string>
+    <string name="MQ_6_answer_3">15, 30, 45, love</string>
+    <string name="MQ_6_answer_4">15, 30, 40, love</string>
+    <string name="MQ_7_text">In tennis \"love\" means:</string>
+    <string name="MQ_7_answer_1">both teams are tied at 40</string>
+    <string name="MQ_7_answer_2">I just won but I still want to be friends</string>
+    <string name="MQ_7_answer_3">the same as 15</string>
+    <string name="MQ_7_answer_4">zero</string>
+    <string name="MQ_8_text">If I\'m serving and I win the first 2 points of the game, the game score is now:</string>
+    <string name="MQ_8_answer_1">love, 30</string>
+    <string name="MQ_8_answer_2">20, love</string>
+    <string name="MQ_8_answer_3">deuce</string>
+    <string name="MQ_8_answer_4">30, love</string>
+    <string name="MQ_9_text">How do you begin the game of tennis?</string>
+    <string name="MQ_9_answer_1">run a mile</string>
+    <string name="MQ_9_answer_2">toss a coin</string>
+    <string name="MQ_9_answer_3">duck walk</string>
+    <string name="MQ_9_answer_4">who ever wants to go first</string>
+    <string name="MQ_10_text">An ace is a</string>
+    <string name="MQ_10_answer_1">serve that goes out</string>
+    <string name="MQ_10_answer_2">serve that hits the net and then goes in the box</string>
+    <string name="MQ_10_answer_3">serve that is good and untouched by the returner</string>
+    <string name="MQ_10_answer_4">serve that is hit with slice</string>
+    <string name="MQ_11_text">The types of hittings swings include (more than one answer may apply):</string>
+    <string name="MQ_11_answer_1">Underhand</string>
+    <string name="MQ_11_answer_2">Forehand</string>
+    <string name="MQ_11_answer_3">Lefthand</string>
+    <string name="MQ_11_answer_4">Righthand</string>
+    <string name="MQ_11_answer_5">Backhand</string>
+    <string name="MQ_12_text">Playing tennis is good for</string>
+    <string name="MQ_12_answer_1">Eye hand coordination</string>
+    <string name="MQ_12_answer_2">Quickness</string>
+    <string name="MQ_12_answer_3">Endurance</string>
+    <string name="MQ_13_text">Types of court surface used to play tennis are</string>
+    <string name="MQ_13_answer_1">clay</string>
+    <string name="MQ_13_answer_2">carpet</string>
+    <string name="MQ_13_answer_3">wood</string>
+    <string name="MQ_13_answer_4">rubber</string>
+    <string name="MQ_14_text">Different types of tennis strokes include:</string>
+    <string name="MQ_14_answer_1">overhands</string>
+    <string name="MQ_14_answer_2">rallies</string>
+    <string name="MQ_14_answer_3">backhands</string>
+    <string name="MQ_14_answer_4">forehands</string>
+    <string name="MQ_14_answer_5">underhands</string>
+    <string name="MQ_15_text">What are some ways tennis can be played?</string>
+    <string name="MQ_15_answer_1">single</string>
+    <string name="MQ_15_answer_2">double</string>
+    <string name="MQ_15_answer_3">mixed gender</string>
+    <string name="MQ_15_answer_4">all of the above</string>
+
+    <!--menu strings-->
+    <string name="manage_players">Manage Players</string>
+    <string name="played_matches">Played Matches</string>
+    <string name="tennis_quiz">Tennis Quiz</string>
+    <string name="web_address">Web Address</string>
+    <string name="visit_us_on_facebook">Visit Us On Facebook</string>
+    <string name="where_are_we">Where Are We</string>
+    <string name="communication">Communication:</string>
+    <string name="call_us">Call Us</string>
+    <string name="email_us">Email Us</string>
+    <string name="contact_information">Contact Information</string>
+
 </resources>
