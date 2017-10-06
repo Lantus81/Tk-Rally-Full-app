@@ -36,6 +36,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.akristic.www.tkrally.data.PlayerContract.PlayerEntry;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -149,6 +151,9 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
                 alertDialog();
             }
         });
+        AdView mAdView = (AdView)findViewById(R.id.player_editor_banner);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     /**

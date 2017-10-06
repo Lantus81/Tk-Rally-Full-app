@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingStart="@dimen/activity_horizontal_margin"
     android:paddingRight="0dp"
+    android:paddingEnd="0dp"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.akristic.www.tkrally.QuizActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -29,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:padding="2dp"
-                android:text="Question number: 1" />
+                android:text="@string/quiz_number_counter" />
 
             <TextView
                 android:id="@+id/question_text"
@@ -37,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
                 android:padding="4dp"
-                android:text="This is question text"
+                android:text="@string/quiz_text_question"
                 android:textSize="16sp" />
 
             <RadioGroup
@@ -45,7 +54,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
-                android:elevation="4dp"
                 android:padding="4dp"
                 android:visibility="invisible"
                 tools:visibility="visible">
@@ -56,7 +64,7 @@
                 android:id="@+id/question_answer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Your answer here" />
+                android:hint="@string/quiz_answer_hint" />
             <RatingBar
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
@@ -70,6 +78,7 @@
 
 
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="0dp"
@@ -85,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:onClick="tryAgain"
-                android:text="Try Again"
+                android:text="@string/quiz_try_again_button"
                 android:visibility="gone"
                 tools:visibility="visible" />
 
@@ -96,7 +105,7 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:onClick="nextQuestion"
-                android:text="Next"
+                android:text="@string/quiz_next_button"
                 android:visibility="gone" />
 
             <Button
@@ -106,18 +115,27 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:onClick="submitQuestion"
-                android:text="Submit" />
+                android:text="@string/quiz_submit_button" />
             <TextView
                 android:id="@+id/current_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Your score: 0/10" />
+                android:text="@string/quiz_current_score" />
+
         </LinearLayout>
 
 
 
     </LinearLayout>
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/statistic_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id" />
+
+</LinearLayout>
 
 </ScrollView>

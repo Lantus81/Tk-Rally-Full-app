@@ -1,5 +1,6 @@
 package com.akristic.www.tkrally;
 
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -8,9 +9,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.cast.CastRemoteDisplay;
+
 
 public class Statistics extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +37,11 @@ public class Statistics extends AppCompatActivity {
             imageViewPlayer2Image.setImageBitmap(PlayerEditorActivity.BITMAP_PLAYER2);
         }
         setProgressBars();
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            AdView mAdView = (AdView)findViewById(R.id.statistic_banner);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+        }
     }
 
     private void setProgressBars() {

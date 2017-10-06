@@ -462,8 +462,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/statistics_unforced_errors_player_1" />
-
-
-    </android.support.constraint.ConstraintLayout>
+   </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>

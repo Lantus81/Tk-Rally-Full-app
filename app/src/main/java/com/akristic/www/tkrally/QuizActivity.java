@@ -13,6 +13,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -96,7 +99,9 @@ public class QuizActivity extends AppCompatActivity {
         if (quizEnd) {
             endOfQuiz();
         }
-
+        AdView mAdView = (AdView)findViewById(R.id.statistic_banner);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override
