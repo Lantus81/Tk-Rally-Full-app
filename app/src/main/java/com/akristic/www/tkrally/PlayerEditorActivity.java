@@ -38,6 +38,7 @@ import android.widget.Toast;
 import com.akristic.www.tkrally.data.PlayerContract.PlayerEntry;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -114,6 +115,9 @@ public class PlayerEditorActivity extends AppCompatActivity implements LoaderMan
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_editor);
+
+        MobileAds.initialize(getApplicationContext(),
+                "ca-app-pub-2605143276968480~6112308671");
 
         Intent intent = getIntent();
         mCurrentPlayerUri = intent.getData();

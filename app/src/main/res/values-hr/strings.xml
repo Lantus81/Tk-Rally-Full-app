@@ -26,7 +26,7 @@
     <string name="game_set_match_player1">Gem, Set, Match Igrač 1</string>
     <string name="set_for_player2">Set za Igrača 2</string>
     <string name="game_set_match_player2">Gem, Set, Match Igrač 2</string>
-    <string name="fault">Greška</string>
+    <string name="fault">S.Greška</string>
     <string name="double_fault">D.Greška</string>
 
     <string name="toast_message_serve">Servis se ne može mjenjati u sredini meča</string>
@@ -51,48 +51,46 @@
 
     <!-- Strings For Minimum Number Of Sets Preference [CHAR LIMIT=30] -->
     <string name="settings_number_of_sets_label">Broj setova u meču</string>
-    <string name="settings_number_of_sets_key" translatable="false">number_of_sets</string>
-    <string name="settings_number_of_sets_default" translatable="false">2</string>
+
+
 
     <!-- Strings For Minimum Number Of Games Preference [CHAR LIMIT=30] -->
     <string name="settings_number_of_games_label">Broj gemova u setu</string>
-    <string name="settings_number_of_games_key" translatable="false">number_of_games</string>
-    <string name="settings_number_of_games_default" translatable="false">6</string>
 
     <!-- Strings For Tiebreak Preference [CHAR LIMIT=30] -->
     <string name="settings_tiebreak_label">Tiebreak</string>
-    <string name="settings_tiebreak_key" translatable="false">tiebreak_value</string>
-    <string name="settings_tiebreak_default" translatable="false">@string/settings_tiebreak_true_value</string>
+
 
     <!-- Label for Tiebreak true option [CHAR LIMIT=20] -->
     <string name="settings_tiebreak_true_label">Igraj Tiebreak</string>
-    <string name="settings_tiebreak_true_value" translatable="false">Da</string>
+    <string name="settings_tiebreak_true_value">Da</string>
 
     <!-- Label for Tiebreak false option [CHAR LIMIT=20] -->
     <string name="settings_tiebreak_false_label">Bez Tiebreaka</string>
-    <string name="settings_tiebreak_false_value" translatable="false">Ne</string>
+    <string name="settings_tiebreak_false_value">Ne</string>
 
     <!-- Strings For Advantage Preference [CHAR LIMIT=30] -->
     <string name="settings_advantage_label">Prednost</string>
-    <string name="settings_advantage_key" translatable="false">advantage_value</string>
-    <string name="settings_advantage_default" translatable="false">@string/settings_advantage_true_value</string>
+    <string name="settings_advantage_key">advantage_value</string>
+    <string name="settings_advantage_default">@string/settings_advantage_true_value</string>
+
     <!-- Label for Advantage true option [CHAR LIMIT=20] -->
     <string name="settings_advantage_true_label">Igraj Prednost</string>
-    <string name="settings_advantage_true_value" translatable="false">Da</string>
+    <string name="settings_advantage_true_value">Da</string>
     <!-- Label for Advantage false option [CHAR LIMIT=20] -->
     <string name="settings_advantage_false_label">Bez Prednostie</string>
-    <string name="settings_advantage_false_value" translatable="false">Ne</string>
+    <string name="settings_advantage_false_value">Ne</string>
 
     <!-- Label for Sets option [CHAR LIMIT=20] -->
     <string name="settings_sets_1_label">Igraj 1 set u meču</string>
-    <string name="settings_sets_1_value" translatable="false">1</string>
+
 
     <!-- Label for Sets option [CHAR LIMIT=20] -->
     <string name="settings_sets_2_label">Igraj 2 seta u meču</string>
-    <string name="settings_sets_2_value" translatable="false">2</string>
+
     <!-- Label for Sets option [CHAR LIMIT=20] -->
     <string name="settings_sets_3_label">Igraj 3 seta u meču</string>
-    <string name="settings_sets_3_value" translatable="false">3</string>
+
 
     <!-- Label for Games option [CHAR LIMIT=20] -->
     <string name="settings_games_02_label">Igraj 2 Gema u Setu</string>
@@ -106,17 +104,7 @@
     <string name="settings_games_10_label">Igraj 10 Gemova u Setu</string>
     <string name="settings_games_11_label">Igraj 11 Gemova u Setu</string>
     <string name="settings_games_12_label">Igraj 12 Gemova u Setu</string>
-    <string name="settings_games_02_value" translatable="false">2</string>
-    <string name="settings_games_03_value" translatable="false">3</string>
-    <string name="settings_games_04_value" translatable="false">4</string>
-    <string name="settings_games_05_value" translatable="false">5</string>
-    <string name="settings_games_06_value" translatable="false">6</string>
-    <string name="settings_games_07_value" translatable="false">7</string>
-    <string name="settings_games_08_value" translatable="false">8</string>
-    <string name="settings_games_09_value" translatable="false">9</string>
-    <string name="settings_games_10_value" translatable="false">10</string>
-    <string name="settings_games_11_value" translatable="false">11</string>
-    <string name="settings_games_12_value" translatable="false">12</string>
+
 
 
     <!-- Label for Contact activity -->
@@ -244,8 +232,8 @@
     <string name="statistics_winners">Winners</string>
     <string name="statistics_unforced_errors">Neprisiljene Greške</string>
     <string name="statistic_forced_errors">Prisiljene Greške</string>
-    <string name="statistics_double_faults">Duple Greške</string>
-    <string name="statistics_faults">Greška</string>
+    <string name="statistics_double_faults">Dupla Servis Greške</string>
+    <string name="statistics_faults">Servis Greška</string>
     <string name="statistics_aces">Asevi</string>
     <string name="load_match">Učitaj Meč</string>
     <string name="undo_error">Ne mogu nazad</string>
@@ -347,4 +335,5 @@
     <string name="call_us">Nazovite nas</string>
     <string name="email_us">Pošaljite nam mail</string>
     <string name="contact_information">Kontakt Informacije</string>
+    <string name="term_of_use">Privatnost</string>
 </resources>

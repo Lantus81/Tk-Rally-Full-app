@@ -68,11 +68,11 @@
 
     <!-- Label for Tiebreak true option [CHAR LIMIT=20] -->
     <string name="settings_tiebreak_true_label">Play Tiebreak</string>
-    <string name="settings_tiebreak_true_value" translatable="false">Yes</string>
+    <string name="settings_tiebreak_true_value">Yes</string>
 
     <!-- Label for Tiebreak false option [CHAR LIMIT=20] -->
     <string name="settings_tiebreak_false_label">No Tiebreak</string>
-    <string name="settings_tiebreak_false_value" translatable="false">No</string>
+    <string name="settings_tiebreak_false_value">No</string>
 
     <!-- Strings For Advantage Preference [CHAR LIMIT=30] -->
     <string name="settings_advantage_label">Advantage</string>
@@ -351,5 +351,6 @@
     <string name="call_us">Call Us</string>
     <string name="email_us">Email Us</string>
     <string name="contact_information">Contact Information</string>
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="term_of_use">Terms of Use</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-2605143276968480/5999036685</string>
 </resources>

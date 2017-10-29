@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -47,6 +48,8 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        MobileAds.initialize(getApplicationContext(),
+                "ca-app-pub-2605143276968480~6112308671");
 
         questionTextView = (TextView) findViewById(R.id.question_text);
         answerEditText = (EditText) findViewById(R.id.question_answer);

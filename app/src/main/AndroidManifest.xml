@@ -75,18 +75,21 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.akristic.www.tkrally.PlayerCatalogActivity" />
         </activity>
-        <activity android:name=".MatchCatalogActivity"
+        <activity
+            android:name=".MatchCatalogActivity"
             android:label="@string/title_matches_catalog">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.akristic.www.tkrally.NavigationScoreKeeperActivity" />
         </activity>
-        <activity android:name=".MatchDetailsActivity"
+        <activity
+            android:name=".MatchDetailsActivity"
             android:label="@string/title_matches_details">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.akristic.www.tkrally.MatchCatalogActivity" />
         </activity>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -94,7 +97,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
         <meta-data
             android:name="com.google.android.gms.version"

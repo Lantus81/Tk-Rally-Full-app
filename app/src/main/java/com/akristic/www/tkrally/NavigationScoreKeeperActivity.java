@@ -418,6 +418,14 @@ public class NavigationScoreKeeperActivity extends AppCompatActivity
             } catch (Exception e) {
                 Toast.makeText(this, R.string.Error_no_app, Toast.LENGTH_SHORT).show();
             }
+        }else if (id == R.id.nav_term_of_use) {
+                Intent browserIntentPolicy = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.kvalitetnaskolatenisa.com/privatnost-1-119.html"));
+
+                try {
+                    startActivity(browserIntentPolicy);
+                } catch (Exception e) {
+                    Toast.makeText(this, R.string.Error_no_app, Toast.LENGTH_SHORT).show();
+                }
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

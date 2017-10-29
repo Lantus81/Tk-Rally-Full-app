@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.cast.CastRemoteDisplay;
+import com.google.android.gms.ads.MobileAds;
 
 
 public class Statistics extends AppCompatActivity {
@@ -19,6 +19,10 @@ public class Statistics extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
+
+        MobileAds.initialize(getApplicationContext(),
+                "ca-app-pub-2605143276968480~6112308671");
+
         printStatistic();
         TextView textViewPlayer1Name = (TextView) findViewById(R.id.statistic_player1_name);
         TextView textViewPlayer2Name = (TextView) findViewById(R.id.statistic_player2_name);
