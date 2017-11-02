@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_navigation"
     android:layout_width="match_parent"
@@ -24,8 +24,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5"
-            tools:layout_editor_absoluteY="81dp"
-            tools:layout_editor_absoluteX="164dp" />
+            tools:layout_editor_absoluteX="164dp"
+            tools:layout_editor_absoluteY="81dp" />
         <!-- HORIZONTAL GUIDELINE -->
         <android.support.constraint.Guideline
             android:id="@+id/statistic_guide_horizontal"
@@ -33,8 +33,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.22"
-            tools:layout_editor_absoluteY="186dp"
-            tools:layout_editor_absoluteX="0dp" />
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="186dp" />
 
         <android.support.constraint.Guideline
             android:id="@+id/statistic_guide_horizontal_name"
@@ -42,8 +42,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.3"
-            tools:layout_editor_absoluteY="225dp"
-            tools:layout_editor_absoluteX="0dp" />
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="225dp" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/view1"
@@ -82,6 +82,7 @@
             android:maxLines="1"
             android:padding="@dimen/small_horizontal_margin"
             android:text="@string/default_player_2"
+            android:textColor="@color/grayLightWhite"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/statistic_guide_horizontal_name"
             app:layout_constraintLeft_toLeftOf="@+id/statistic_guide_vertical"
@@ -136,6 +137,7 @@
             android:maxLines="1"
             android:padding="@dimen/small_horizontal_margin"
             android:text="@string/default_player_1"
+            android:textColor="@color/grayLightWhite"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/statistic_guide_horizontal_name"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -409,6 +411,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/statistics_winners"
+            android:textColor="@color/grayLightWhite"
             app:layout_constraintBottom_toBottomOf="@+id/statistics_winners_player_1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -420,6 +423,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/statistics_aces"
+            android:textColor="@color/grayLightWhite"
             app:layout_constraintBottom_toBottomOf="@+id/statistics_aces_player_1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -431,6 +435,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/statistics_faults"
+            android:textColor="@color/grayLightWhite"
             app:layout_constraintBottom_toBottomOf="@+id/statistics_faults_player_1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -442,6 +447,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/statistics_double_faults"
+            android:textColor="@color/grayLightWhite"
             app:layout_constraintBottom_toBottomOf="@+id/statistics_double_faults_player_1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -453,6 +459,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/statistic_forced_errors"
+            android:textColor="@color/grayLightWhite"
             app:layout_constraintBottom_toBottomOf="@+id/statistics_forced_errors_player_1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -464,6 +471,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/statistics_unforced_errors"
+            android:textColor="@color/grayLightWhite"
             app:layout_constraintBottom_toBottomOf="@+id/statistics_unforced_errors_player_1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -473,11 +481,11 @@
             android:id="@+id/statistic_banner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_ad_unit_id" />
+            app:layout_constraintRight_toRightOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>

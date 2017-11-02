@@ -13,32 +13,28 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
->
+        android:layout_height="match_parent">
         <!-- HORIZONTAL GUIDELINE -->
         <android.support.constraint.Guideline
             android:id="@+id/statistic_guide_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5"
- />
+            app:layout_constraintGuide_percent="0.5" />
         <!-- HORIZONTAL GUIDELINE -->
         <android.support.constraint.Guideline
             android:id="@+id/statistic_guide_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.2"
- />
+            app:layout_constraintGuide_percent="0.2" />
 
         <android.support.constraint.Guideline
             android:id="@+id/statistic_guide_horizontal_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.35"
- />
+            app:layout_constraintGuide_percent="0.35" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/view1"
@@ -76,6 +72,7 @@
             android:gravity="center"
             android:padding="@dimen/small_horizontal_margin"
             android:text="@string/default_player_2"
+            android:textColor="@color/grayLightWhite"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@id/statistic_guide_horizontal_name"
             app:layout_constraintLeft_toLeftOf="@id/statistic_guide_vertical"
@@ -129,6 +126,7 @@
             android:gravity="center"
             android:padding="@dimen/small_horizontal_margin"
             android:text="@string/default_player_1"
+            android:textColor="@color/grayLightWhite"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@id/statistic_guide_horizontal_name"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -403,6 +401,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/statistics_winners"
+            android:textColor="@color/grayLightWhite"
             app:layout_constraintBottom_toBottomOf="@id/statistics_winners_player_1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -414,6 +413,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/statistics_aces"
+            android:textColor="@color/grayLightWhite"
             app:layout_constraintBottom_toBottomOf="@id/statistics_aces_player_1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -425,6 +425,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/statistics_faults"
+            android:textColor="@color/grayLightWhite"
             app:layout_constraintBottom_toBottomOf="@id/statistics_faults_player_1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -436,6 +437,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/statistics_double_faults"
+            android:textColor="@color/grayLightWhite"
             app:layout_constraintBottom_toBottomOf="@id/statistics_double_faults_player_1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -447,6 +449,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/statistic_forced_errors"
+            android:textColor="@color/grayLightWhite"
             app:layout_constraintBottom_toBottomOf="@id/statistics_forced_errors_player_1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -458,10 +461,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/statistics_unforced_errors"
+            android:textColor="@color/grayLightWhite"
             app:layout_constraintBottom_toBottomOf="@id/statistics_unforced_errors_player_1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/statistics_unforced_errors_player_1" />
-   </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>
